@@ -1,5 +1,10 @@
 import React from "react";
-import { Card, Typography } from "@material-ui/core";
+import {
+    Card,
+    CardContent,
+    CardMedia,
+    Typography,
+  } from "@material-ui/core";
 
 const VenueCard = ({venues}) => {
 return (
@@ -8,22 +13,19 @@ return (
                     console.log(venue)
                     return (
                         <Card key={venue._id}>
+                            <CardContent>
                             <h1>VENUE CARD</h1> {/*REMOVE LATER*/}
                             {/* PROFILE IMAGE */}
-                            <div>
+                            <CardMedia>
                                 <img src={venue.profile.profileImage} alt="profile-image" height="300px" width="600px"/>
-                            </div>
+                            </CardMedia>
                             {/* USERNAME */}
                             <Typography>{venue.username}</Typography>
-                            {/* EMAIL */}
-                            {venue.emails.map(email => {
-                                return (
-                                    <Typography key={venue._id}>{email.address}</Typography>
-                                )
-                            })}
+                            {/* DESCRIPTION */}
+                            <Typography>{venue.profile.description}</Typography>
                             {/* LOCATION */}
                             <Typography>{venue.profile.location}</Typography>
-
+                            </CardContent>
                         </Card>
                         )
                     }

@@ -6,6 +6,7 @@ import EventsContainer from "../ui/components/EventsContainer";
 import { Events } from "../api";
 import { withTracker } from "meteor/react-meteor-data";
 // import { Meteor } from "meteor/meteor";
+import ArtistCard from "../ui/components/ArtistCard";
 
 class App extends React.Component {
   constructor(props) {
@@ -19,9 +20,9 @@ class App extends React.Component {
         <Routes />
       </Router>
         <h1>VenMuse</h1>
-        <VenueCard venues={this.props.users}/>
         <EventsContainer events={this.props.events} />
-      
+        <VenueCard venues={this.props.users}/>
+        <ArtistCard artists={this.props.users}/>
       </React.Fragment>
     );
   }
