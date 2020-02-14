@@ -1,7 +1,7 @@
-import React from "react";
-import EventsCard from "../ui/components/EventsCard";
-import { Events } from "../api";
-import { withTracker } from "meteor/react-meteor-data";
+import React from 'react';
+import EventsCard from '../ui/components/EventsCard';
+import { Events } from '../api';
+import { withTracker } from 'meteor/react-meteor-data';
 // import { Meteor } from "meteor/meteor";
 
 class App extends React.Component {
@@ -20,8 +20,12 @@ class App extends React.Component {
 }
 
 export default withTracker(() => {
-  Meteor.subscribe("events");
+  Meteor.subscribe('events');
+  Meteor.subscribe('users');
   return {
-    events: Events.find({}).fetch()
+    events: Events.find({}).fetch(),
+    users: Meteor.users.find({}).fetch(),
+    currentUsers: Meteor.user(),
+    userId: Meteor.userId()
   };
 })(App);
