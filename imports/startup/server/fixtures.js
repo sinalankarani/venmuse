@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Events } from '../../api';
+
 import moment from 'moment';
 
 Meteor.startup(() => {
