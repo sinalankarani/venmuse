@@ -111,4 +111,4 @@ class AccountsForm extends Component {
   }
 }
 
-export default AccountsForm;
+export default withStyles(AccountsForm);
