@@ -20,7 +20,7 @@ class App extends React.Component {
 }
 
 export default withTracker(() => {
-  // Meteor.subscribe("events");
+  Meteor.subscribe("events");
   return {
     events: Events.find({}).fetch()
   };
