@@ -9,7 +9,7 @@ Meteor.startup(() => {
       date: 'February 14, 2020',
       created: moment()
         .startOf()
-        .fromNow(), //find date method for mongo
+        .fromNow(),
       title: 'Valentimes ball',
       location: 'Da Club', //Venue.name
       description: 'A super fun love filled night of valentimes day fun',
@@ -23,25 +23,27 @@ Meteor.startup(() => {
       date: 'April 20, 2020',
       created: moment()
         .startOf()
-        .fromNow(), //find date method for mongo
+        .fromNow(),
       title: 'blaze it',
       location: 'Da Club', //Venue.name
       description: 'lol  4 20 2020',
       imageurl:
         'https://images.unsplash.com/photo-1517849845537-4d257902454a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
-      artist: ['Snoop']
+      artist: ['Snoop'],
+      filled: true
     });
     Events.insert({
       date: 'December 24, 2020',
       created: moment()
         .startOf()
-        .fromNow(), //find date method for mongo
+        .fromNow(),
       title: 'Christmas Market Jolly Joy Jamboree',
       location: 'Christmas Market', //Venue.name
       description: '',
       imageurl:
         'https://images.unsplash.com/photo-1512729360855-0d1e1b0983a2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
-      artist: []
+      artist: [],
+      filled: false
     });
   }
   if (Meteor.users.find().count() === 0) {
