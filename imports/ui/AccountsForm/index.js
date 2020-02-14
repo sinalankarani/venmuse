@@ -12,7 +12,7 @@ import {
   withStyles
 } from "@material-ui/core/";
 
-class AccountsWrapper extends Component {
+class AccountsForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -49,11 +49,12 @@ class AccountsWrapper extends Component {
   };
 
   login = () => {
-    const email = event.target.email.value;
+    const username = event.target.username.value;
     const password = event.target.password.value;
-    Meteor.loginWithPassword(email, password, error => {
+    Meteor.loginWithPassword(username, password, error => {
       console.log(error);
     });
+    console.log(Meteor.userId(), "logged in");
   };
 
   changeUserType = () => {
@@ -62,23 +63,29 @@ class AccountsWrapper extends Component {
   };
   render() {
     return (
-      <div className="accountsWrapperContainer">
+      <div className="AccountsFormContainer">
         <Form
-          onSubmit={this.signup}
+          onSubmit={this.state.formToggle ? this.login : this.signup}
           render={({ handleSubmit, pristine, invalid, form }) => (
             <form onSubmit={handleSubmit}>
-              <Input name="username" type="text" placeholder="What's your username?" />
-              <Input name="email" type="text" placeholder="What's your email?" />
-              <Input name="password" type="password" placeholder="What's your password?" />
-              <FormControlLabel
-                label={this.state.userTypeToggle === true ? "Venue" : "Artist"}
-                control={
-                  <Switch
-                    //   checked={this.state.userTypeToggle}
-                    onChange={this.changeUserType}
+              {!this.state.formToggle ? (
+                <div>
+                  <FormControlLabel
+                    label={this.state.userTypeToggle === true ? "Venue" : "Artist"}
+                    control={
+                      <Switch
+                        //   checked={this.state.userTypeToggle}
+                        onChange={this.changeUserType}
+                      />
+                    }
                   />
-                }
-              />
+                  <Input name="email" type="text" placeholder="What's your email?" />
+                </div>
+              ) : null}
+              <Input name="username" type="text" placeholder="What's your username?" />
+
+              <Input name="password" type="password" placeholder="What's your password?" />
+
               <Button
                 type="submit"
                 variant="contained"
@@ -92,7 +99,9 @@ class AccountsWrapper extends Component {
                 type="button"
                 onClick={() => this.setState({ formToggle: !this.state.formToggle })}
               >
-                {this.state.formToggle ? "Sign In" : "Register"}
+                {this.state.formToggle
+                  ? "New to VenMuse? Click here to register!"
+                  : "Already have an account? Click here to sign in!"}
               </button>
             </form>
           )}
@@ -102,4 +111,4 @@ class AccountsWrapper extends Component {
   }
 }
 
-export default AccountsWrapper;
+export default AccountsForm;
