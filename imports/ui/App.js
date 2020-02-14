@@ -1,7 +1,8 @@
-import React from 'react';
-import EventsCard from '../ui/components/EventsCard';
-import { Events } from '../api';
-import { withTracker } from 'meteor/react-meteor-data';
+import React from "react";
+import EventsContainer from "../ui/components/EventsContainer";
+import { Events } from "../api";
+import { withTracker } from "meteor/react-meteor-data";
+
 // import { Meteor } from "meteor/meteor";
 
 class App extends React.Component {
@@ -13,7 +14,7 @@ class App extends React.Component {
     return (
       <React.Fragment>
         <h1>VenMuse</h1>
-        <EventsCard />
+        <EventsContainer events={this.props.events} />
       </React.Fragment>
     );
   }
