@@ -1,14 +1,20 @@
 import React from "react";
-import { Card } from "@material-ui/core";
+import { Card, Typography } from "@material-ui/core";
 
-const VenueCard = (props) => {
-    console.log(this.props)
+const VenueCard = ({venues}) => {
+return (
+            venues.map(venue => {
+                console.log(venue)
+                if(venue.profile.userType==="venue"){
+                    return (
+                        <Card key={venue._id}>
+                            <Typography>{venue.username}</Typography>
+                        </Card>
+                        )
+                    }
+            })
+)
 
-  return (
-    <Card>
-      <h1>Venue Card</h1>
-    </Card>
-  );
 };
 
 export default VenueCard;

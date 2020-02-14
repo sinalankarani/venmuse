@@ -10,20 +10,24 @@ class App extends React.Component {
     super(props);
   }
   render() {
-    console.log(this.props);
+    // console.log(this.props);
     return (
       <React.Fragment>
         <h1>VenMuse</h1>
         <EventsCard />
-        <VenueCard/>
+        <VenueCard venues={this.props.users}/>
       </React.Fragment>
     );
   }
 }
 
 export default withTracker(() => {
-  Meteor.subscribe("events");
+  Meteor.subscribe('events');
+  Meteor.subscribe('users');
   return {
-    events: Events.find({}).fetch()
+    events: Events.find({}).fetch(),
+    users: Meteor.users.find({}).fetch(),
+    currentUsers: Meteor.user(),
+    userId: Meteor.userId()
   };
 })(App);
