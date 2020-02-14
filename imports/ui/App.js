@@ -1,7 +1,10 @@
 import React from "react";
 import EventsCard from "../ui/components/EventsCard";
+import { Events } from "../api";
+import { withTracker } from "meteor/react-meteor-data";
 
-const App = () => {
+const App = props => {
+  console.log(props);
   return (
     <React.Fragment>
       <h1>VenMuse</h1>
@@ -10,4 +13,8 @@ const App = () => {
   );
 };
 
-export default App;
+export default withTracker(() => {
+  return {
+    events: Events.find({}).fetch()
+  };
+})(App);
