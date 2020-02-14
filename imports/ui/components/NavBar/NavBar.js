@@ -5,7 +5,7 @@ const NavBar = ({ classes }) => {
     return (
         <nav>
         <NavLink to="/feed" activeClassName="selected">
-            <img src={'/images/logo/logo.svg'} alt="logo"/>
+            <img src={'/images/logo/logo.svg'} height="100px" width="100px" alt="logo"/>
             Feed</NavLink>
         <NavLink to="/archive" activeClassName="selected">Archive</NavLink>
         <NavLink to="/account" activeClassName="selected">Account</NavLink>
