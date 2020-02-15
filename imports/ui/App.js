@@ -17,7 +17,6 @@ class App extends React.Component {
         </Router>
         <h1>VenMuse</h1>
         <EventsContainer events={this.props.events} />
-        <ArtistContainer />
       </React.Fragment>
     );
   }
@@ -25,6 +24,7 @@ class App extends React.Component {
 
 export default withTracker(() => {
   Meteor.subscribe("events");
+  Meteor.subscribe("users");
   return {
     events: Events.find({}).fetch()
   };
