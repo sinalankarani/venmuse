@@ -1,40 +1,31 @@
 import React from "react";
-import VenueCard from "../ui/components/VenueCard";
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router } from "react-router-dom";
 import Routes from "./routes/";
 import EventsContainer from "../ui/components/EventsContainer";
+import ArtistContainer from "../ui/containers/ArtistContainer";
+
 import { Events } from "../api";
 import { withTracker } from "meteor/react-meteor-data";
 // import { Meteor } from "meteor/meteor";
-import ArtistCard from "../ui/components/ArtistCard";
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-  }
   render() {
-    // console.log(this.props);
     return (
       <React.Fragment>
-            <Router>
-        <Routes />
-      </Router>
+        <Router>
+          <Routes />
+        </Router>
         <h1>VenMuse</h1>
         <EventsContainer events={this.props.events} />
-        <VenueCard venues={this.props.users}/>
-        <ArtistCard artists={this.props.users}/>
+        <ArtistContainer />
       </React.Fragment>
     );
   }
 }
 
 export default withTracker(() => {
-  Meteor.subscribe('events');
-  Meteor.subscribe('users');
+  Meteor.subscribe("events");
   return {
-    events: Events.find({}).fetch(),
-    users: Meteor.users.find({}).fetch(),
-    currentUsers: Meteor.user(),
-    userId: Meteor.userId()
+    events: Events.find({}).fetch()
   };
 })(App);
