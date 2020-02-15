@@ -1,3 +1,4 @@
+
 import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import Routes from "./routes/";
@@ -6,7 +7,6 @@ import ArtistContainer from "../ui/containers/ArtistContainer";
 
 import { Events } from "../api";
 import { withTracker } from "meteor/react-meteor-data";
-// import { Meteor } from "meteor/meteor";
 
 class App extends React.Component {
   render() {
@@ -16,6 +16,8 @@ class App extends React.Component {
           <Routes />
         </Router>
         <h1>VenMuse</h1>
+
+        <SubmitEvent />
         <EventsContainer events={this.props.events} />
       </React.Fragment>
     );
