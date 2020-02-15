@@ -1,5 +1,6 @@
 import React from 'react';
 import EventsCard from '../ui/components/EventsCard';
+import SubmitEvent from '../ui/components/SubmitEvent';
 import { Events } from '../api';
 import { withTracker } from 'meteor/react-meteor-data';
 // import { Meteor } from "meteor/meteor";
@@ -14,6 +15,7 @@ class App extends React.Component {
       <React.Fragment>
         <h1>VenMuse</h1>
         <EventsCard />
+        <SubmitEvent />
       </React.Fragment>
     );
   }
