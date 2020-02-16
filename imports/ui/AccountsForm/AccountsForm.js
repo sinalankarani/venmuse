@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { Accounts } from "meteor/accounts-base";
 import { Meteor } from "meteor/meteor";
-import styles from "./styles";
 import { Form, Field } from "react-final-form";
 import {
   Button,
   FormControl,
   Grid,
   Input,
+  TextField,
   FormControlLabel,
   Switch,
   withStyles
@@ -63,54 +63,78 @@ class AccountsForm extends Component {
     console.log(this.state.userTypeToggle);
   };
   render() {
-    // console.log(this.props);
-    const { classes } = this.props;
     return (
-      <div className={classes.form}>
+      <div className="AccountsFormContainer">
         <Form
-          // className={classes.form}
           onSubmit={this.state.formToggle ? this.login : this.signup}
           render={({ handleSubmit, pristine, invalid, form }) => (
-            <form
-              onSubmit={handleSubmit}
-              // className={classes.form}
-            >
+            <form onSubmit={handleSubmit}>
               {!this.state.formToggle ? (
-                <div
-                // className={classes.form}
-                >
+                <React.Fragment>
                   <FormControlLabel
                     label={this.state.userTypeToggle === true ? "Venue" : "Artist"}
-                    control={
-                      <Switch
-                        //   checked={this.state.userTypeToggle}
-                        onChange={this.changeUserType}
-                      />
-                    }
+                    control={<Switch onChange={this.changeUserType} />}
                   />
-                  <Input name="email" type="text" placeholder="What's your email?" />
-                </div>
+                  <Field
+                    name="email"
+                    render={({ input, meta }) => (
+                      <React.Fragment>
+                        <TextField
+                          name="email"
+                          type="text"
+                          placeholder="What's your email?"
+                          label="Email"
+                          {...input}
+                        />
+                        {meta.error && meta.touched && <span>{meta.error}</span>}
+                      </React.Fragment>
+                    )}
+                  />
+                </React.Fragment>
               ) : null}
-              <Input name="username" type="text" placeholder="What's your username?" />
+              <Field
+                name="username"
+                render={({ input, meta }) => (
+                  <React.Fragment>
+                    <TextField
+                      name="username"
+                      type="text"
+                      label="User Name"
+                      placeholder="What's your username?"
+                      {...input}
+                    />
+                    {meta.error && meta.touched && (
+                      <span className={classes.error}>{meta.error}</span>
+                    )}
+                  </React.Fragment>
+                )}
+              />
+              <Field
+                name="password"
+                render={({ input, meta }) => (
+                  <React.Fragment>
+                    <TextField
+                      name="password"
+                      type="password"
+                      Label="Password"
+                      placeholder="What's your password?"
+                      {...input}
+                    />
+                    {meta.error && meta.touched && <span>{meta.error}</span>}
+                  </React.Fragment>
+                )}
+              />
 
-              <Input name="password" type="password" placeholder="What's your password?" />
-
-              <Button
-                type="submit"
-                variant="contained"
-                size="large"
-                color="primary"
-                // disabled={pristine || invalid}
-              >
-                {this.state.formToggle ? "Login" : "Create Account"}
+              <Button type="submit" variant="contained" size="large" color="secondary">
+                {this.state.formToggle ? "Enter" : "Create Account"}
               </Button>
               <button
                 type="button"
                 onClick={() => this.setState({ formToggle: !this.state.formToggle })}
               >
                 {this.state.formToggle
-                  ? "New to VenMuse? Click here to register!"
-                  : "Already have an account? Click here to sign in!"}
+                  ? "New to VenMuse? Click here to register."
+                  : "Already have an account? Click here to sign in."}
               </button>
             </form>
           )}
@@ -120,4 +144,4 @@ class AccountsForm extends Component {
   }
 }
 
-export default withStyles(styles)(AccountsForm);
+export default withStyles(AccountsForm);
