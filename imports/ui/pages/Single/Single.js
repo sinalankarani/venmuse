@@ -11,3 +11,6 @@ const Single = ({ users, events }) => {
   );
 };
 export default Single;
+import SubmitEvent from "../../components/SubmitEvent";
+
+<SubmitEvent />;
