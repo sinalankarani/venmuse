@@ -6,7 +6,6 @@ import ArtistContainer from "../ui/containers/ArtistContainer";
 
 import { Events } from "../api";
 import { withTracker } from "meteor/react-meteor-data";
-// import { Meteor } from "meteor/meteor";
 
 class App extends React.Component {
   render() {
