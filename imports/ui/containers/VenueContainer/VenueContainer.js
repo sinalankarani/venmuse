@@ -7,15 +7,16 @@ const VenueContainer = ({ classes, venues }) => {
   return (
     <Grid container spacing={4} className={classes.venueContainer}>
       {venues.map(venue => {
-          if(venue.profile.userType==="venue"){
-            return (
-              <VenueCard venues={venues}/>
-            )
-          }
-
-})}
+        if (venue.profile.userType === "venue") {
+          return <VenueCard venues={venues} />;
+        }
+      })}
     </Grid>
   );
 };
-
-export default withStyles(styles)(VenueContainer);
+export default withTracker(() => {
+  Meteor.subscribe("users");
+  return {
+    venues: Meteor.users.find({}).fetch()
+  };
+})(withStyles(styles)(VenueContainer));
