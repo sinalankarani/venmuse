@@ -17,12 +17,12 @@ Meteor.methods({
   // event param will be object containing all necessary data
   // then add to events collections
   'events.addNewEvent'(event) {
-    if (user.profile.userType !== 'venue') {
-      throw new Meteor.Error(
-        'events.addNewEvent.not-authorized',
-        'You are unauthorized to add new events.'
-      );
-    }
+    // if (user.profile.userType !== 'venue') {
+    //   throw new Meteor.Error(
+    //     'events.addNewEvent.not-authorized',
+    //     'You are unauthorized to add new events.'
+    //   );
+    // }
     Events.insert(event);
   }
 });
