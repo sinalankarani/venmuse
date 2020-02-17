@@ -10,7 +10,7 @@ const ArtistContainer = ({ classes, artists }) => {
   return (
     <Grid container spacing={4} className={classes.artistContainer}>
       {artists.map(artist => {
-        return <ArtistCard artist={artist} />;
+        return <ArtistCard key={artist._id} artist={artist} />;
       })}
     </Grid>
   );
