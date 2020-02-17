@@ -4,8 +4,8 @@ import SubmitEvent from "../../components/SubmitEvent";
 const Single = () => {
   return (
     <div>
-      <h1>single page</h1>;
-      <SubmitEvent />;
+      <h1>single page</h1>
+      <SubmitEvent />
     </div>
   );
 };
