@@ -1,6 +1,5 @@
 import React from 'react';
 import AccountsForm from '../../AccountsForm';
-import NavBar from '../../components/NavBar';
 
 class Account extends React.Component {
   render() {
@@ -12,4 +11,5 @@ class Account extends React.Component {
     );
   }
 }
+
 export default Account;
