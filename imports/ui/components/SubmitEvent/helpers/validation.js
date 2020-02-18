@@ -4,8 +4,8 @@ export default function validate(values) {
   if (!values.title) {
     errors.title = 'Required';
   }
-  if (values.date) {
-    errors.title = 'Required';
+  if (!values.date) {
+    errors.date = 'Required';
   }
   //   if (!values.description) {
   //     errors.description = 'Required';
