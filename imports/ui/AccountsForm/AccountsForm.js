@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Accounts } from "meteor/accounts-base";
 import { Meteor } from "meteor/meteor";
 import { Form, Field } from "react-final-form";
+import { withRouter } from "react-router-dom";
 import {
   Button,
   FormControl,
@@ -60,7 +61,6 @@ class AccountsForm extends Component {
     Meteor.loginWithPassword(values, error => {
       console.log(error);
     });
-    console.log(Meteor.userId(), "logged in");
   };
 
   changeUserType = () => {
@@ -124,7 +124,7 @@ class AccountsForm extends Component {
                     <TextField
                       name="password"
                       type="password"
-                      Label="Password"
+                      label="Password"
                       placeholder="What's your password?"
                       {...input}
                     />
@@ -152,4 +152,4 @@ class AccountsForm extends Component {
   }
 }
 
-export default withStyles(styles)(AccountsForm);
+export default withStyles(styles)(withRouter(AccountsForm));
