@@ -6,6 +6,9 @@ if (Meteor.isServer) {
   Meteor.publish("events", function todosPublication() {
     return Events.find();
   });
+  Meteor.publish("users", function usersPublication() {
+    return Meteor.users.find();
+  });
 }
 
 Meteor.methods({
@@ -23,7 +26,7 @@ Meteor.methods({
     Events.insert(event);
   },
 
-  'users.updateProfile'(newProfileData) {
+  "users.updateProfile"(newProfileData) {
     // if(newProfileData!this.userId){
     //   throw new Meteor.Error(
     //     'profile.updateProfile.not-authorized',

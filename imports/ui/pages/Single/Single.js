@@ -11,13 +11,15 @@ const Single = ({ users, events }) => (
       <h1> {users && users && users.username}</h1>
       <p>{users && users.profile.location}</p>
       <p>{users && users.profile.description}</p>
-      {users &&
+      {/* {users &&
         users.profile.social.map(social => {
           return <p>{social}</p>;
-        })}
+        })} */}
     </Card>
-    {console.log(events)}
-    {users && users.profile.userType === "venue" ? <SubmitEvent /> : null}
+    {console.log(users)}
+    {users && users.profile.userType === "venue" ? (
+      <SubmitEvent /> //also events listed
+    ) : null}
   </Grid>
 );
 
