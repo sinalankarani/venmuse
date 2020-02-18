@@ -26,20 +26,7 @@ class AccountsForm extends Component {
   }
   //signup
   signup = values => {
-    // const username = event.target.username.value;
-    // const email = event.target.email.value;
-    // const password = event.target.password.value;
     const { username, email, password } = values;
-
-    // let userType;
-    // if (this.state.userTypeToggle === false) {
-    //   console.log(this.state.userTypeToggle);
-    //   userType = "artist";
-    // } else {
-    //   console.log(this.state.userTypeToggle);
-    //   userType = "venue";
-    // }
-
     Accounts.createUser(
       {
         username,
@@ -56,9 +43,8 @@ class AccountsForm extends Component {
   };
 
   login = values => {
-    // const username = event.target.username.value;
-    // const password = event.target.password.value;
-    Meteor.loginWithPassword(values, error => {
+    const { username, password } = values;
+    Meteor.loginWithPassword(username, password, error => {
       console.log(error);
     });
   };
