@@ -3,8 +3,12 @@ import { Meteor } from "meteor/meteor";
 export const Events = new Mongo.Collection("events");
 
 if (Meteor.isServer) {
-  Meteor.publish("events", function todosPublication() {
+  Meteor.publish("events", function eventPublication() {
     return Events.find();
+  });
+
+  Meteor.publish("users", function usersPublication() {
+    return Meteor.users.find();
   });
 }
 
@@ -23,7 +27,7 @@ Meteor.methods({
     Events.insert(event);
   },
 
-  'users.updateProfile'(newProfileData) {
+  "users.updateProfile"(newProfileData) {
     // if(newProfileData!this.userId){
     //   throw new Meteor.Error(
     //     'profile.updateProfile.not-authorized',
