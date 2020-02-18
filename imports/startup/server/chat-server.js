@@ -4,15 +4,11 @@ const dotenv = require("dotenv");
 const typeDefs = require("./typeDefs");
 const resolvers = require("./resolvers");
 
-// dotenv.config();
-
-// const { DB_URL } = process.env;
-
-// mongoose.connect(DB_URL, {
-//   useNewUrlParser: true,
-//   useFindAndModify: false,
-//   useCreateIndex: true
-// });
+mongoose.connect("mongodb://localhost", {
+  useNewUrlParser: true,
+  useFindAndModify: false,
+  useCreateIndex: true
+});
 
 const pubsub = new PubSub();
 const server = new GraphQLServer({ typeDefs, resolvers, context: { pubsub } });
