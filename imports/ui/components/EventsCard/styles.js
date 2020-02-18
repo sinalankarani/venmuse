@@ -1,7 +1,7 @@
 const styles = () => {
   return {
     card: {
-      width: 450,
+      maxWidth: 600,
       height: 600
     },
     media: {
