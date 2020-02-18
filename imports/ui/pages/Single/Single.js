@@ -4,7 +4,7 @@ import { withTracker } from "meteor/react-meteor-data";
 import { Events } from "../../../api";
 import { Card, Grid } from "@material-ui/core";
 
-const Single = ({ users, events }) => (
+const Single = ({ users }) => (
   <Grid>
     <Card>
       <img src={users && users.profile.profileImage} />

@@ -4,7 +4,7 @@ import { Card, CardContent, CardMedia, Typography } from "@material-ui/core";
 const VenueCard = ({ venues }) => {
   return venues.map(venue => {
     if (venue.profile.userType === "venue") {
-      console.log(venue);
+      // console.log(venue);
       return (
         <Card key={venue._id}>
           <CardContent>
