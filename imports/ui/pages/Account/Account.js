@@ -1,11 +1,16 @@
 import React from "react";
+import AccountsForm from "../../AccountsForm";
 
-const Account = () => {
-  return (
-    <div>
-      <h1>account page</h1>
-    </div>
-  );
-};
+class Account extends React.Component {
+  render() {
+    console.log("on accounts page");
+    return (
+      <React.Fragment>
+        <h1>account page</h1>
+        <AccountsForm />
+      </React.Fragment>
+    );
+  }
+}
 
 export default Account;
