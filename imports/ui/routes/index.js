@@ -13,7 +13,7 @@ const Routes = ({ userId }) => {
   return !userId && !Meteor.loggingIn() ? (
     <Switch>
       <Route exact path="/account" component={Account} />
-      <Redirect from="*" txo="/account" />
+      <Redirect from="*" to="/account" />
     </Switch>
   ) : (
     <Fragment>
