@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Accounts } from "meteor/accounts-base";
 import { Meteor } from "meteor/meteor";
 import { Form, Field } from "react-final-form";
+import { withRouter } from "react-router-dom";
 import {
   Button,
   FormControl,
@@ -24,8 +25,7 @@ class AccountsForm extends Component {
     };
   }
   //signup
-  signup = event => {
-    event.preventDefault();
+  signup = () => {
     const username = event.target.username.value;
     const email = event.target.email.value;
     const password = event.target.password.value;
@@ -56,9 +56,9 @@ class AccountsForm extends Component {
     const username = event.target.username.value;
     const password = event.target.password.value;
     Meteor.loginWithPassword(username, password, error => {
-      console.log(error);
+      // console.log("huh", error, this.props.history, Meteor.user());
+      // if (!error) this.props.history.push("/feed");
     });
-    console.log(Meteor.userId(), "logged in");
   };
 
   changeUserType = () => {
@@ -75,7 +75,9 @@ class AccountsForm extends Component {
               {!this.state.formToggle ? (
                 <React.Fragment>
                   <FormControlLabel
-                    label={this.state.userTypeToggle === true ? "Venue" : "Artist"}
+                    label={
+                      this.state.userTypeToggle === true ? "Venue" : "Artist"
+                    }
                     control={<Switch onChange={this.changeUserType} />}
                   />
                   <Field
@@ -89,7 +91,9 @@ class AccountsForm extends Component {
                           label="Email"
                           {...input}
                         />
-                        {meta.error && meta.touched && <span>{meta.error}</span>}
+                        {meta.error && meta.touched && (
+                          <span>{meta.error}</span>
+                        )}
                       </React.Fragment>
                     )}
                   />
@@ -128,12 +132,19 @@ class AccountsForm extends Component {
                 )}
               />
 
-              <Button type="submit" variant="contained" size="large" color="secondary">
+              <Button
+                type="submit"
+                variant="contained"
+                size="large"
+                color="secondary"
+              >
                 {this.state.formToggle ? "Enter" : "Create Account"}
               </Button>
               <button
                 type="button"
-                onClick={() => this.setState({ formToggle: !this.state.formToggle })}
+                onClick={() =>
+                  this.setState({ formToggle: !this.state.formToggle })
+                }
               >
                 {this.state.formToggle
                   ? "New to VenMuse? Click here to register."
@@ -147,4 +158,4 @@ class AccountsForm extends Component {
   }
 }
 
-export default withStyles(styles)(AccountsForm);
+export default withStyles(styles)(withRouter(AccountsForm));
