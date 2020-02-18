@@ -12,8 +12,9 @@ import { withTracker } from "meteor/react-meteor-data";
 const Routes = ({ userId }) => {
   return !userId && !Meteor.loggingIn() ? (
     <Switch>
-      <Route exact path="/account" component={Account} />
-      <Redirect from="*" to="/account" />
+
+      <Route exact path="/signup" component={Signup} />
+      <Redirect from="*" to="/signup" />
     </Switch>
   ) : (
     <Fragment>
@@ -21,6 +22,7 @@ const Routes = ({ userId }) => {
       <NavBar />
       <Switch>
         <Route exact path="/feed" component={Feed} />
+        <Route exact path="/account" component={Account} />
         <Route exact path="/archive" component={Archive} />
         <Route exact path="/single" component={Single} />
         <Redirect from="*" to="/feed" />
