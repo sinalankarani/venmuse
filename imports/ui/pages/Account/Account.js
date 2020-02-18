@@ -32,7 +32,7 @@ class Account extends React.Component {
           username: this.props.user?.username,
           location: this.props.user?.profile?.location,
           emails: this.props.user?.emails[0].address,
-          description: this.props.user?.profile?.description,
+          description: this.props.user?.profile?.description
           // social: this.props.user?.profile?.social[0],
           // social: this.props.user?.profile?.social[1]
 
@@ -78,8 +78,18 @@ class Account extends React.Component {
                 />
               )}
             />
-            {/* PROFILE IMAGE */}
+            PROFILE IMAGE
             <Typography>
+              <Button><input
+                accept="image/*"
+                id="contained-button-file"
+                multiple
+                type="file"
+              />
+              <label htmlFor="contained-button-file">
+                UPLOAD IMAGE
+              </label>
+              </Button>
               {/* PROFILE IMAGE:{" "}
               <img
                 src={this.props.user && this.props.user.profile.profileImage}
