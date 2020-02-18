@@ -12,6 +12,8 @@ import {
   Switch,
   withStyles
 } from "@material-ui/core/";
+import { style } from "@material-ui/system";
+import styles from "./styles";
 
 class AccountsForm extends Component {
   constructor(props) {
@@ -22,7 +24,8 @@ class AccountsForm extends Component {
     };
   }
   //signup
-  signup = () => {
+  signup = event => {
+    event.preventDefault();
     const username = event.target.username.value;
     const email = event.target.email.value;
     const password = event.target.password.value;
@@ -138,10 +141,10 @@ class AccountsForm extends Component {
               </button>
             </form>
           )}
-        ></Form>
+        />
       </div>
     );
   }
 }
 
-export default withStyles(AccountsForm);
+export default withStyles(styles)(AccountsForm);
