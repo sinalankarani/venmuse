@@ -25,25 +25,28 @@ class AccountsForm extends Component {
     };
   }
   //signup
-  signup = () => {
-    const username = event.target.username.value;
-    const email = event.target.email.value;
-    const password = event.target.password.value;
-    let userType;
-    if (this.state.userTypeToggle === false) {
-      console.log(this.state.userTypeToggle);
-      userType = "artist";
-    } else {
-      console.log(this.state.userTypeToggle);
-      userType = "venue";
-    }
+  signup = values => {
+    // const username = event.target.username.value;
+    // const email = event.target.email.value;
+    // const password = event.target.password.value;
+    const { username, email, password } = values;
+
+    // let userType;
+    // if (this.state.userTypeToggle === false) {
+    //   console.log(this.state.userTypeToggle);
+    //   userType = "artist";
+    // } else {
+    //   console.log(this.state.userTypeToggle);
+    //   userType = "venue";
+    // }
+
     Accounts.createUser(
       {
         username,
         email,
         password,
         profile: {
-          userType
+          userType: this.state.userTypeToggle ? "venue" : "artist"
         }
       },
       error => {
@@ -52,12 +55,11 @@ class AccountsForm extends Component {
     );
   };
 
-  login = () => {
-    const username = event.target.username.value;
-    const password = event.target.password.value;
-    Meteor.loginWithPassword(username, password, error => {
-      // console.log("huh", error, this.props.history, Meteor.user());
-      // if (!error) this.props.history.push("/feed");
+  login = values => {
+    // const username = event.target.username.value;
+    // const password = event.target.password.value;
+    Meteor.loginWithPassword(values, error => {
+      console.log(error);
     });
   };
 
@@ -69,16 +71,17 @@ class AccountsForm extends Component {
     return (
       <div className="AccountsFormContainer">
         <Form
-          onSubmit={this.state.formToggle ? this.login : this.signup}
+          onSubmit={values => {
+            this.state.formToggle ? this.login(values) : this.signup(values);
+          }}
           render={({ handleSubmit, pristine, invalid, form }) => (
             <form onSubmit={handleSubmit}>
               {!this.state.formToggle ? (
                 <React.Fragment>
                   <FormControlLabel
-                    label={
-                      this.state.userTypeToggle === true ? "Venue" : "Artist"
-                    }
+                    label={this.state.userTypeToggle === true ? "Venue" : "Artist"}
                     control={<Switch onChange={this.changeUserType} />}
+                    labelPlacement="top"
                   />
                   <Field
                     name="email"
@@ -91,9 +94,7 @@ class AccountsForm extends Component {
                           label="Email"
                           {...input}
                         />
-                        {meta.error && meta.touched && (
-                          <span>{meta.error}</span>
-                        )}
+                        {meta.error && meta.touched && <span>{meta.error}</span>}
                       </React.Fragment>
                     )}
                   />
@@ -132,19 +133,12 @@ class AccountsForm extends Component {
                 )}
               />
 
-              <Button
-                type="submit"
-                variant="contained"
-                size="large"
-                color="secondary"
-              >
+              <Button type="submit" variant="contained" size="large" color="secondary">
                 {this.state.formToggle ? "Enter" : "Create Account"}
               </Button>
               <button
                 type="button"
-                onClick={() =>
-                  this.setState({ formToggle: !this.state.formToggle })
-                }
+                onClick={() => this.setState({ formToggle: !this.state.formToggle })}
               >
                 {this.state.formToggle
                   ? "New to VenMuse? Click here to register."
