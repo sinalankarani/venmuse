@@ -123,7 +123,7 @@ class AccountsForm extends Component {
                     <TextField
                       name="password"
                       type="password"
-                      Label="Password"
+                      label="Password"
                       placeholder="What's your password?"
                       {...input}
                     />
