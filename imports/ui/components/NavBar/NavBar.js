@@ -31,7 +31,6 @@ const NavBar = ({ classes }) => {
           <button
             onClick={() => {
               Meteor.logout();
-              console.log(Meteor.userId(), "logged out");
             }}
           >
             Logout
