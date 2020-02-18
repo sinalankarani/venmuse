@@ -1,4 +1,5 @@
 import React from "react";
+<<<<<<< HEAD
 import AccountsForm from "../../AccountsForm";
 import NavBar from "../../components/NavBar";
 
@@ -16,3 +17,15 @@ class Login extends React.Component {
 }
 
 export default Login;
+=======
+
+const Account = () => {
+  return (
+    <div>
+      <h1>account page</h1>
+    </div>
+  );
+};
+
+export default Account;
+>>>>>>> master
