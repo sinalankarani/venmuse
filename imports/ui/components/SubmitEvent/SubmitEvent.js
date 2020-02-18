@@ -26,7 +26,6 @@ const SubmitEvent = ({ classes }) => {
       description: ''
     };
     Meteor.call('events.addNewEvent', newEvent);
-    console.log(values);
   };
 
   return (
@@ -84,7 +83,7 @@ const SubmitEvent = ({ classes }) => {
                       id="date"
                       label="Date"
                       type="date"
-                      defaultValue={moment().format('YYYY-MM-D')}
+                      {...input}
                       InputLabelProps={{
                         shrink: true
                       }}
@@ -95,6 +94,7 @@ const SubmitEvent = ({ classes }) => {
                   </React.Fragment>
                 )}
               />
+              {/* SUBMIT NEW EVENT */}
               <Button onClick={handleSubmit} variant="contained">
                 Submit
               </Button>

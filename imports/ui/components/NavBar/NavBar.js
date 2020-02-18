@@ -22,12 +22,16 @@ const NavBar = ({ classes }) => {
           <NavLink to="/account" activeClassName="selected">
             Account
           </NavLink>
-          <NavLink to="/signup" activeClassName="selected">
-            SignUp
-          </NavLink>
           <NavLink to="/single" activeClassName="selected">
             Single
           </NavLink>
+          <button
+            onClick={() => {
+              Meteor.logout();
+            }}
+          >
+            Logout
+          </button>
         </Toolbar>
       </AppBar>
 
