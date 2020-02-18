@@ -1,6 +1,9 @@
 const styles = () => {
   return {
-    eventContainer: {}
+    eventContainer: {
+      display: "flex",
+      padding: 20
+    }
   };
 };
 
