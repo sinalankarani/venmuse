@@ -1,16 +1,25 @@
 import React from "react";
-import { Container } from "@material-ui/core";
-const Single = ({ users, events }) => {
-  console.log("hello", users);
-  console.log("goodbye", events);
+import SubmitEvent from "../../components/SubmitEvent";
+import { withTracker } from "meteor/react-meteor-data";
+import { Events } from "../../../api";
+import { Artists } from "../../../api";
+import { Venues } from "../../../api";
 
+const Single = ({ events }) => {
+  console.log(events);
   return (
-    <Container>
-      <div className="banner">poop</div>
-    </Container>
+    <div>
+      <h1>single page</h1>
+      <SubmitEvent />
+    </div>
   );
 };
-export default Single;
-import SubmitEvent from "../../components/SubmitEvent";
 
-<SubmitEvent />;
+export default withTracker(() => {
+  Meteor.subscribe("events");
+  return {
+    events: Events.find({}).fetch(),
+    artists: Meteor.users.find({}).fetch(),
+    venues: Meteor.users.find({}).fetch()
+  };
+})(Single);
