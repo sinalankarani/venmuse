@@ -1,4 +1,4 @@
-export default function validate(values) {
+export default validate = values => {
   const errors = {};
   if (!values.title) {
     errors.title = 'Required';
@@ -14,4 +14,4 @@ export default function validate(values) {
   }
 
   return errors;
-}
+};
