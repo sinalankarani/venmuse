@@ -9,7 +9,11 @@ const VenueContainer = ({ classes, venues }) => {
     <Grid container spacing={4} className={classes.venueContainer}>
       {venues.map(venue => {
         if (venue.profile.userType === "venue") {
-          return <VenueCard key={venue._id} venues={venues} />;
+          return (
+            <Grid item key={venue._id} xs={12} md={6} lg={4}>
+              <VenueCard venues={venues} />
+            </Grid>
+          );
         }
       })}
     </Grid>
