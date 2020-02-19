@@ -15,8 +15,8 @@ const VenueCard = ({ classes, venue }) => {
   return (
     venue &&
     venue.profile.userType === "venue" && (
-      <Card className={classes.card}>
-        <CardActionArea>
+      <CardActionArea>
+        <Card className={classes.card}>
           <Link to={venue && venue._id ? `/profile/${venue && venue._id}` : ""}>
             <CardContent className={classes.content}>
               <CardMedia className={classes.media}>
@@ -31,8 +31,8 @@ const VenueCard = ({ classes, venue }) => {
               </div>
             </CardContent>
           </Link>
-        </CardActionArea>
-      </Card>
+        </Card>
+      </CardActionArea>
     )
   );
 };

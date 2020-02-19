@@ -12,8 +12,8 @@ import styles from "./styles";
 
 const EventsCard = ({ classes, event }) => {
   return (
-    <Card className={classes.card}>
-      <CardActionArea>
+    <CardActionArea>
+      <Card className={classes.card}>
         <Link to={event && event._id ? `/profile/${event && event._id}` : ""}>
           <CardContent className={classes.content}>
             <CardMedia className={classes.media}>
@@ -29,8 +29,8 @@ const EventsCard = ({ classes, event }) => {
             </div>
           </CardContent>
         </Link>
-      </CardActionArea>
-    </Card>
+      </Card>
+    </CardActionArea>
   );
 };
 

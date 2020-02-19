@@ -14,8 +14,8 @@ const ArtistCard = ({ classes, artist }) => {
   return (
     artist &&
     artist.profile.userType === "artist" && (
-      <Card className={classes.card}>
-        <CardActionArea>
+      <CardActionArea>
+        <Card className={classes.card}>
           <Link to={artist && artist._id ? `/profile/${artist && artist._id}` : ""}>
             <CardContent className={classes.content}>
               <CardMedia className={classes.media}>
@@ -36,8 +36,8 @@ const ArtistCard = ({ classes, artist }) => {
               </div>
             </CardContent>
           </Link>
-        </CardActionArea>
-      </Card>
+        </Card>
+      </CardActionArea>
     )
   );
 };
