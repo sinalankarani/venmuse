@@ -23,7 +23,7 @@ Meteor.startup(() => {
       created: moment()
         .startOf()
         .fromNow(),
-      title: "blaze it",
+      title: "Blaze it",
       location: "Da Club", //Venue.name
       description: "42069",
       imageurl:
@@ -52,12 +52,17 @@ Meteor.startup(() => {
       password: "12345",
       profile: {
         userType: "artist",
+        title: "Coolio",
         location: "Vancouver",
         description: "a super cool band",
         profileImage:
           "https://images.unsplash.com/photo-1511367461989-f85a21fda167?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
         images: [],
-        social: ["facebook", "insta"]
+        social: {
+          facebook: "www.facebook.com",
+          instagram: "www.instagram.com",
+          twitter: "www.twitter.com"
+        }
       }
     });
     Accounts.createUser({
@@ -66,12 +71,17 @@ Meteor.startup(() => {
       password: "12345",
       profile: {
         userType: "artist",
+        title: "Hood Boyz",
         location: "Surrey",
         description: "a super hood hip hop group",
         profileImage:
           "https://images.unsplash.com/photo-1415886541506-6efc5e4b1786?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
         images: [],
-        social: ["facebook", "insta"]
+        social: {
+          facebook: "www.facebook.com",
+          instagram: "www.instagram.com",
+          twitter: "www.twitter.com"
+        }
       }
     });
     Accounts.createUser({
@@ -80,12 +90,17 @@ Meteor.startup(() => {
       password: "12345",
       profile: {
         userType: "venue",
+        title: "Dude Chillin",
         location: "East Vancouver",
         description: "a super cool venue",
         profileImage:
           "https://images.unsplash.com/photo-1518079893270-6222a4393c6d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
         images: [],
-        social: ["facebook", "insta", "twitter"]
+        social: {
+          facebook: "www.facebook.com",
+          instagram: "www.instagram.com",
+          twitter: "www.twitter.com"
+        }
       }
     });
   }
