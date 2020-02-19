@@ -1,9 +1,7 @@
-import { createStyles } from "@material-ui/core";
-
-const styles = (theme = createStyles({
+const styles = theme => ({
   form: {
-    display: "flex",
-    flexDirection: "column",
+    display: 'flex',
+    flexDirection: 'column'
     // width: "75%",
     // margin: "auto"
   },
@@ -12,9 +10,9 @@ const styles = (theme = createStyles({
   //       flexDirection: "column"
   //   }
   accountsFormContainer: {
-    display: "flex",
-    flexDirection: "column"
+    display: 'flex',
+    flexDirection: 'column'
   }
-}));
+});
 
 export default styles;
