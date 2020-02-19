@@ -7,7 +7,7 @@ import styles from "./styles";
 
 const Feed = ({ classes }) => {
   return (
-    <div>
+    <div className={classes.feedPage}>
       <Container className={classes.banner}>
         <Typography className={classes.bannertext}>
           YOUR NEXT GIG AWAITS

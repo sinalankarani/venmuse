@@ -1,5 +1,8 @@
 const styles = theme => {
   return {
+    feedPage: {
+      backgroundColor: theme.palette.primary.background
+    },
     banner: {
       padding: 0,
       margin: 0,

@@ -16,8 +16,8 @@ Meteor.startup(() => {
       location: 'Da Club', //Venue.name
       description: 'A super fun love filled night of valentimes day fun',
       imageurl:
-        'https://images.unsplash.com/photo-1556035511-3168381ea4d4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
-      artist: ['Joe shmoe the band', 'the band'],
+        "https://images.unsplash.com/photo-1556035511-3168381ea4d4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+      artist: ["Joe shmoe the band", "the band"],
       filled: false
     });
 
@@ -52,11 +52,24 @@ Meteor.startup(() => {
       created: moment()
         .startOf()
         .fromNow(),
-      title: 'New Years Ball',
-      location: 'Times Square', //Venue.name
-      description: '',
+      title: "Christmas Jolly Joy Jamboree",
+      location: "Christmas Market", //Venue.name
+      description: "",
       imageurl:
         'https://images.unsplash.com/photo-1541535650810-10d26f5c2ab3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+      artist: [],
+      filled: false
+    });
+    Events.insert({
+      date: "December, 31, 2020",
+      created: moment()
+        .startOf()
+        .fromNow(),
+      title: "New Years Ball",
+      location: "Times Square", //Venue.name
+      description: "",
+      imageurl:
+        "https://images.unsplash.com/photo-1541535650810-10d26f5c2ab3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
       artist: [],
       filled: false
     });
@@ -129,13 +142,14 @@ Meteor.startup(() => {
       email: 'venue@test.com',
       password: '12345',
       profile: {
-        userType: 'venue',
-        location: 'East Vancouver',
-        description: 'a super cool venue',
+        userType: "artist",
+        title: "Del Mar Dick Van Dyke",
+        location: "Vancouver",
+        description: "a super cool band",
         profileImage:
           'https://images.unsplash.com/photo-1518079893270-6222a4393c6d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
         images: [],
-        social: ['facebook', 'insta', 'twitter']
+        social: ["facebook", "insta"]
       }
     });
     Accounts.createUser({
@@ -143,34 +157,53 @@ Meteor.startup(() => {
       email: 'hall@test.com',
       password: '12345',
       profile: {
-        userType: 'venue',
-        location: 'Downtown Vancouver',
-        description: 'A gold gilded theatre hall',
+        userType: "artist",
+        title: "N.W.A",
+        location: "Compton",
+        description: "Gangster rap yo",
         profileImage:
           'https://images.unsplash.com/photo-1507924538820-ede94a04019d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
         images: [],
-        social: ['facebook', 'insta', 'twitter']
+        social: ["facebook", "insta"]
       }
     });
     Accounts.createUser({
-      username: 'Outdoor Music Festival',
-      email: 'omf@test.com',
-      password: '12345',
+      username: "Polkaband",
+      email: "pb@test.com",
+      password: "12345",
       profile: {
-        userType: 'venue',
-        location: 'Stanley Park',
-        description:
-          'An outdoor field where we will rock out rain or shine, but probably rain',
+        userType: "artist",
+        title: "Polka Dots",
+        location: "Langley",
+        description: "An upbeat, classical polka ensemble",
         profileImage:
-          'https://images.unsplash.com/photo-1506157786151-b8491531f063?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+          "https://images.unsplash.com/flagged/photo-1569231290694-70d80ea24b8e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
         images: [],
-        social: ['facebook', 'insta', 'twitter']
+        social: ["facebook", "insta"]
       }
     });
     Accounts.createUser({
-      username: 'Caddy Bar',
-      email: 'cadbar@test.com',
-      password: '12345',
+      username: "So do you like jazz",
+      email: "jerry@test.com",
+      password: "12345",
+      profile: {
+        userType: "artist",
+        title: "Miles Davis",
+        location: "Downtown Van",
+        description: "So you like jazz?",
+        profileImage:
+          "https://images.unsplash.com/photo-1541804627596-3b5b9ef58c93?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+        images: [],
+        social: ["facebook", "insta"]
+      }
+    });
+    //////////////////////////////////////
+    /////////////// VENUES ///////////////
+    //////////////////////////////////////
+    Accounts.createUser({
+      username: "venue test",
+      email: "venue@test.com",
+      password: "12345",
       profile: {
         userType: 'venue',
         location: 'Caddilac Lounge',
@@ -178,7 +211,53 @@ Meteor.startup(() => {
         profileImage:
           'https://images.unsplash.com/photo-1456743625079-86a97ff8bc86?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
         images: [],
-        social: ['facebook', 'insta', 'twitter']
+        social: ["facebook", "insta", "twitter"]
+      }
+    });
+    Accounts.createUser({
+      username: "Theatre Hall",
+      email: "hall@test.com",
+      password: "12345",
+      profile: {
+        userType: "venue",
+        title: "The Orpheum",
+        location: "Downtown Vancouver",
+        description: "A gold gilded theatre hall",
+        profileImage:
+          "https://images.unsplash.com/photo-1507924538820-ede94a04019d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+        images: [],
+        social: ["facebook", "insta", "twitter"]
+      }
+    });
+    Accounts.createUser({
+      username: "Outdoor Music Festival",
+      email: "omf@test.com",
+      password: "12345",
+      profile: {
+        userType: "venue",
+        title: "Malkin Bowl",
+        location: "Stanley Park",
+        description:
+          "An outdoor field where we will rock out rain or shine, but probably rain",
+        profileImage:
+          "https://images.unsplash.com/photo-1506157786151-b8491531f063?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+        images: [],
+        social: ["facebook", "insta", "twitter"]
+      }
+    });
+    Accounts.createUser({
+      username: "Caddy Bar",
+      email: "cadbar@test.com",
+      password: "12345",
+      profile: {
+        userType: "venue",
+        title: "Cadillac Loung",
+        location: "Cadillac Lounge",
+        description: "The caddy lounge is the place to be",
+        profileImage:
+          "https://images.unsplash.com/photo-1456743625079-86a97ff8bc86?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+        images: [],
+        social: ["facebook", "insta", "twitter"]
       }
     });
   }

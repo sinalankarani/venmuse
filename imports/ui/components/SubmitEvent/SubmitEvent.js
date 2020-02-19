@@ -3,7 +3,7 @@ import { Events } from '../../../api/';
 import { Form, Field } from 'react-final-form';
 import { withTracker } from 'meteor/react-meteor-data';
 import { withRouter } from 'react-router-dom';
-import validate from './helpers/validation';
+import validate from './helpers/';
 import { Meteor } from 'meteor/meteor';
 import styles from './styles';
 import {

@@ -1,13 +1,14 @@
 import React from "react";
 import EventsContainer from "../../containers/EventsContainer";
+import { withStyles } from "@material-ui/core";
+import styles from "./styles";
 
-const Event = () => {
+const Event = ({ classes }) => {
   return (
-    <div>
-      <h1>Event Page</h1>
+    <div className={classes.eventPage}>
       <EventsContainer />
     </div>
   );
 };
 
-export default Event;
+export default withStyles(styles)(Event);
