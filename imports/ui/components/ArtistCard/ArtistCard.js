@@ -26,8 +26,8 @@ const ArtistCard = ({ classes, artist }) => {
             />
           </CardMedia>
           <div className={classes.eventDetails}>
-            <Typography variant="h5">{artist.profile.title}</Typography>
-            <Typography variant="body2">
+            <Typography variant="h6">{artist.profile.title}</Typography>
+            <Typography variant="body2" color="secondary">
               {artist.profile.description}
             </Typography>
             <Typography variant="body2">{artist.profile.location}</Typography>
