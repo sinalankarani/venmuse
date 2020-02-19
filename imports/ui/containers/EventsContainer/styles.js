@@ -5,6 +5,9 @@ const styles = () => {
       margin: "0 auto",
       display: "flex",
       justifyContent: "flex-start"
+    },
+    card: {
+      padding: 0
     }
   };
 };
