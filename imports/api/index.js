@@ -1,6 +1,6 @@
-import { Mongo } from 'meteor/mongo';
-import { Meteor } from 'meteor/meteor';
-export const Events = new Mongo.Collection('events');
+import { Mongo } from "meteor/mongo";
+import { Meteor } from "meteor/meteor";
+export const Events = new Mongo.Collection("events");
 
 if (Meteor.isServer) {
   Meteor.publish('events', function eventsPublication() {
@@ -10,7 +10,6 @@ if (Meteor.isServer) {
   Meteor.publish('users', function usersPublication() {
     return Meteor.users.find();
   });
-  ////////////////////////////////////////////////////////
 }
 
 Meteor.methods({
@@ -34,5 +33,6 @@ Meteor.methods({
     Meteor.users.update(Meteor.userId(), {
       $set: { profile: { ...Meteor.user().profile, ...newProfileData } }
     });
+
   }
 });

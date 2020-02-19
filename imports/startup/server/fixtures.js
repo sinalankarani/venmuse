@@ -57,7 +57,11 @@ Meteor.startup(() => {
         profileImage:
           "https://images.unsplash.com/photo-1511367461989-f85a21fda167?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
         images: [],
-        social: ["facebook", "insta"]
+        social: {
+          facebook: "www.facebook.com",
+          instagram: "www.instagram.com",
+          twitter: "www.twitter.com"
+        }
       }
     });
     Accounts.createUser({
@@ -71,7 +75,11 @@ Meteor.startup(() => {
         profileImage:
           "https://images.unsplash.com/photo-1415886541506-6efc5e4b1786?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
         images: [],
-        social: ["facebook", "insta"]
+        social: {
+          facebook: "www.facebook.com",
+          instagram: "www.instagram.com",
+          twitter: "www.twitter.com"
+        }
       }
     });
     Accounts.createUser({
@@ -85,7 +93,12 @@ Meteor.startup(() => {
         profileImage:
           "https://images.unsplash.com/photo-1518079893270-6222a4393c6d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
         images: [],
-        social: ["facebook", "insta", "twitter"]
+        social: {
+          facebook: "www.facebook.com",
+          instagram: "www.instagram.com",
+          twitter: "www.twitter.com"
+        }
+        // ["facebook", "insta", "twitter"]
       }
     });
   }

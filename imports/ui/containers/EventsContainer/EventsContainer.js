@@ -9,7 +9,7 @@ const EventsContainer = ({ classes, events }) => {
   return (
     <Grid container spacing={4} className={classes.eventContainer}>
       {events.map(event => (
-        <Grid event key={event._id}>
+        <Grid item key={event._id} xs={12} md={6} lg={4}>
           <EventsCard event={event} />
         </Grid>
       ))}
