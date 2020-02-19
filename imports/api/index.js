@@ -3,37 +3,39 @@ import { Meteor } from "meteor/meteor";
 export const Events = new Mongo.Collection("events");
 
 if (Meteor.isServer) {
-  Meteor.publish('events', function eventsPublication() {
+  Meteor.publish("events", function eventsPublication() {
     return Events.find();
   });
 
   //////////////////KIERAN WILL REMOVE LATER - NOONE ELSE!
-  Meteor.publish('users', function usersPublication() {
+  Meteor.publish("users", function usersPublication() {
     return Meteor.users.find();
   });
 }
 
 Meteor.methods({
-  'events.addNewEvent'(event) {
-    if (Meteor.user().profile.userType !== 'venue') {
+  "events.addNewEvent"(event) {
+    if (Meteor.user().profile.userType !== "venue") {
       throw new Meteor.Error(
-        'events.addNewEvent.not-authorized',
-        'You are unauthorized to add new events.'
+        "events.addNewEvent.not-authorized",
+        "You are unauthorized to add new events."
       );
     }
     Events.insert({ ...event, owner: this.userId, filled: false });
   },
 
-  'users.updateProfile'(newProfileData) {
+  "users.updateProfile"(newProfileData) {
+    // console.log(newProfileData);
+    const { profile } = newProfileData;
     if (!this.userId) {
       throw new Meteor.Error(
-        'profile.updateProfile.not-authorized',
-        'You are not allowed to update profile for other users'
+        "profile.updateProfile.not-authorized",
+        "You are not allowed to update profile for other users"
       );
     }
-    Meteor.users.update(Meteor.userId(), {
-      $set: { profile: { ...Meteor.user().profile, ...newProfileData } }
-    });
 
+    Meteor.users.update(Meteor.userId(), {
+      $set: { profile: { ...Meteor.user().profile, ...profile } }
+    });
   }
 });
