@@ -1,13 +1,14 @@
 import React from "react";
 import VenueContainer from "../../containers/VenueContainer";
+import { withStyles } from "@material-ui/core";
+import styles from "./styles";
 
-const Venue = () => {
+const Venue = ({ classes }) => {
   return (
-    <div>
-      <h1>Venue Page</h1>
+    <div className={classes.venuePage}>
       <VenueContainer />
     </div>
   );
 };
 
-export default Venue;
+export default withStyles(styles)(Venue);
