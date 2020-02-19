@@ -3,33 +3,46 @@ import SubmitEvent from "../../components/SubmitEvent";
 import { withTracker } from "meteor/react-meteor-data";
 import { Events } from "../../../api";
 import { Card, Grid } from "@material-ui/core";
+import { Meteor } from "meteor/meteor";
 
-const Single = ({ users }) => (
-  <Grid>
-    <Card>
-      <img src={users && users.profile.profileImage} />
-      <h1> {users && users && users.username}</h1>
-      <p>{users && users.profile.location}</p>
-      <p>{users && users.profile.description}</p>
-      {/* {users &&
-        users.profile.social.map(social => {
-          return <p>{social}</p>;
-        })} */}
-    </Card>
-    {console.log(users)}
-    {users && users.profile.userType === "venue" ? (
-      <SubmitEvent /> //also events listed
-    ) : null}
-  </Grid>
-);
+const Single = ({ user }) => {
+  return user && user.profile ? (
+    <Grid>
+      {console.log(user)}
+      <Card>
+        <img src={user && user.profile.profileImage} />
+        <h1> {user.username}</h1>
+        <p>{user.profile.location}</p>
+        <p>{user.profile.description}</p>
+        {console.log(user.profile.social.facebook)}
+        <h2>Connect with us on Social Media</h2>
+        <ul>
+          <li key="facebook">
+            <a href={user.profile.social.facebook} target="_blank">
+              Facebook Icon
+            </a>
+          </li>
+          <li key="instagram">
+            <a href={user.profile.social.instagram}>Instagram Icon</a>
+          </li>
+          <li key="twitter">
+            <a href={user.profile.social.twitter}>Twitter Icon</a>
+          </li>
+        </ul>
+      </Card>
+      {user.profile.userType === "venue" ? (
+        <SubmitEvent /> //also events listed
+      ) : null}
+    </Grid>
+  ) : null;
+};
 
-export default withTracker(({ id }) => {
+export default withTracker(({ userId }) => {
   Meteor.subscribe("events");
   Meteor.subscribe("users");
-  console.log("id", id);
 
   return {
     events: Events.find({}).fetch(),
-    users: Meteor.users.findOne({ _id: id })
+    user: Meteor.users.find({ _id: userId }).fetch()[0]
   };
 })(Single);

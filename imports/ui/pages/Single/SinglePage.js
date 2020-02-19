@@ -7,10 +7,10 @@ import { Artists } from "../../../api";
 import { Venues } from "../../../api";
 import Single from "./Single";
 
-const SinglePage = ({ events, users }) => {
+const SinglePage = props => {
   let { id } = useParams();
 
-  return <Single id={id} />;
+  return <Single userId={id} />;
 };
 
 export default SinglePage;
