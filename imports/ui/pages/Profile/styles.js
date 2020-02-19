@@ -1,4 +1,4 @@
-import { createStyles } from "@material-ui/core/styles";
+import { createStyles } from "@material-ui/core";
 
 const styles = createStyles(theme => ({
   modal: {
@@ -11,6 +11,14 @@ const styles = createStyles(theme => ({
     border: "2px solid #000",
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3)
+  },
+  gravatar: {
+    borderRadius: "30px"
+  },
+  banner: {
+    width: "100%",
+    maxHeight: "400px",
+    objectFit: "cover"
   }
 }));
 
