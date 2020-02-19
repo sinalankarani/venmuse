@@ -1,12 +1,13 @@
 const styles = () => {
   return {
     card: {
-      maxWidth: 600,
-      height: 500
+      maxWidth: 350,
+      height: 300,
+      margin: 0
     },
     image: {
       width: "100%",
-      height: 300,
+      height: 150,
       borderRadius: 5,
       objectPosition: "center",
       objectFit: "cover"
@@ -14,8 +15,7 @@ const styles = () => {
     eventDetails: {
       display: "flex",
       flexDirection: "column",
-      justifyContent: "space-between",
-      padding: 5
+      padding: 10
     }
   };
 };
