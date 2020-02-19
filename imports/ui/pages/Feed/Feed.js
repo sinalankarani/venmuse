@@ -2,11 +2,12 @@ import React from "react";
 import EventsContainer from "../../containers/EventsContainer";
 import ArtistContainer from "../../containers/ArtistContainer";
 import VenueContainer from "../../containers/VenueContainer";
+import { withStyles } from "@material-ui/core";
+import styles from "./styles";
 
-const Feed = () => {
+const Feed = ({ classes }) => {
   return (
-    <div>
-      <h1>Feed Page</h1>
+    <div className={classes.feedPage}>
       <ArtistContainer />
       <VenueContainer />
       <EventsContainer />
@@ -14,4 +15,4 @@ const Feed = () => {
   );
 };
 
-export default Feed;
+export default withStyles(styles)(Feed);
