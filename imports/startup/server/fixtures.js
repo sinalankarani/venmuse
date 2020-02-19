@@ -23,7 +23,7 @@ Meteor.startup(() => {
       created: moment()
         .startOf()
         .fromNow(),
-      title: "blaze it",
+      title: "Blaze it",
       location: "Da Club", //Venue.name
       description: "42069",
       imageurl:
@@ -52,6 +52,7 @@ Meteor.startup(() => {
       password: "12345",
       profile: {
         userType: "artist",
+        title: "Coolio",
         location: "Vancouver",
         description: "a super cool band",
         profileImage:
@@ -70,6 +71,26 @@ Meteor.startup(() => {
       password: "12345",
       profile: {
         userType: "artist",
+        title: "Hood Boyz",
+        location: "Surrey",
+        description: "a super hood hip hop group",
+        profileImage:
+          "https://images.unsplash.com/photo-1415886541506-6efc5e4b1786?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+        images: [],
+        social: {
+          facebook: "www.facebook.com",
+          instagram: "www.instagram.com",
+          twitter: "www.twitter.com"
+        }
+      }
+    });
+    Accounts.createUser({
+      username: "artist test 3",
+      email: "artist3@test.com",
+      password: "12345",
+      profile: {
+        userType: "artist",
+        title: "Rap Boyz",
         location: "Surrey",
         description: "a super hood hip hop group",
         profileImage:
@@ -88,6 +109,7 @@ Meteor.startup(() => {
       password: "12345",
       profile: {
         userType: "venue",
+        title: "Dude Chillin",
         location: "East Vancouver",
         description: "a super cool venue",
         profileImage:
@@ -98,7 +120,6 @@ Meteor.startup(() => {
           instagram: "www.instagram.com",
           twitter: "www.twitter.com"
         }
-        // ["facebook", "insta", "twitter"]
       }
     });
   }

@@ -56,85 +56,92 @@ class AccountsForm extends Component {
   render() {
     const { classes } = this.props;
     return (
-      <div className={classes.accountsFormContainer}>
-        <Form
-          onSubmit={values => {
-            this.state.formToggle ? this.login(values) : this.signup(values);
-          }}
-          render={({ handleSubmit, pristine, invalid, form }) => (
-            <form onSubmit={handleSubmit} className={classes.form}>
-              {!this.state.formToggle ? (
+      <Form
+        onSubmit={values => {
+          this.state.formToggle ? this.login(values) : this.signup(values);
+        }}
+        render={({ handleSubmit, pristine, invalid, form }) => (
+          <form onSubmit={handleSubmit} className={classes.form}>
+            {!this.state.formToggle ? (
+              <React.Fragment>
+                <FormControlLabel
+                  label={
+                    this.state.userTypeToggle === true ? "Venue" : "Artist"
+                  }
+                  control={<Switch onChange={this.changeUserType} />}
+                  labelPlacement="top"
+                />
+                <Field
+                  name="email"
+                  render={({ input, meta }) => (
+                    <React.Fragment>
+                      <TextField
+                        name="email"
+                        type="text"
+                        placeholder="What's your email?"
+                        label="Email"
+                        {...input}
+                      />
+                      {meta.error && meta.touched && <span>{meta.error}</span>}
+                    </React.Fragment>
+                  )}
+                />
+              </React.Fragment>
+            ) : null}
+            <Field
+              name="username"
+              render={({ input, meta }) => (
                 <React.Fragment>
-                  <FormControlLabel
-                    label={this.state.userTypeToggle === true ? "Venue" : "Artist"}
-                    control={<Switch onChange={this.changeUserType} />}
-                    labelPlacement="top"
+                  <TextField
+                    name="username"
+                    type="text"
+                    label="User Name"
+                    placeholder="What's your username?"
+                    {...input}
                   />
-                  <Field
-                    name="email"
-                    render={({ input, meta }) => (
-                      <React.Fragment>
-                        <TextField
-                          name="email"
-                          type="text"
-                          placeholder="What's your email?"
-                          label="Email"
-                          {...input}
-                        />
-                        {meta.error && meta.touched && <span>{meta.error}</span>}
-                      </React.Fragment>
-                    )}
-                  />
+                  {meta.error && meta.touched && (
+                    <span className={classes.error}>{meta.error}</span>
+                  )}
                 </React.Fragment>
-              ) : null}
-              <Field
-                name="username"
-                render={({ input, meta }) => (
-                  <React.Fragment>
-                    <TextField
-                      name="username"
-                      type="text"
-                      label="User Name"
-                      placeholder="What's your username?"
-                      {...input}
-                    />
-                    {meta.error && meta.touched && (
-                      <span className={classes.error}>{meta.error}</span>
-                    )}
-                  </React.Fragment>
-                )}
-              />
-              <Field
-                name="password"
-                render={({ input, meta }) => (
-                  <React.Fragment>
-                    <TextField
-                      name="password"
-                      type="password"
-                      label="Password"
-                      placeholder="What's your password?"
-                      {...input}
-                    />
-                    {meta.error && meta.touched && <span>{meta.error}</span>}
-                  </React.Fragment>
-                )}
-              />
+              )}
+            />
+            <Field
+              name="password"
+              render={({ input, meta }) => (
+                <React.Fragment>
+                  <TextField
+                    name="password"
+                    type="password"
+                    label="Password"
+                    placeholder="What's your password?"
+                    {...input}
+                  />
+                  {meta.error && meta.touched && <span>{meta.error}</span>}
+                </React.Fragment>
+              )}
+            />
 
-              <Button type="submit" variant="contained" size="large" color="secondary">
-                {this.state.formToggle ? "Enter" : "Create Account"}
-              </Button>
-              <button
-                type="button"
-                onClick={() => this.setState({ formToggle: !this.state.formToggle })}
-              >
-                {this.state.formToggle
-                  ? "New to VenMuse? Click here to register."
-                  : "Already have an account? Click here to sign in."}
-              </button>
-            </form>
-          )}
-        />
-      </div>
+            <Button
+              type="submit"
+              variant="contained"
+              size="large"
+              color="secondary"
+            >
+              {this.state.formToggle ? "Enter" : "Create Account"}
+            </Button>
+            <button
+              type="button"
+              onClick={() =>
+                this.setState({ formToggle: !this.state.formToggle })
+              }
+            >
+              {this.state.formToggle
+                ? "New to VenMuse? Click here to register."
+                : "Already have an account? Click here to sign in."}
+            </button>
+          </form>
+        )}
+      />
     );
   }
 }

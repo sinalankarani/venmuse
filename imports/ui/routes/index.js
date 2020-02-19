@@ -17,7 +17,6 @@ const Routes = ({ userId }) => {
     </Switch>
   ) : (
     <Fragment>
-      {console.log(userId)}
       <NavBar />
       <Switch>
         <Route exact path="/feed" component={Feed} />
