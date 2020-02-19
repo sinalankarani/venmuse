@@ -9,9 +9,10 @@ import {
   MenuItem,
   Menu
 } from "@material-ui/core";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import { withTracker } from "meteor/react-meteor-data";
+import PowerSettingsNewIcon from "@material-ui/icons/PowerSettingsNew";
+import PersonOutlineTwoToneIcon from "@material-ui/icons/PersonOutlineTwoTone";
 
 const StyledMenu = withStyles({
   paper: {
@@ -56,7 +57,7 @@ const NavBar = ({ classes }) => {
   return (
     <nav className={classes.root}>
       <AppBar className={classes.appbar} position="static">
-        <Toolbar>
+        <Toolbar className={classes.nav}>
           <NavLink
             to="/feed"
             activeClassName="selected"
@@ -69,49 +70,6 @@ const NavBar = ({ classes }) => {
               alt="logo"
             />
           </NavLink>
-          <div>
-            <Button
-              aria-controls="customized-menu"
-              aria-haspopup="true"
-              variant="contained"
-              color="primary"
-              onClick={handleClick}
-            >
-              EXPLORE
-            </Button>
-            <StyledMenu
-              id="customized-menu"
-              anchorEl={anchorEl}
-              keepMounted
-              open={Boolean(anchorEl)}
-              onClose={handleClose}
-            >
-              <NavLink to="/event" className={classes.link}>
-                <StyledMenuItem>
-                  <ListItemText primary="EVENT" />
-                </StyledMenuItem>
-              </NavLink>
-
-              <NavLink to="/artist" className={classes.link}>
-                <StyledMenuItem>
-                  <ListItemText primary="ARTIST" />
-                </StyledMenuItem>
-              </NavLink>
-
-              <NavLink to="/venue" className={classes.link}>
-                <StyledMenuItem>
-                  <ListItemText primary="VENUE" />
-                </StyledMenuItem>
-              </NavLink>
-            </StyledMenu>
-          </div>
-          <NavLink
-            to="/account"
-            activeClassName="selected"
-            className={classes.link}
-          >
-            ACCOUNT
-          </NavLink>
           <NavLink
             to={`profile/${Meteor.userId()}`}
             activeClassName="selected"
@@ -119,14 +77,59 @@ const NavBar = ({ classes }) => {
           >
             PROFILE
           </NavLink>
-          <button
-            onClick={() => {
-              Meteor.logout();
-            }}
-            className={classes.logout}
+          <Button
+            aria-controls="customized-menu"
+            aria-haspopup="true"
+            variant="contained"
+            color="primary"
+            onClick={handleClick}
+            className={classes.explorebtn}
           >
-            LOGOUT
-          </button>
+            EXPLORE
+          </Button>
+          <StyledMenu
+            id="customized-menu"
+            anchorEl={anchorEl}
+            keepMounted
+            open={Boolean(anchorEl)}
+            onClose={handleClose}
+          >
+            <NavLink to="/event" className={classes.link}>
+              <StyledMenuItem>
+                <ListItemText primary="EVENT" />
+              </StyledMenuItem>
+            </NavLink>
+
+            <NavLink to="/artist" className={classes.link}>
+              <StyledMenuItem>
+                <ListItemText primary="ARTIST" />
+              </StyledMenuItem>
+            </NavLink>
+
+            <NavLink to="/venue" className={classes.link}>
+              <StyledMenuItem>
+                <ListItemText primary="VENUE" />
+              </StyledMenuItem>
+            </NavLink>
+          </StyledMenu>
+          <div className={classes.navlinks}>
+            <NavLink
+              to="/account"
+              activeClassName="selected"
+              className={classes.link}
+            >
+              <PersonOutlineTwoToneIcon className={classes.accountbtn} />
+            </NavLink>
+
+            <button
+              onClick={() => {
+                Meteor.logout();
+              }}
+              className={classes.logout}
+            >
+              <PowerSettingsNewIcon className={classes.logoutbtn} />
+            </button>
+          </div>
         </Toolbar>
       </AppBar>
     </nav>

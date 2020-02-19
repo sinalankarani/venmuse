@@ -1,8 +1,10 @@
 const styles = () => {
   return {
     artistContainer: {
+      maxWidth: "100%",
+      margin: "0 auto",
       display: "flex",
-      padding: 20
+      justifyContent: "flex-start"
     }
   };
 };

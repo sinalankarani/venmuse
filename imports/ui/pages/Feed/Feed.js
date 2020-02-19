@@ -2,16 +2,28 @@ import React from "react";
 import EventsContainer from "../../containers/EventsContainer";
 import ArtistContainer from "../../containers/ArtistContainer";
 import VenueContainer from "../../containers/VenueContainer";
+import { withStyles, Container, Typography } from "@material-ui/core";
+import styles from "./styles";
 
-const Feed = () => {
+const Feed = ({ classes }) => {
   return (
     <div>
-      <h1>Feed Page</h1>
-      <ArtistContainer />
-      <VenueContainer />
-      <EventsContainer />
+      <Container className={classes.banner}>
+        <Typography className={classes.bannertext}>
+          YOUR NEXT GIG AWAITS
+        </Typography>
+        <img className={classes.bannerimage} src="/images/concert.jpg" />
+      </Container>
+      <div className={classes.contentcontainer}>
+        <Typography className={classes.title}>UPCOMING EVENTS</Typography>
+        <EventsContainer />
+        <Typography className={classes.title}>FEATURED ARTISTS</Typography>
+        <ArtistContainer />
+        <Typography className={classes.title}>HOTTEST VENUES</Typography>
+        <VenueContainer />
+      </div>
     </div>
   );
 };
 
-export default Feed;
+export default withStyles(styles)(Feed);
