@@ -1,8 +1,11 @@
-import { createStyles } from "@material-ui/core";
-
-const styles = (theme = createStyles({
+const styles = theme => ({
   container: {
-    display: "flex"
+    height: '100vh',
+    width: '100vw',
+    display: 'flex',
+    alignItems: 'center',
+    alignContent: 'center',
+    justifyContent: 'space-evenly'
   }
-}));
+});
 export default styles;

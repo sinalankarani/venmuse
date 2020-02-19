@@ -23,8 +23,10 @@ const VenueCard = ({ classes, venue }) => {
                 <img src={venue.profile.profileImage} className={classes.image} />
               </CardMedia>
               <div className={classes.venueDetails}>
-                <Typography variant="h4">{venue.profile.title}</Typography>
-                <Typography>{venue.profile.description}</Typography>
+                <Typography variant="h6">{venue.profile.title}</Typography>
+                <Typography variant="body2" color="secondary">
+                  {venue.profile.description}
+                </Typography>
                 <Typography>{venue.profile.location}</Typography>
               </div>
             </CardContent>
