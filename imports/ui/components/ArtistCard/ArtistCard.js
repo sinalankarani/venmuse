@@ -7,13 +7,10 @@ import {
   CardActionArea,
   withStyles
 } from "@material-ui/core";
-import { Link, withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styles from "./styles";
 
 const ArtistCard = ({ classes, artist }) => {
-  {
-    console.log(artist);
-  }
   return (
     artist &&
     artist.profile.userType === "artist" && (
@@ -44,4 +41,3 @@ const ArtistCard = ({ classes, artist }) => {
 };
 
 export default withStyles(styles)(ArtistCard);
-//need withTracker as well as withRouter
