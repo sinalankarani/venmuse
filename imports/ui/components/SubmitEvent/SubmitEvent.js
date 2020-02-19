@@ -34,10 +34,9 @@ class SubmitEvent extends React.Component {
         .startOf()
         .fromNow(),
       title: values.title,
-      location:
-        this.props.user && this.props.user.profile.location
-          ? this.props.user.profile.location
-          : values.location,
+      location: this.props.user?.profile?.location
+        ? this.props.user.profile.location
+        : values.location,
       description: values.description,
       tags: values.tags
     };
@@ -97,7 +96,7 @@ class SubmitEvent extends React.Component {
                 />
                 {/* EVENT LOCATION */}
 
-                {this.props.user && !this.props.user.profile.location && (
+                {!this.props.user?.profile?.location && (
                   <Field
                     name="location"
                     type="text"
