@@ -5,12 +5,12 @@ import { withTracker } from "meteor/react-meteor-data";
 import { Events } from "../../../api";
 import { Artists } from "../../../api";
 import { Venues } from "../../../api";
-import Single from "./Single";
+import Profile from "./Profile";
 
-const SinglePage = props => {
+const ProfilePage = props => {
   let { id } = useParams();
 
-  return <Single userId={id} />;
+  return <Profile userId={id} />;
 };
 
-export default SinglePage;
+export default ProfilePage;
