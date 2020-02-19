@@ -1,4 +1,3 @@
-
-import Single from "./Single";
+import Single from "./SinglePage";
 
 export default Single;

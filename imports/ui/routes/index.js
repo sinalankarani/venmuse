@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import Archive from "../pages/Archive";
 import Feed from "../pages/Feed";
 import Signup from "../pages/Signup";
@@ -9,32 +9,29 @@ import NavBar from "../components/NavBar";
 import { Meteor } from "meteor/meteor";
 import { withTracker } from "meteor/react-meteor-data";
 
-class Routes extends React.Component {
-  render() {
-    return (
-      <Fragment>
-        <NavBar />
-        <Switch>
-          <Route exact path="/feed" component={Feed} />
-          <Route
-            exact
-            path="/archive"
-            render={props => <Archive {...props} />}
-          />
-          <Route exact path="/account" component={Account} />
-          <Route exact path="/signup" component={Signup} />
-          <Route exact path="/single" component={Single} />
-        </Switch>
-      </Fragment>
-    );
-  }
-}
+const Routes = ({ userId }) => {
+  return !userId && !Meteor.loggingIn() ? (
+    <Switch>
+      <Route exact path="/signup" component={Signup} />
+      <Redirect from="*" to="/signup" />
+    </Switch>
+  ) : (
+    <Fragment>
+      <NavBar />
+      <Switch>
+        <Route exact path="/feed" component={Feed} />
+        <Route exact path="/account" component={Account} />
+        <Route exact path="/archive" component={Archive} />
+        <Route exact path="/single" component={Single} />
+        <Route exact path="/single/:id" component={Single} />
+        <Redirect from="*" to="/feed" />
+      </Switch>
+    </Fragment>
+  );
+};
 
 export default withTracker(() => {
-  Meteor.subscribe("users");
-
-  console.log(Meteor.users.find({}).fetch());
   return {
-    artists: Meteor.users.find({}).fetch()
+    userId: Meteor.userId()
   };
 })(Routes);

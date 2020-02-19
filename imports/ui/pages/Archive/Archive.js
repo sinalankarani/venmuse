@@ -1,13 +1,15 @@
+import React from "react";
 import ArtistContainer from "../../containers/ArtistContainer";
 import VenueContainer from "../../containers/VenueContainer";
-
-import React from "react";
+import EventsContainer from "../../containers/EventsContainer";
 
 const Archive = () => {
   return (
     <div>
-      <ArtistContainer />;
-      <VenueContainer />;
+      <h1>Archive Page</h1>
+      <ArtistContainer />
+      <VenueContainer />
+      <EventsContainer />
     </div>
   );
 };
