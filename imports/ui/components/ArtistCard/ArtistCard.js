@@ -4,38 +4,44 @@ import {
   CardContent,
   CardMedia,
   Typography,
+  CardActionArea,
   withStyles
 } from "@material-ui/core";
+import { Link, withRouter } from "react-router-dom";
 import styles from "./styles";
 
 const ArtistCard = ({ classes, artist }) => {
+  {
+    console.log(artist);
+  }
   return (
     artist &&
     artist.profile.userType === "artist" && (
       <Card className={classes.card}>
-        <CardContent className={classes.content}>
-          <CardMedia className={classes.media}>
-            <img
-              src={
-                artist.profile.profileImage ? artist.profile.profileImage : null
-              }
-              alt="profile-image"
-              height="300px"
-              width="600px"
-              className={classes.image}
-            />
-          </CardMedia>
-          <div className={classes.eventDetails}>
-            <Typography variant="h5">{artist.profile.title}</Typography>
-            <Typography variant="body2">
-              {artist.profile.description}
-            </Typography>
-            <Typography variant="body2">{artist.profile.location}</Typography>
-          </div>
-        </CardContent>
+        <CardActionArea>
+          <Link to={artist && artist._id ? `/profile/${artist && artist._id}` : ""}>
+            <CardContent className={classes.content}>
+              <CardMedia className={classes.media}>
+                <img
+                  src={artist.profile.profileImage ? artist.profile.profileImage : null}
+                  alt="profile-image"
+                  height="300px"
+                  width="600px"
+                  className={classes.image}
+                />
+              </CardMedia>
+              <div className={classes.eventDetails}>
+                <Typography variant="h5">{artist.profile.title}</Typography>
+                <Typography variant="body2">{artist.profile.description}</Typography>
+                <Typography variant="body2">{artist.profile.location}</Typography>
+              </div>
+            </CardContent>
+          </Link>
+        </CardActionArea>
       </Card>
     )
   );
 };
 
 export default withStyles(styles)(ArtistCard);
+//need withTracker as well as withRouter
