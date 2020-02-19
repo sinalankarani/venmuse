@@ -54,14 +54,15 @@ class AccountsForm extends Component {
     console.log(this.state.userTypeToggle);
   };
   render() {
+    const { classes } = this.props;
     return (
-      <div className="AccountsFormContainer">
+      <div className={classes.accountsFormContainer}>
         <Form
           onSubmit={values => {
             this.state.formToggle ? this.login(values) : this.signup(values);
           }}
           render={({ handleSubmit, pristine, invalid, form }) => (
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className={classes.form}>
               {!this.state.formToggle ? (
                 <React.Fragment>
                   <FormControlLabel

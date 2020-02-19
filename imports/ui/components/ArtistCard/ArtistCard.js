@@ -1,34 +1,41 @@
 import React from "react";
-import { Card, CardContent, CardMedia, Typography } from "@material-ui/core";
+import {
+  Card,
+  CardContent,
+  CardMedia,
+  Typography,
+  withStyles
+} from "@material-ui/core";
+import styles from "./styles";
 
-const ArtistCard = ({ artist }) => {
+const ArtistCard = ({ classes, artist }) => {
   return (
     artist &&
     artist.profile.userType === "artist" && (
-      <Card key={artist._id}>
-        <CardContent>
-          <h1>ARTIST CARD</h1> {/*REMOVE LATER*/}
-          {/* PROFILE IMAGE */}
-          <CardMedia>
-            <div>
-              <img
-                src={artist.profile.profileImage}
-                alt="profile-image"
-                height="300px"
-                width="600px"
-              />
-            </div>
+      <Card className={classes.card}>
+        <CardContent className={classes.content}>
+          <CardMedia className={classes.media}>
+            <img
+              src={
+                artist.profile.profileImage ? artist.profile.profileImage : null
+              }
+              alt="profile-image"
+              height="300px"
+              width="600px"
+              className={classes.image}
+            />
           </CardMedia>
-          {/* USERNAME */}
-          <Typography>{artist.username}</Typography>
-          {/* DESCRIPTION */}
-          <Typography>{artist.profile.description}</Typography>
-          {/* LOCATION */}
-          <Typography>{artist.profile.location}</Typography>
+          <div className={classes.eventDetails}>
+            <Typography variant="h5">{artist.profile.title}</Typography>
+            <Typography variant="body2">
+              {artist.profile.description}
+            </Typography>
+            <Typography variant="body2">{artist.profile.location}</Typography>
+          </div>
         </CardContent>
       </Card>
     )
   );
 };
 
-export default ArtistCard;
+export default withStyles(styles)(ArtistCard);

@@ -24,6 +24,7 @@ const Single = ({ user, users, events }) => {
         <h1> {user.username}</h1>
         <p>{user.profile.location}</p>
         <p>{user.profile.description}</p>
+
         <h2>Connect with us on Social Media</h2>
         <ul>
           <li key="facebook">
@@ -59,3 +60,4 @@ export default withTracker(({ userId }) => {
     userId: Meteor.userId()
   };
 })(withStyles(styles)(Single));
+   

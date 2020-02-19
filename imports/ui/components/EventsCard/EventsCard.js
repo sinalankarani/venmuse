@@ -11,18 +11,21 @@ import styles from "./styles";
 const EventsCard = ({ classes, event }) => {
   return (
     <Card className={classes.card}>
-            <CardContent className={classes.content}>
-            <CardMedia >
-              <div className={classes.media}>
-          <img src={event.imageurl ? event.imageurl : null}/>
-          </div>
+      <CardContent className={classes.content}>
+        <CardMedia className={classes.media}>
+          <img
+            src={event.imageurl ? event.imageurl : null}
+            className={classes.image}
+          />
         </CardMedia>
-      <Typography variant="h4">{event.title}</Typography>
-      <Typography variant="h5">{event.artist}</Typography>
-        <Typography variant="body2">{event.description}</Typography>
-        <Typography variant="body2">{event.date}</Typography>
-        <Typography variant="body2">{event.location}</Typography>
-        <Typography variant="body2">Created: {event.created}</Typography>
+        <div className={classes.eventDetails}>
+          <Typography variant="h5">{event.title}</Typography>
+          <Typography variant="h6">{event.artist}</Typography>
+          <Typography variant="body2">{event.description}</Typography>
+          <Typography variant="body2">{event.date}</Typography>
+          <Typography variant="body2">{event.location}</Typography>
+          <Typography variant="body2">Created: {event.created}</Typography>
+        </div>
       </CardContent>
     </Card>
   );
