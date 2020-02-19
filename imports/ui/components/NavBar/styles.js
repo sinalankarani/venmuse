@@ -39,19 +39,19 @@ const styles = theme => {
     },
     accountbtn: {
       transform: "translateY(5px)",
-      color: "gray",
+      color: theme.palette.secondary.main,
       fontSize: "2.5rem",
       marginRight: "1.5rem",
       "&:hover": {
-        color: theme.palette.secondary.main
+        color: theme.palette.primary.main
       }
     },
     logoutbtn: {
       transform: "translateY(5px)",
-      color: "gray",
+      color: theme.palette.secondary.main,
       fontSize: "2.5rem",
       "&:hover": {
-        color: theme.palette.secondary.main
+        color: theme.palette.primary.main
       }
     },
     explorebtn: {
