@@ -1,5 +1,5 @@
 import React from 'react';
-import AccountsForm from '../../AccountsForm';
+import AccountsForm from '../../components/AccountsForm';
 import styles from './styles';
 import { withStyles, Grid } from '@material-ui/core';
 
