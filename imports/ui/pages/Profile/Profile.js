@@ -13,7 +13,7 @@ import {
 } from "@material-ui/core";
 import { Meteor } from "meteor/meteor";
 
-const Single = ({ user, users, events }) => {
+const Profile = ({ user, users, events }) => {
   return user && user.profile ? (
     <Grid>
       {console.log(user)}
@@ -59,5 +59,4 @@ export default withTracker(({ userId }) => {
     user: Meteor.users.find({ _id: userId }).fetch()[0],
     userId: Meteor.userId()
   };
-})(withStyles(styles)(Single));
-   
+})(withStyles(styles)(Profile));
