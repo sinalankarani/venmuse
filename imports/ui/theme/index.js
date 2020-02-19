@@ -5,7 +5,8 @@ export default createMuiTheme({
     primary: {
       main: "#FF9633", //orange
       background: "#F7F7F7", //off-white
-      title: "#000000" //black
+      title: "#000000", //black
+      navicon: "#24252b" //dark off-gray
     },
     secondary: {
       main: "#67687A" //off-gray

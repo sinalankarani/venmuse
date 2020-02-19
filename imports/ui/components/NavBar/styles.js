@@ -39,7 +39,7 @@ const styles = theme => {
     },
     accountbtn: {
       transform: "translateY(5px)",
-      color: theme.palette.secondary.main,
+      color: theme.palette.primary.navicon,
       fontSize: "2.5rem",
       marginRight: "1.5rem",
       "&:hover": {
@@ -48,8 +48,8 @@ const styles = theme => {
     },
     logoutbtn: {
       transform: "translateY(5px)",
-      color: theme.palette.secondary.main,
-      fontSize: "2.5rem",
+      color: theme.palette.primary.navicon,
+      fontSize: "2.25rem",
       "&:hover": {
         color: theme.palette.primary.main
       }
