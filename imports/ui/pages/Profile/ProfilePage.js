@@ -10,7 +10,7 @@ import Profile from "./Profile";
 const ProfilePage = props => {
   let { id } = useParams();
 
-  return <Profile userId={id} />;
+  return <Profile userId={id} eventId={id} />;
 };
 
 export default ProfilePage;
