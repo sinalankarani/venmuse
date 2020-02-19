@@ -120,7 +120,7 @@ class AccountsForm extends Component {
                 )}
               />
 
-              <Button type="submit" variant="contained" size="large" color="secondary">
+              <Button type="submit" variant="contained" size="large" color="primary">
                 {this.state.formToggle ? "Enter" : "Create Account"}
               </Button>
               <button
