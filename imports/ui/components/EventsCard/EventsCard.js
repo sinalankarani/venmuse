@@ -21,10 +21,8 @@ const EventsCard = ({ classes, event }) => {
         <div className={classes.eventDetails}>
           <Typography variant="h5">{event.title}</Typography>
           <Typography variant="h6">{event.artist}</Typography>
-          <Typography variant="body2">{event.description}</Typography>
           <Typography variant="body2">{event.date}</Typography>
           <Typography variant="body2">{event.location}</Typography>
-          <Typography variant="body2">Created: {event.created}</Typography>
         </div>
       </CardContent>
     </Card>

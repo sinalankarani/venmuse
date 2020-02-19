@@ -12,7 +12,7 @@ import { Meteor } from "meteor/meteor";
 import Gravatar from "react-gravatar";
 import Loader from "../../components/Loader";
 
-const Single = ({ user, users, userId, events, classes }) => {
+const Profile = ({ user, users, userId, events, classes }) => {
   const [open, setOpen] = React.useState(false);
 
   const handleOpen = () => {
@@ -113,4 +113,4 @@ export default withTracker(({ userId }) => {
     user: Meteor.users.find({ _id: userId }).fetch()[0],
     userId: Meteor.userId()
   };
-})(withStyles(styles)(Single));
+})(withStyles(styles)(Profile));

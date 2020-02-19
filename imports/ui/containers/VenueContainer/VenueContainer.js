@@ -10,7 +10,7 @@ const VenueContainer = ({ classes, venues, userId }) => {
       {venues?.map(venue => {
         if (venue.profile.userType === "venue" && venue._id !== userId) {
           return (
-            <Grid item key={venue._id} xs={12} md={6} lg={4}>
+            <Grid item key={venue._id} xs={12} sm={6} md={4} lg={3}>
               <VenueCard venue={venue} />
             </Grid>
           );
