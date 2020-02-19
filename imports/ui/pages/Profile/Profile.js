@@ -10,8 +10,9 @@ import InstagramIcon from "@material-ui/icons/Instagram";
 import TwitterIcon from "@material-ui/icons/Twitter";
 import { Meteor } from "meteor/meteor";
 import Gravatar from "react-gravatar";
+import Loader from "../../components/Loader";
 
-const Single = ({ user, users, events, classes }) => {
+const Profile = ({ user, users, userId, events, classes }) => {
   const [open, setOpen] = React.useState(false);
 
   const handleOpen = () => {
@@ -23,41 +24,55 @@ const Single = ({ user, users, events, classes }) => {
   };
   return user && user.profile ? (
     <Grid>
-      {console.log(user)}
-      {console.log(users)}
+      {console.log(userId)}
+      {console.log(user._id)}
       {console.log(events)}
-      <img src={user && user.profile.profileImage} />
+      <img src={user && user.profile.profileImage} className={classes.banner} />
       <Card>
-        <Gravatar classname={classes.gravatar} email={user.emails[0].address} />
+        <Gravatar className={classes.gravatar} email={user.emails[0].address} />
         <h1> {user.username}</h1>
-        <p>{user.profile.location}</p>
-        <p>{user.profile.description}</p>
+        <p>{user && user.profile && user.profile.location}</p>
+        <p>{user && user.profile && user.profile.description}</p>
+        {user._id === userId ? (
+          <Button
+            type="button"
+            variant="contained"
+            size="large"
+            color="primary"
+            onClick={handleOpen}
+          >
+            Update Profile{" "}
+          </Button>
+        ) : null}
       </Card>
-      <h2>Connect with us on Social Media</h2>
-      <div>
-        <p key="facebook">
-          <a href={user.profile.social.facebook} target="_blank">
-            <FacebookIcon />
-          </a>
-        </p>
-        <p key="instagram">
-          <a href={user.profile.social.instagram}>
-            <InstagramIcon />
-          </a>
-        </p>
-        <p key="twitter">
-          <a href={user.profile.social.twitter}>
-            <TwitterIcon />
-          </a>
-        </p>
-      </div>
+      {user && user.profile && user.profile.social ? (
+        <div>
+          <h2>Connect with us on Social Media</h2>
+
+          <p key="facebook">
+            <a href={user.profile.social.facebook} target="_blank">
+              <FacebookIcon />
+            </a>
+          </p>
+          <p key="instagram">
+            <a href={user.profile.social.instagram}>
+              <InstagramIcon />
+            </a>
+          </p>
+          <p key="twitter">
+            <a href={user.profile.social.twitter}>
+              <TwitterIcon />
+            </a>
+          </p>
+        </div>
+      ) : null}
       {user.profile.userType === "venue" ? (
         <div>
           <Button
             type="button"
             variant="contained"
             size="large"
-            color="secondary"
+            color="primary"
             onClick={handleOpen}
           >
             Create a New Event
@@ -83,7 +98,9 @@ const Single = ({ user, users, events, classes }) => {
         </div>
       ) : null}
     </Grid>
-  ) : null;
+  ) : (
+    <Loader />
+  );
 };
 
 export default withTracker(({ userId }) => {
@@ -96,4 +113,4 @@ export default withTracker(({ userId }) => {
     user: Meteor.users.find({ _id: userId }).fetch()[0],
     userId: Meteor.userId()
   };
-})(withStyles(styles)(Single));
+})(withStyles(styles)(Profile));
