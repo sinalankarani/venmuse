@@ -1,12 +1,20 @@
 import { createMuiTheme } from "@material-ui/core/styles";
 
-const theme = createMuiTheme({
+export default createMuiTheme({
   palette: {
     primary: {
-      main: "#FF9633"
+      main: "#000"
     },
     secondary: {
-      main: "#fff"
+      main: "#ff9633"
+    }
+  },
+  fonts: {
+    primary: {
+      main: "Roboto, sans-serif"
+    },
+    secondary: {
+      main: "Dhurjati, sans-serif"
     }
   }
 });

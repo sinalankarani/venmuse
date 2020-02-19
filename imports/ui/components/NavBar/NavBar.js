@@ -1,55 +1,134 @@
 import React from "react";
 import { NavLink, withRouter } from "react-router-dom";
 import styles from "./styles";
-import { withStyles, AppBar, Toolbar } from "@material-ui/core";
+import {
+  withStyles,
+  AppBar,
+  Toolbar,
+  Button,
+  MenuItem,
+  Menu
+} from "@material-ui/core";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
 import { withTracker } from "meteor/react-meteor-data";
 
+const StyledMenu = withStyles({
+  paper: {
+    border: "1px solid #d3d4d5"
+  }
+})(props => (
+  <Menu
+    elevation={0}
+    getContentAnchorEl={null}
+    anchorOrigin={{
+      vertical: "bottom",
+      horizontal: "center"
+    }}
+    transformOrigin={{
+      vertical: "top",
+      horizontal: "center"
+    }}
+    {...props}
+  />
+));
+
+const StyledMenuItem = withStyles(theme => ({
+  root: {
+    "&:focus": {
+      backgroundColor: theme.palette.primary.main,
+      "& .MuiListItemIcon-root, & .MuiListItemText-primary": {
+        color: theme.palette.common.white
+      }
+    }
+  }
+}))(MenuItem);
 const NavBar = ({ classes }) => {
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = event => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   return (
     <nav className={classes.root}>
       <AppBar className={classes.appbar} position="static">
         <Toolbar>
-          <NavLink to="/feed" activeClassName="selected">
+          <NavLink
+            to="/feed"
+            activeClassName="selected"
+            className={classes.link}
+          >
             <img
-              src={"/images/logo/full-logo-1.png"}
+              src={"/images/logo/Final/full-logo.png"}
               height="75px"
               width="px"
               alt="logo"
             />
           </NavLink>
-          <NavLink to="/event" activeClassName="selected">
-            Event
+          <div>
+            <Button
+              aria-controls="customized-menu"
+              aria-haspopup="true"
+              variant="contained"
+              color="primary"
+              onClick={handleClick}
+            >
+              EXPLORE
+            </Button>
+            <StyledMenu
+              id="customized-menu"
+              anchorEl={anchorEl}
+              keepMounted
+              open={Boolean(anchorEl)}
+              onClose={handleClose}
+            >
+              <NavLink to="/event" className={classes.link}>
+                <StyledMenuItem>
+                  <ListItemText primary="EVENT" />
+                </StyledMenuItem>
+              </NavLink>
+
+              <NavLink to="/artist" className={classes.link}>
+                <StyledMenuItem>
+                  <ListItemText primary="ARTIST" />
+                </StyledMenuItem>
+              </NavLink>
+
+              <NavLink to="/venue" className={classes.link}>
+                <StyledMenuItem>
+                  <ListItemText primary="VENUE" />
+                </StyledMenuItem>
+              </NavLink>
+            </StyledMenu>
+          </div>
+          <NavLink
+            to="/account"
+            activeClassName="selected"
+            className={classes.link}
+          >
+            ACCOUNT
           </NavLink>
-          <NavLink to="/artist" activeClassName="selected">
-            Artist
-          </NavLink>
-          <NavLink to="/venue" activeClassName="selected">
-            Venue
-          </NavLink>
-          <NavLink to="/account" activeClassName="selected">
-            Account
-          </NavLink>
-          <NavLink to={`profile/${Meteor.userId()}`} activeClassName="selected">
-            Profile
+          <NavLink
+            to={`profile/${Meteor.userId()}`}
+            activeClassName="selected"
+            className={classes.link}
+          >
+            PROFILE
           </NavLink>
           <button
             onClick={() => {
               Meteor.logout();
             }}
+            className={classes.logout}
           >
-            {console.log(Meteor.userId())}
-            Logout
+            LOGOUT
           </button>
         </Toolbar>
       </AppBar>
-
-      {/* <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" className={classes.title}>
-            News
-          </Typography>
-          <Button color="inherit">Login</Button> */}
     </nav>
   );
 };
