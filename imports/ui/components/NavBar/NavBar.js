@@ -10,16 +10,27 @@ const NavBar = ({ classes }) => {
       <AppBar className={classes.appbar} position="static">
         <Toolbar>
           <NavLink to="/feed" activeClassName="selected">
-            <img src={"/images/logo/logo-text2.png"} height="150px" width="400px" alt="logo" />
+            <img
+              src={"/images/logo/full-logo-1.png"}
+              height="75px"
+              width="px"
+              alt="logo"
+            />
           </NavLink>
-          <NavLink to="/archive" activeClassName="selected">
-            Archive
+          <NavLink to="/event" activeClassName="selected">
+            Event
+          </NavLink>
+          <NavLink to="/artist" activeClassName="selected">
+            Artist
+          </NavLink>
+          <NavLink to="/venue" activeClassName="selected">
+            Venue
           </NavLink>
           <NavLink to="/account" activeClassName="selected">
             Account
           </NavLink>
-          <NavLink to={`single/${Meteor.userId()}`} activeClassName="selected">
-            Single
+          <NavLink to={`profile/${Meteor.userId()}`} activeClassName="selected">
+            Profile
           </NavLink>
           <button
             onClick={() => {
