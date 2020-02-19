@@ -1,18 +1,24 @@
 const styles = () => {
   return {
     card: {
-      height: "auto",
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "space-evenly",
-      margin: 10
+      maxWidth: 600,
+      height: 600
     },
     media: {
-      height: "50px",
-      width: "200px",
+      height: "50%"
     },
-    content: {
-      color: "black",
+    image: {
+      width: "100%",
+      height: 350,
+      borderRadius: 5,
+      objectPosition: "center",
+      objectFit: "cover"
+    },
+    eventDetails: {
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "space-between",
+      padding: 5
     }
   };
 };

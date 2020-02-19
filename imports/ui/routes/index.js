@@ -23,6 +23,7 @@ const Routes = ({ userId }) => {
         <Route exact path="/account" component={Account} />
         <Route exact path="/archive" component={Archive} />
         <Route exact path="/single" component={Single} />
+        <Route exact path="/single/:id" component={Single} />
         <Redirect from="*" to="/feed" />
       </Switch>
     </Fragment>

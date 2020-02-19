@@ -1,29 +1,11 @@
 import React from "react";
 import { Meteor } from "meteor/meteor";
 import { withTracker } from "meteor/react-meteor-data";
-import { Typography, Button } from "@material-ui/core";
-import EditableLabel from "../../components/EditableLabel";
+import { Typography, Button, TextField } from "@material-ui/core";
 import { Form, Field } from "react-final-form";
 
 class Account extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this._handleFocus = this._handleFocus.bind(this);
-    this._handleFocusOut = this._handleFocusOut.bind(this);
-  }
-  _handleFocus(text) {
-    console.log("Current text: " + text);
-  }
-  _handleFocusOut(text) {
-    console.log("Updated text: " + text);
-  }
-  captureValues = values => {
-    console.log(values);
-  };
-
   render() {
-    console.log(this.props);
     console.log(this.props.user);
 
     return (
@@ -31,115 +13,84 @@ class Account extends React.Component {
         initialValues={{
           username: this.props.user?.username,
           location: this.props.user?.profile?.location,
-          emails: this.props.user?.emails[0].address,
-          description: this.props.user?.profile?.description
-          // social: this.props.user?.profile?.social[0],
-          // social: this.props.user?.profile?.social[1]
-
+          email: this.props.user?.emails[0].address,
+          description: this.props.user?.profile?.description,
+          facebook: this.props.user?.profile?.social?.facebook
+            ? this.props.user?.profile?.social?.facebook
+            : "Please enter Facebook URL",
+          instagram: this.props.user?.profile?.social?.instagram
+            ? this.props.user?.profile?.social?.instagram
+            : "Please enter Instagram URL",
+          twitter: this.props.user?.profile?.social?.twitter
+            ? this.props.user?.profile?.social?.twitter
+            : "Please enter Twitter URL"
           // the question mark - nullish coalescing google please
         }}
         onSubmit={values => {
-          this.captureValues(values);
+          console.log(values);
+          const updatedProfile = {
+            profile: {
+              location: values.location,
+              description: values.description,
+              social: {
+                facebook: values.facebook,
+                instagram: values.instagram,
+                twitter: values.twitter
+              }
+            }
+          };
+          Meteor.call("users.updateProfile", updatedProfile);
         }}
         render={({ handleSubmit }) => (
           <form onSubmit={handleSubmit}>
             <h1>account page</h1>
             {/* USERNAME */}
-            <Field
-              name="username"
-              render={({ input }) => (
-                <EditableLabel
-                  labelClassName="myLabelClass"
-                  inputClassName="myInputClass"
-                  inputWidth="200px"
-                  inputHeight="25px"
-                  onFocus={this._handleFocus}
-                  onFocusOut={this._handleFocusOut}
-                  {...input}
-                />
-              )}
-            />
+            <Typography>{this.props.user?.username}</Typography>
             {/* USERTYPE */}
             <Typography>
-              YOU ARE: {this.props.user && this.props.user.profile.userType}
+              YOU ARE: {this.props.user?.profile?.userType}
             </Typography>
+            {/* EMAIL */}
+            <Typography>{this.props.user?.emails[0].address}</Typography>
             {/* LOCATION */}
             <Field
               name="location"
-              render={({ input }) => (
-                <EditableLabel
-                  labelClassName="myLabelClass"
-                  inputClassName="myInputClass"
-                  inputWidth="200px"
-                  inputHeight="25px"
-                  onFocus={this._handleFocus}
-                  onFocusOut={this._handleFocusOut}
-                  {...input}
-                />
-              )}
+              render={({ input }) => <TextField {...input} />}
             />
             PROFILE IMAGE
             <Typography>
-              <Button><input
-                accept="image/*"
-                id="contained-button-file"
-                multiple
-                type="file"
-              />
-              <label htmlFor="contained-button-file">
-                UPLOAD IMAGE
-              </label>
+              <Button>
+                <input
+                  accept="image/*"
+                  id="contained-button-file"
+                  multiple
+                  type="file"
+                />
+                <label htmlFor="contained-button-file">UPLOAD IMAGE</label>
               </Button>
               {/* PROFILE IMAGE:{" "}
               <img
                 src={this.props.user && this.props.user.profile.profileImage}
               /> */}
             </Typography>
-            {/* EMAIL */}
-            <Field
-              name="emails"
-              render={({ input }) => (
-                <EditableLabel
-                  labelClassName="myLabelClass"
-                  inputClassName="myInputClass"
-                  inputWidth="200px"
-                  inputHeight="25px"
-                  onFocus={this._handleFocus}
-                  onFocusOut={this._handleFocusOut}
-                  {...input}
-                />
-              )}
-            />
             {/* DESCRIPTION */}
             <Field
               name="description"
-              render={({ input }) => (
-                <EditableLabel
-                  labelClassName="myLabelClass"
-                  inputClassName="myInputClass"
-                  inputWidth="200px"
-                  inputHeight="25px"
-                  onFocus={this._handleFocus}
-                  onFocusOut={this._handleFocusOut}
-                  {...input}
-                />
-              )}
+              render={({ input }) => <TextField {...input} />}
             />
             {/* SOCIAL MEDIA */}
-            {/* <Field
-              name="social"
-              render={({ input }) => (
-                <EditableLabel
-                  labelClassName="myLabelClass"
-                  inputClassName="myInputClass"
-                  inputWidth="200px"
-                  inputHeight="25px"
-                  onFocus={this._handleFocus}
-                  onFocusOut={this._handleFocusOut}
-                  {...input}
-                />
-              )}
-            /> */}
+            <Field
+              name="facebook"
+              render={({ input }) => <TextField {...input} />}
+            />
+            <Field
+              name="instagram"
+              render={({ input }) => <TextField {...input} />}
+            />
+            <Field
+              name="twitter"
+              render={({ input }) => <TextField {...input} />}
+            />
             <Button type="submit">Save</Button>
           </form>
         )}

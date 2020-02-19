@@ -23,7 +23,9 @@ Meteor.methods({
     Events.insert(event);
   },
 
-  'users.updateProfile'(newProfileData) {
+  "users.updateProfile"(newProfileData) {
+    // console.log(newProfileData);
+    const { profile } = newProfileData;
     // if(newProfileData!this.userId){
     //   throw new Meteor.Error(
     //     'profile.updateProfile.not-authorized',
@@ -32,6 +34,15 @@ Meteor.methods({
     // }
     // need to test if correct user and test if newProfileData
     // overwrites current profile data
-    Meteor.users.update(users._id, { profile: { ...newProfileData } });
+
+    Meteor.users.update(Meteor.userId(), {
+      $set: { profile: { ...Meteor.user().profile, ...profile } }
+    });
+
+    // Meteor.users.update(Meteor.userId(), {
+    //   $set: {
+    //     profile: { ...Meteor.user().profile, ...profile }
+    //   }
+    // });
   }
 });
