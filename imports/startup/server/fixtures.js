@@ -85,6 +85,25 @@ Meteor.startup(() => {
       }
     });
     Accounts.createUser({
+      username: "artist test 3",
+      email: "artist3@test.com",
+      password: "12345",
+      profile: {
+        userType: "artist",
+        title: "Rap Boyz",
+        location: "Surrey",
+        description: "a super hood hip hop group",
+        profileImage:
+          "https://images.unsplash.com/photo-1415886541506-6efc5e4b1786?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+        images: [],
+        social: {
+          facebook: "www.facebook.com",
+          instagram: "www.instagram.com",
+          twitter: "www.twitter.com"
+        }
+      }
+    });
+    Accounts.createUser({
       username: "venue test",
       email: "venue@test.com",
       password: "12345",
