@@ -6,6 +6,7 @@ if (Meteor.isServer) {
   Meteor.publish('events', function eventsPublication() {
     return Events.find();
   });
+
   //////////////////KIERAN WILL REMOVE LATER - NOONE ELSE!
   Meteor.publish('users', function usersPublication() {
     return Meteor.users.find();
