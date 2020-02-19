@@ -1,13 +1,14 @@
 import React from "react";
 import ArtistContainer from "../../containers/ArtistContainer";
+import { withStyles } from "@material-ui/core";
+import styles from "./styles";
 
-const Artist = () => {
+const Artist = ({ classes }) => {
   return (
-    <div>
-      <h1>Artist Page</h1>
+    <div className={classes.artistPage}>
       <ArtistContainer />
     </div>
   );
 };
 
-export default Artist;
+export default withStyles(styles)(Artist);

@@ -2,8 +2,7 @@ const styles = () => {
   return {
     card: {
       maxWidth: 350,
-      height: 300,
-      margin: 0
+      height: 350
     },
     image: {
       width: "100%",
