@@ -14,6 +14,11 @@ const styles = createStyles(theme => ({
   },
   gravatar: {
     borderRadius: "30px"
+  },
+  banner: {
+    width: "100%",
+    maxHeight: "400px",
+    objectFit: "cover"
   }
 }));
 
