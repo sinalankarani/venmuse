@@ -1,16 +1,23 @@
-import React from "react";
-import AccountsForm from "../../AccountsForm";
-import styles from "./styles";
-import { withStyles } from "@material-ui/core";
-import { mergeClasses } from "@material-ui/styles";
+import React from 'react';
+import AccountsForm from '../../components/AccountsForm';
+import styles from './styles';
+import { withStyles, Grid } from '@material-ui/core';
 
-const Signup = classes => {
+const Signup = ({ classes }) => {
   return (
-    <div className={classes.container}>
-      <h1>signup page</h1>
-      <img src={"/images/logo/logo-text2.png"} height="150px" width="400px" alt="logo" />
-      <AccountsForm />
-    </div>
+    <Grid container className={classes.container}>
+      <Grid item>
+        <img
+          src={'/images/logo/logo-text2.png'}
+          height="150px"
+          width="400px"
+          alt="logo"
+        />
+      </Grid>
+      <Grid item>
+        <AccountsForm />
+      </Grid>
+    </Grid>
   );
 };
 

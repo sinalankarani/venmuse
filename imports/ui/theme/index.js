@@ -1,21 +1,21 @@
-import { createMuiTheme } from "@material-ui/core/styles";
+import { createMuiTheme } from '@material-ui/core/styles';
 
 export default createMuiTheme({
   palette: {
     primary: {
-      main: "#FF9633",
-      background: "#F7F7F7"
+      main: '#FF9633',
+      background: '#F7F7F7'
     },
     secondary: {
-      main: "#67687A"
+      main: '#67687A'
     }
   },
   fonts: {
     primary: {
-      main: "Roboto, sans-serif"
+      main: 'Roboto, sans-serif'
     },
     secondary: {
-      main: "Dhurjati, sans-serif"
+      main: 'Dhurjati, sans-serif'
     }
   }
 });
