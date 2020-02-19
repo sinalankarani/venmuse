@@ -10,7 +10,7 @@ const ArtistContainer = ({ classes, artists, userId }) => {
       {artists?.map(artist => {
         if (artist.profile.userType === "artist" && artist._id !== userId) {
           return (
-            <Grid item key={artist._id} xs={12} md={6} lg={4}>
+            <Grid item key={artist._id} xs={12} sm={6} md={4} lg={3}>
               <ArtistCard artist={artist} />
             </Grid>
           );
