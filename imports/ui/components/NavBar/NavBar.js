@@ -2,6 +2,7 @@ import React from "react";
 import { NavLink, withRouter } from "react-router-dom";
 import styles from "./styles";
 import { withStyles, AppBar, Toolbar } from "@material-ui/core";
+import { withTracker } from "meteor/react-meteor-data";
 
 const NavBar = ({ classes }) => {
   return (
@@ -9,12 +10,7 @@ const NavBar = ({ classes }) => {
       <AppBar className={classes.appbar} position="static">
         <Toolbar>
           <NavLink to="/feed" activeClassName="selected">
-            <img
-              src={"/images/logo/logo-text2.png"}
-              height="150px"
-              width="400px"
-              alt="logo"
-            />
+            <img src={"/images/logo/logo-text2.png"} height="150px" width="400px" alt="logo" />
           </NavLink>
           <NavLink to="/archive" activeClassName="selected">
             Archive
@@ -22,7 +18,7 @@ const NavBar = ({ classes }) => {
           <NavLink to="/account" activeClassName="selected">
             Account
           </NavLink>
-          <NavLink to="/single" activeClassName="selected">
+          <NavLink to={`single/${Meteor.userId()}`} activeClassName="selected">
             Single
           </NavLink>
           <button
@@ -30,6 +26,7 @@ const NavBar = ({ classes }) => {
               Meteor.logout();
             }}
           >
+            {console.log(Meteor.userId())}
             Logout
           </button>
         </Toolbar>
@@ -46,4 +43,9 @@ const NavBar = ({ classes }) => {
   );
 };
 
-export default withRouter(withStyles(styles)(NavBar));
+export default withTracker(() => {
+  Meteor.subscribe("users");
+  return {
+    userId: Meteor.userId()
+  };
+})(withRouter(withStyles(styles)(NavBar)));
