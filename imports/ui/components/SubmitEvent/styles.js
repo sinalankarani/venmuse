@@ -4,7 +4,7 @@ const styles = () => ({
   },
   formContainer: {
     width: '50vw',
-    height: '50vh',
+    padding: 20,
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
@@ -15,15 +15,15 @@ const styles = () => ({
   },
   fields: {
     width: '100%',
-    margin: '8px 0'
+    margin: '16px 0'
+  },
+  submit: {
+    margin: '16px auto'
+  },
+  openMenuButton: {
+    width: '100%',
+    margin: '16px 0'
   }
-  // submitBtn: {
-  //   diplay: 'block'
-  // },
-  // tagFields: {
-  //   display: 'flex',
-  //   alignItems: 'center'
-  // }
 });
 
 export default styles;
