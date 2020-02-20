@@ -47,8 +47,8 @@ VenueCard.propTypes = {
   venue: PropTypes.shape({
     profile: PropTypes.shape({
       userType: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired,
-      location: PropTypes.string.isRequired,
+      title: PropTypes.string,
+      location: PropTypes.string,
       description: PropTypes.string
     })
   }),

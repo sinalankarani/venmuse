@@ -92,7 +92,7 @@ const styles = theme => {
       justifyContent: "space-between"
     },
     fullList: {
-      margin: "0 10rem",
+      margin: "0 auto",
       display: "flex",
       justifyContent: "space-between"
     }
