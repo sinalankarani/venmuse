@@ -6,11 +6,11 @@ if (Meteor.isServer) {
   Meteor.publish('events', function eventsPublication() {
     return Events.find();
   });
+
   //////////////////KIERAN WILL REMOVE LATER - NOONE ELSE!
   Meteor.publish('users', function usersPublication() {
     return Meteor.users.find();
   });
-  ////////////////////////////////////////////////////////
 }
 
 Meteor.methods({
@@ -23,16 +23,27 @@ Meteor.methods({
     }
     Events.insert({ ...event, owner: this.userId, filled: false });
   },
+  'events.removeEvent'(event) {
+    console.log(event);
+    if (this.userId !== event.owner) {
+      throw new Meteor.Error(
+        'events.removeEvent.not-authorized',
+        'You are unauthorized to remove events.'
+      );
+    }
+    Events.remove(event._id);
+  },
 
-  'users.updateProfile'(newProfileData) {
+  'users.updateProfile'({ profile }) {
     if (!this.userId) {
       throw new Meteor.Error(
         'profile.updateProfile.not-authorized',
         'You are not allowed to update profile for other users'
       );
     }
+
     Meteor.users.update(Meteor.userId(), {
-      $set: { profile: { ...Meteor.user().profile, ...newProfileData } }
+      $set: { profile: { ...Meteor.user().profile, ...profile } }
     });
   }
 });
