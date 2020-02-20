@@ -21,11 +21,25 @@ const styles = createStyles(theme => ({
     maxHeight: "400px",
     objectFit: "cover"
   },
+  titleLocation: {
+    display: "flex",
+    flexDirection: "column"
+  },
   idContainer: {
+    display: "flex",
+    justifyContent: "space-between"
+  },
+  userContainer: {
     display: "flex"
   },
   profileContainer: {
     marginTop: "80px"
+  },
+  card: {
+    padding: "20px 50px"
+  },
+  description: {
+    padding: "30px"
   }
 }));
 

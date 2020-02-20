@@ -32,48 +32,54 @@ const Profile = ({ user, users, userId, event, eventId, classes }) => {
   return user && user.profile ? (
     <Grid className={classes.profileContainer}>
       <img src={user && user.profile.profileImage} className={classes.banner} />
-      <Card>
+      <Card className={classes.card}>
         <Box className={classes.idContainer}>
-          {user ? <Gravatar className={classes.gravatar} email={user.emails[0].address} /> : null}
-          <Box>
-            <Typography variant="h4"> {user.profile.title}</Typography>
-            <Typography variant="subtitle1">
-              {user && user.profile && user.profile.location}
-            </Typography>
+          <Box className={classes.userContainer}>
+            {user ? <Gravatar className={classes.gravatar} email={user.emails[0].address} /> : null}
+            <Box className={classes.titleLocation}>
+              <Typography variant="h4"> {user.profile.title}</Typography>
+              <Typography variant="subtitle1">
+                {user && user.profile && user.profile.location}
+              </Typography>
+            </Box>
           </Box>
+
+          {user._id === userId ? (
+            <div>
+              <Button
+                type="button"
+                variant="contained"
+                size="large"
+                color="primary"
+                onClick={handleOpenAccount}
+              >
+                Update Profile{" "}
+              </Button>
+              <Modal
+                aria-labelledby="transition-modal-title"
+                aria-describedby="transition-modal-description"
+                className={classes.modal}
+                open={openAccount}
+                onClose={handleClose}
+                closeAfterTransition
+                BackdropComponent={Backdrop}
+                BackdropProps={{
+                  timeout: 500
+                }}
+              >
+                <Fade in={openAccount}>
+                  <div className={classes.paper}>
+                    <Account />
+                  </div>
+                </Fade>
+              </Modal>
+            </div>
+          ) : null}
         </Box>
-        <Typography variant="body1">{user && user.profile && user.profile.description}</Typography>
-        {user._id === userId ? (
-          <div>
-            <Button
-              type="button"
-              variant="contained"
-              size="large"
-              color="primary"
-              onClick={handleOpenAccount}
-            >
-              Update Profile{" "}
-            </Button>
-            <Modal
-              aria-labelledby="transition-modal-title"
-              aria-describedby="transition-modal-description"
-              className={classes.modal}
-              open={openAccount}
-              onClose={handleClose}
-              closeAfterTransition
-              BackdropComponent={Backdrop}
-              BackdropProps={{
-                timeout: 500
-              }}
-            >
-              <Fade in={openAccount}>
-                <div className={classes.paper}>
-                  <Account />
-                </div>
-              </Fade>
-            </Modal>
-          </div>
-        ) : null}
+
+        <Typography className={classes.description} variant="body1">
+          {user && user.profile && user.profile.description}
+        </Typography>
       </Card>
       {user && user.profile && user.profile.social ? (
         <div>
@@ -176,7 +182,7 @@ const Profile = ({ user, users, userId, event, eventId, classes }) => {
               </Modal>
             </div>
           ) : null} */}
-          {event._id !== eventId ? <Button>Apply to Play</Button> : null}
+          {/* {event._id !== eventId ? <Button>Apply to Play</Button> : null} */}
         </Card>
         {user && user.profile && user.profile.social ? (
           <div>
