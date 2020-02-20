@@ -63,6 +63,9 @@ const styles = createStyles(theme => ({
     width: "220px",
     margin: "10px"
   },
+  border: {
+    border: "2px solid red"
+  },
   icon: {
     transform: "translateY(7px)"
   }

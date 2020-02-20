@@ -18,6 +18,7 @@ import styles from "./styles";
 import validate from "./helpers";
 import StoreIcon from "@material-ui/icons/Store";
 import MusicNoteIcon from "@material-ui/icons/MusicNote";
+import PropTypes from "prop-types";
 
 class AccountsForm extends Component {
   constructor(props) {
@@ -198,5 +199,11 @@ class AccountsForm extends Component {
     );
   }
 }
+
+AccountsForm.propTypes = {
+  username: PropTypes.string,
+  password: PropTypes.string,
+  email: PropTypes.string
+};
 
 export default withStyles(styles)(withRouter(AccountsForm));
