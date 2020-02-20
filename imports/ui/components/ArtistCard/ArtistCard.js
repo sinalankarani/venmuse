@@ -14,7 +14,7 @@ const ArtistCard = ({ classes, artist }) => {
   return (
     artist &&
     artist.profile.userType === "artist" && (
-      <CardActionArea>
+      <CardActionArea className={classes.card}>
         <Card className={classes.card}>
           <Link
             className={classes.link}

@@ -11,11 +11,10 @@ import { Link } from "react-router-dom";
 import styles from "./styles";
 
 const VenueCard = ({ classes, venue }) => {
-  console.log(venue);
   return (
     venue &&
     venue.profile.userType === "venue" && (
-      <CardActionArea>
+      <CardActionArea className={classes.card}>
         <Card className={classes.card}>
           <Link
             className={classes.link}
