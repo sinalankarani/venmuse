@@ -1,4 +1,4 @@
-const styles = () => {
+const styles = theme => {
   return {
     card: {
       maxWidth: 350,
@@ -15,6 +15,10 @@ const styles = () => {
       display: "flex",
       flexDirection: "column",
       padding: 10
+    },
+    link: {
+      textDecoration: "none",
+      color: theme.fonts.primary.color
     }
   };
 };

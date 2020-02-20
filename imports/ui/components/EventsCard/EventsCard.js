@@ -14,10 +14,16 @@ const EventsCard = ({ classes, event }) => {
   return (
     <CardActionArea>
       <Card className={classes.card}>
-        <Link to={event && event._id ? `/profile/${event && event._id}` : ""}>
+        <Link
+          className={classes.link}
+          to={event && event._id ? `/profile/${event && event._id}` : ""}
+        >
           <CardContent className={classes.content}>
             <CardMedia className={classes.media}>
-              <img src={event.imageurl ? event.imageurl : null} className={classes.image} />
+              <img
+                src={event.imageurl ? event.imageurl : null}
+                className={classes.image}
+              />
             </CardMedia>
             <div className={classes.eventDetails}>
               <Typography variant="body1" color="primary">

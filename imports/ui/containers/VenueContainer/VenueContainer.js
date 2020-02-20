@@ -6,7 +6,7 @@ import { withTracker } from "meteor/react-meteor-data";
 
 const VenueContainer = ({ classes, venues, userId }) => {
   return (
-    <Grid container className={classes.venueContainer}>
+    <Grid container spacing={2} className={classes.venueContainer}>
       {venues?.map(venue => {
         if (venue.profile.userType === "venue" && venue._id !== userId) {
           return (

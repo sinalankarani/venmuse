@@ -140,9 +140,16 @@ const Profile = ({ user, users, userId, event, eventId, classes }) => {
       <Grid>
         <img src={event && event.imageurl} className={classes.banner} />
         <Card>
-          {user ? <Gravatar className={classes.gravatar} email={user.emails[0].address} /> : null}
+          {user ? (
+            <Gravatar
+              className={classes.gravatar}
+              email={user.emails[0].address}
+            />
+          ) : null}
           <h1> {event.title}</h1>
-          <p>{(user && user.profile && user.profile.location) || event.location}</p>
+          <p>
+            {(user && user.profile && user.profile.location) || event.location}
+          </p>
           <p>{user && user.profile && user.profile.description}</p>
           {/* {event._id === eventId ? (
             <div>
