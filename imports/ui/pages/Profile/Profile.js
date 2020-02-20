@@ -4,7 +4,17 @@ import { withTracker } from "meteor/react-meteor-data";
 import { Events } from "../../../api";
 import styles from "./styles";
 import { withStyles } from "@material-ui/core";
-import { Card, Grid, Modal, Backdrop, Fade, Button, Typography, Box } from "@material-ui/core";
+import {
+  Card,
+  Grid,
+  Modal,
+  Backdrop,
+  Fade,
+  Button,
+  Typography,
+  Box,
+  Link
+} from "@material-ui/core";
 import FacebookIcon from "@material-ui/icons/Facebook";
 import InstagramIcon from "@material-ui/icons/Instagram";
 import TwitterIcon from "@material-ui/icons/Twitter";
@@ -28,6 +38,11 @@ const Profile = ({ user, users, userId, event, eventId, classes }) => {
     setOpenAccount(false);
     setOpenEvent(false);
   };
+  const preventDefault = event => {
+    event.preventDefault();
+    console.log("clicked");
+  };
+
   console.log(user);
   return user && user.profile ? (
     <Grid className={classes.profileContainer}>
@@ -74,7 +89,35 @@ const Profile = ({ user, users, userId, event, eventId, classes }) => {
                 </Fade>
               </Modal>
             </div>
-          ) : null}
+          ) : (
+            <div>
+              <Button
+                type="button"
+                variant="contained"
+                size="large"
+                color="primary"
+                onClick={handleOpenAccount}
+              >
+                Message Artist{" "}
+              </Button>
+              <Modal
+                aria-labelledby="transition-modal-title"
+                aria-describedby="transition-modal-description"
+                className={classes.modal}
+                open={openAccount}
+                onClose={handleClose}
+                closeAfterTransition
+                BackdropComponent={Backdrop}
+                BackdropProps={{
+                  timeout: 500
+                }}
+              >
+                <Fade in={openAccount}>
+                  <div className={classes.paper}></div>
+                </Fade>
+              </Modal>
+            </div>
+          )}
         </Box>
 
         <Typography className={classes.description} variant="body1">
@@ -83,23 +126,23 @@ const Profile = ({ user, users, userId, event, eventId, classes }) => {
       </Card>
       {user && user.profile && user.profile.social ? (
         <div>
-          <h2>Connect with us on Social Media</h2>
+          <Typography variant="h5">Connect with {user.profile.title} on Social Media</Typography>
 
-          <p key="facebook">
-            <a href={user.profile.social.facebook} target="_blank">
-              <FacebookIcon />
-            </a>
-          </p>
-          <p key="instagram">
-            <a href={user.profile.social.instagram}>
-              <InstagramIcon />
-            </a>
-          </p>
-          <p key="twitter">
-            <a href={user.profile.social.twitter}>
-              <TwitterIcon />
-            </a>
-          </p>
+          <Link
+            to={user && user.profile && user.profile.social && user.profile.social.facebook}
+            target="_blank"
+          >
+            <FacebookIcon /> Facebook
+          </Link>
+          <Link
+            to={user && user.profile && user.profile.social && user.profile.social.instagram}
+            target="_blank"
+          >
+            <InstagramIcon /> Instagram
+          </Link>
+          <Link href={user.profile.social.twitter} onClick={preventDefault} target="_blank">
+            <TwitterIcon /> Twitter
+          </Link>
         </div>
       ) : null}
       {user.profile.userType === "venue" && user._id === userId ? (
@@ -140,71 +183,16 @@ const Profile = ({ user, users, userId, event, eventId, classes }) => {
       <Grid>
         <img src={event && event.imageurl} className={classes.banner} />
         <Card>
-          {user ? (
-            <Gravatar
-              className={classes.gravatar}
-              email={user.emails[0].address}
-            />
-          ) : null}
-          <h1> {event.title}</h1>
-          <p>
-            {(user && user.profile && user.profile.location) || event.location}
-          </p>
-          <p>{user && user.profile && user.profile.description}</p>
-          {/* {event._id === eventId ? (
-            <div>
-              <Button
-                type="button"
-                variant="contained"
-                size="large"
-                color="primary"
-                onClick={handleOpen}
-              >
-                Update Profile{" "}
-              </Button>
-              <Modal
-                aria-labelledby="transition-modal-title"
-                aria-describedby="transition-modal-description"
-                className={classes.modal}
-                open={open}
-                onClose={handleClose}
-                closeAfterTransition
-                BackdropComponent={Backdrop}
-                BackdropProps={{
-                  timeout: 500
-                }}
-              >
-                <Fade in={open}>
-                  <div className={classes.paper}>
-                    <SubmitEvent />
-                  </div>
-                </Fade>
-              </Modal>
-            </div>
-          ) : null} */}
+          {user ? <Gravatar className={classes.gravatar} email={user.emails[0].address} /> : null}
+          <Typography variant="h4"> {event.title}</Typography>
+          <Typography variant="h5" color="primary">
+            {event.location}
+          </Typography>
+          <Typography variant="subtitle1">{event.date}</Typography>
+          <Typography variant="body1">{event.description}</Typography>
+
           {/* {event._id !== eventId ? <Button>Apply to Play</Button> : null} */}
         </Card>
-        {user && user.profile && user.profile.social ? (
-          <div>
-            <h2>Connect with us on Social Media</h2>
-
-            <p key="facebook">
-              <a href={user.profile.social.facebook.value} target="_blank">
-                <FacebookIcon />
-              </a>
-            </p>
-            <p key="instagram">
-              <a href={user.profile.social.instagram}>
-                <InstagramIcon />
-              </a>
-            </p>
-            <p key="twitter">
-              <a href={user.profile.social.twitter}>
-                <TwitterIcon />
-              </a>
-            </p>
-          </div>
-        ) : null}
       </Grid>
     ))
   ) : (
