@@ -14,18 +14,23 @@ import Account from "../Account";
 import Loader from "../../components/Loader";
 
 const Profile = ({ user, users, userId, event, eventId, classes }) => {
-  const [open, setOpen] = React.useState(false);
+  const [openAccount, setOpenAccount] = React.useState(false);
+  const [openEvent, setOpenEvent] = React.useState(false);
 
-  const handleOpen = () => {
-    setOpen(true);
+  const handleOpenAccount = () => {
+    setOpenAccount(true);
+  };
+  const handleOpenEvent = () => {
+    setOpenEvent(true);
   };
 
   const handleClose = () => {
-    setOpen(false);
+    setOpenAccount(false);
+    setOpenEvent(false);
   };
   console.log(user);
   return user && user.profile ? (
-    <Grid>
+    <Grid className={classes.profileContainer}>
       <img src={user && user.profile.profileImage} className={classes.banner} />
       <Card>
         <Box className={classes.idContainer}>
@@ -45,7 +50,7 @@ const Profile = ({ user, users, userId, event, eventId, classes }) => {
               variant="contained"
               size="large"
               color="primary"
-              onClick={handleOpen}
+              onClick={handleOpenAccount}
             >
               Update Profile{" "}
             </Button>
@@ -53,7 +58,7 @@ const Profile = ({ user, users, userId, event, eventId, classes }) => {
               aria-labelledby="transition-modal-title"
               aria-describedby="transition-modal-description"
               className={classes.modal}
-              open={open}
+              open={openAccount}
               onClose={handleClose}
               closeAfterTransition
               BackdropComponent={Backdrop}
@@ -61,7 +66,7 @@ const Profile = ({ user, users, userId, event, eventId, classes }) => {
                 timeout: 500
               }}
             >
-              <Fade in={open}>
+              <Fade in={openAccount}>
                 <div className={classes.paper}>
                   <Account />
                 </div>
@@ -98,7 +103,7 @@ const Profile = ({ user, users, userId, event, eventId, classes }) => {
             variant="contained"
             size="large"
             color="primary"
-            onClick={handleOpen}
+            onClick={handleOpenEvent}
           >
             Create a New Event
           </Button>
@@ -106,7 +111,7 @@ const Profile = ({ user, users, userId, event, eventId, classes }) => {
             aria-labelledby="transition-modal-title"
             aria-describedby="transition-modal-description"
             className={classes.modal}
-            open={open}
+            open={openEvent}
             onClose={handleClose}
             closeAfterTransition
             BackdropComponent={Backdrop}
@@ -114,7 +119,7 @@ const Profile = ({ user, users, userId, event, eventId, classes }) => {
               timeout: 500
             }}
           >
-            <Fade in={open}>
+            <Fade in={openEvent}>
               <div className={classes.paper}>
                 <SubmitEvent />
               </div>

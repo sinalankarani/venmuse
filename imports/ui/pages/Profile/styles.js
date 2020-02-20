@@ -23,6 +23,9 @@ const styles = createStyles(theme => ({
   },
   idContainer: {
     display: "flex"
+  },
+  profileContainer: {
+    marginTop: "80px"
   }
 }));
 
