@@ -56,7 +56,7 @@ ArtistCard.propTypes = {
   artist: PropTypes.shape({
     profile: PropTypes.shape({
       userType: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired,
+      title: PropTypes.string,
       location: PropTypes.string,
       description: PropTypes.string
     })
