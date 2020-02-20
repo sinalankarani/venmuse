@@ -6,7 +6,7 @@ import { withTracker } from "meteor/react-meteor-data";
 
 const ArtistContainer = ({ classes, artists, userId }) => {
   return (
-    <Grid container className={classes.artistContainer}>
+    <Grid container spacing={2} className={classes.artistContainer}>
       {artists?.map(artist => {
         if (artist.profile.userType === "artist" && artist._id !== userId) {
           return (
