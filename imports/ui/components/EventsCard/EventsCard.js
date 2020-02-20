@@ -12,7 +12,7 @@ import styles from "./styles";
 
 const EventsCard = ({ classes, event }) => {
   return (
-    <CardActionArea>
+    <CardActionArea className={classes.card}>
       <Card className={classes.card}>
         <Link
           className={classes.link}
