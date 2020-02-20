@@ -83,9 +83,23 @@ class AccountsForm extends Component {
                   <>
                     <FormControlLabel
                       label={
-                        this.state.userTypeToggle === true ? "VENUE" : "ARTIST"
+                        this.state.userTypeToggle === true ? (
+                          <Typography className={classes.togglelabel}>
+                            VENUE
+                          </Typography>
+                        ) : (
+                          <Typography className={classes.togglelabel}>
+                            ARTIST
+                          </Typography>
+                        )
                       }
-                      control={<Switch onChange={this.changeUserType} />}
+                      control={
+                        <Switch
+                          color="primary"
+                          className={classes.toggleswitch}
+                          onChange={this.changeUserType}
+                        />
+                      }
                       labelPlacement="top"
                     />
                     <Field
@@ -96,7 +110,6 @@ class AccountsForm extends Component {
                             name="email"
                             type="text"
                             placeholder="WHAT'S YOUR EMAIL?"
-                            label="EMAIL"
                             {...input}
                           />
                           {meta.error && meta.touched && (
@@ -114,12 +127,11 @@ class AccountsForm extends Component {
                 <Field
                   name="username"
                   render={({ input, meta }) => (
-                    <>
+                    <div className={classes.inputContainer}>
                       <TextField
                         name="username"
                         type="text"
-                        label="USERNAME"
-                        placeholder="WHAT'S YOUR USERNAME"
+                        placeholder="WHAT'S YOUR USERNAME?"
                         {...input}
                       />
                       {meta.error && meta.touched && (
@@ -130,24 +142,23 @@ class AccountsForm extends Component {
                           {meta.error}
                         </span>
                       )}
-                    </>
+                    </div>
                   )}
                 />
                 <Field
                   name="password"
                   render={({ input, meta }) => (
-                    <>
+                    <div className={classes.inputContainer}>
                       <TextField
                         name="password"
                         type="password"
-                        label="PASSWORD"
-                        placeholder="WHAT'S YOUR PASSWORD"
+                        placeholder="WHAT'S YOUR PASSWORD?"
                         {...input}
                       />
                       {meta.error && meta.touched && (
                         <span className={classes.error}>{meta.error}</span>
                       )}
-                    </>
+                    </div>
                   )}
                 />
               </Box>
@@ -158,13 +169,15 @@ class AccountsForm extends Component {
                   variant="contained"
                   size="large"
                   color="primary"
+                  disableRipple="true"
                   disabled={pristine}
-                  className={classes.button}
+                  className={classes.submitbutton}
                 >
                   {this.state.formToggle ? "Enter" : "Create Account"}
                 </Button>
                 <Button
                   className={classes.button}
+                  disableRipple="true"
                   type="button"
                   onClick={() =>
                     this.setState({
