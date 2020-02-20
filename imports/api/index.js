@@ -34,7 +34,7 @@ Meteor.methods({
     Events.remove(event._id);
   },
 
-  'users.updateProfile'(newProfileData) {
+  'users.updateProfile'({ profile }) {
     if (!this.userId) {
       throw new Meteor.Error(
         'profile.updateProfile.not-authorized',
@@ -43,7 +43,7 @@ Meteor.methods({
     }
 
     Meteor.users.update(Meteor.userId(), {
-      $set: { profile: { ...Meteor.user().profile, ...newProfileData } }
+      $set: { profile: { ...Meteor.user().profile, ...profile } }
     });
   }
 });
