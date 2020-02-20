@@ -1,11 +1,24 @@
-import React from "react";
+import React from 'react';
+import AccountsForm from '../../components/AccountsForm';
+import styles from './styles';
+import { withStyles, Grid } from '@material-ui/core';
 
-const Signup = () => {
+const Signup = ({ classes }) => {
   return (
-    <div>
-      <h1>signup page</h1>
-    </div>
+    <Grid container className={classes.container}>
+      <Grid item>
+        <img
+          src={'/images/logo/logo-text2.png'}
+          height="150px"
+          width="400px"
+          alt="logo"
+        />
+      </Grid>
+      <Grid item>
+        <AccountsForm />
+      </Grid>
+    </Grid>
   );
 };
 
-export default Signup;
+export default withStyles(styles)(Signup);

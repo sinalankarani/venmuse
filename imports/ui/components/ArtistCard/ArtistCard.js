@@ -1,34 +1,54 @@
 import React from "react";
-import { Card, CardContent, CardMedia, Typography } from "@material-ui/core";
+import {
+  Card,
+  CardContent,
+  CardMedia,
+  Typography,
+  CardActionArea,
+  withStyles
+} from "@material-ui/core";
+import { Link } from "react-router-dom";
+import styles from "./styles";
 
-const ArtistCard = ({ artist }) => {
+const ArtistCard = ({ classes, artist }) => {
   return (
     artist &&
     artist.profile.userType === "artist" && (
-      <Card key={artist._id}>
-        <CardContent>
-          <h1>ARTIST CARD</h1> {/*REMOVE LATER*/}
-          {/* PROFILE IMAGE */}
-          <CardMedia>
-            <div>
-              <img
-                src={artist.profile.profileImage}
-                alt="profile-image"
-                height="300px"
-                width="600px"
-              />
-            </div>
-          </CardMedia>
-          {/* USERNAME */}
-          <Typography>{artist.username}</Typography>
-          {/* DESCRIPTION */}
-          <Typography>{artist.profile.description}</Typography>
-          {/* LOCATION */}
-          <Typography>{artist.profile.location}</Typography>
-        </CardContent>
-      </Card>
+      <CardActionArea>
+        <Card className={classes.card}>
+          <Link
+            className={classes.link}
+            to={artist && artist._id ? `/profile/${artist && artist._id}` : ""}
+          >
+            <CardContent className={classes.content}>
+              <CardMedia className={classes.media}>
+                <img
+                  src={
+                    artist.profile.profileImage
+                      ? artist.profile.profileImage
+                      : null
+                  }
+                  alt="profile-image"
+                  height="300px"
+                  width="600px"
+                  className={classes.image}
+                />
+              </CardMedia>
+              <div className={classes.eventDetails}>
+                <Typography variant="h6">{artist.profile.title}</Typography>
+                <Typography variant="body2" color="secondary">
+                  {artist.profile.description}
+                </Typography>
+                <Typography variant="body2">
+                  {artist.profile.location}
+                </Typography>
+              </div>
+            </CardContent>
+          </Link>
+        </Card>
+      </CardActionArea>
     )
   );
 };
 
-export default ArtistCard;
+export default withStyles(styles)(ArtistCard);

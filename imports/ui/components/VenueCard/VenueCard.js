@@ -1,34 +1,46 @@
 import React from "react";
-import { Card, CardContent, CardMedia, Typography } from "@material-ui/core";
+import {
+  Card,
+  CardContent,
+  CardMedia,
+  Typography,
+  CardActionArea,
+  withStyles
+} from "@material-ui/core";
+import { Link } from "react-router-dom";
+import styles from "./styles";
 
-const VenueCard = ({ venues }) => {
-  return venues.map(venue => {
-    if (venue.profile.userType === "venue") {
-      console.log(venue);
-      return (
-        <Card key={venue._id}>
-          <CardContent>
-            <h1>VENUE CARD</h1> {/*REMOVE LATER*/}
-            {/* PROFILE IMAGE */}
-            <CardMedia>
-              <img
-                src={venue.profile.profileImage}
-                alt="profile-image"
-                height="300px"
-                width="600px"
-              />
-            </CardMedia>
-            {/* USERNAME */}
-            <Typography>{venue.username}</Typography>
-            {/* DESCRIPTION */}
-            <Typography>{venue.profile.description}</Typography>
-            {/* LOCATION */}
-            <Typography>{venue.profile.location}</Typography>
-          </CardContent>
+const VenueCard = ({ classes, venue }) => {
+  console.log(venue);
+  return (
+    venue &&
+    venue.profile.userType === "venue" && (
+      <CardActionArea>
+        <Card className={classes.card}>
+          <Link
+            className={classes.link}
+            to={venue && venue._id ? `/profile/${venue && venue._id}` : ""}
+          >
+            <CardContent className={classes.content}>
+              <CardMedia className={classes.media}>
+                <img
+                  src={venue.profile.profileImage}
+                  className={classes.image}
+                />
+              </CardMedia>
+              <div className={classes.venueDetails}>
+                <Typography variant="h6">{venue.profile.title}</Typography>
+                <Typography variant="body2" color="secondary">
+                  {venue.profile.description}
+                </Typography>
+                <Typography>{venue.profile.location}</Typography>
+              </div>
+            </CardContent>
+          </Link>
         </Card>
-      );
-    }
-  });
+      </CardActionArea>
+    )
+  );
 };
 
-export default VenueCard;
+export default withStyles(styles)(VenueCard);

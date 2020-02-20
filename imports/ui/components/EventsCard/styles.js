@@ -1,18 +1,24 @@
-const styles = () => {
+const styles = theme => {
   return {
     card: {
-      height: "auto",
+      maxWidth: 350,
+      height: 350
+    },
+    image: {
+      width: "100%",
+      height: 150,
+      borderRadius: 5,
+      objectPosition: "center",
+      objectFit: "cover"
+    },
+    eventDetails: {
       display: "flex",
       flexDirection: "column",
-      justifyContent: "space-evenly",
-      margin: 10
+      padding: 10
     },
-    media: {
-      height: "50px",
-      width: "200px",
-    },
-    content: {
-      color: "black",
+    link: {
+      textDecoration: "none",
+      color: theme.fonts.primary.color
     }
   };
 };
