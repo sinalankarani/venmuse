@@ -7,7 +7,7 @@ import { Events } from "../../../api";
 
 const EventsContainer = ({ classes, events }) => {
   return (
-    <Grid container spacing={4} className={classes.eventContainer}>
+    <Grid container className={classes.eventContainer}>
       {events.map(event => (
         <Grid item key={event._id} xs={12} sm={6} md={4} lg={3}>
           <EventsCard event={event} />
