@@ -12,8 +12,14 @@ import PropTypes from "prop-types";
 import styles from "./styles";
 
 const EventsCard = ({ classes, event }) => {
+  let notifyCheck;
+  {
+    event.owner === Meteor.userId() && event?.artistApplied?.length
+      ? (notifyCheck = classes.applied)
+      : (notifyCheck = classes.card);
+  }
   return (
-    <CardActionArea className={classes.card}>
+    <CardActionArea className={notifyCheck}>
       <Card className={classes.card}>
         <Link
           className={classes.link}
@@ -21,10 +27,7 @@ const EventsCard = ({ classes, event }) => {
         >
           <CardContent className={classes.content}>
             <CardMedia className={classes.media}>
-              <img
-                src={event.imageurl ? event.imageurl : null}
-                className={classes.image}
-              />
+              <img src={event.imageurl ? event.imageurl : null} className={classes.image} />
             </CardMedia>
             <div className={classes.eventDetails}>
               <Typography variant="body1" color="primary">
