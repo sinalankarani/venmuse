@@ -3,6 +3,9 @@ import { Events } from "../../api";
 import moment from "moment";
 
 Meteor.startup(() => {
+  //////////////////////////////////////
+  /////////////// EVENTS ///////////////
+  //////////////////////////////////////
   if (Events.find().count() === 0) {
     Events.insert({
       date: "February 14, 2020",
@@ -15,7 +18,7 @@ Meteor.startup(() => {
       imageurl:
         "https://images.unsplash.com/photo-1556035511-3168381ea4d4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
       artist: ["Joe shmoe the band", "the band"],
-      filled: "false"
+      filled: false
     });
 
     Events.insert({
@@ -44,8 +47,37 @@ Meteor.startup(() => {
       artist: ["Santa Baby"],
       filled: false
     });
+    Events.insert({
+      date: "December, 31, 2020",
+      created: moment()
+        .startOf()
+        .fromNow(),
+      title: "Christmas Jolly Joy Jamboree",
+      location: "Christmas Market", //Venue.name
+      description: "",
+      imageurl:
+        "https://images.unsplash.com/photo-1541535650810-10d26f5c2ab3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+      artist: [],
+      filled: false
+    });
+    Events.insert({
+      date: "December, 31, 2020",
+      created: moment()
+        .startOf()
+        .fromNow(),
+      title: "New Years Ball",
+      location: "Times Square", //Venue.name
+      description: "",
+      imageurl:
+        "https://images.unsplash.com/photo-1541535650810-10d26f5c2ab3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+      artist: [],
+      filled: false
+    });
   }
   if (Meteor.users.find().count() === 0) {
+    //////////////////////////////////////
+    /////////////// ARTISTS //////////////
+    //////////////////////////////////////
     Accounts.createUser({
       username: "artist test",
       email: "artist@test.com",
@@ -67,7 +99,7 @@ Meteor.startup(() => {
       profile: {
         userType: "artist",
         location: "Surrey",
-        description: "a super hood hip hop group",
+        description: "Gangster rap yo",
         profileImage:
           "https://images.unsplash.com/photo-1415886541506-6efc5e4b1786?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
         images: [],
@@ -75,17 +107,94 @@ Meteor.startup(() => {
       }
     });
     Accounts.createUser({
+      username: "Polkaband",
+      email: "pb@test.com",
+      password: "12345",
+      profile: {
+        userType: "artist",
+        location: "Langley",
+        description: "A upbeat, classical polka ensemble",
+        profileImage:
+          "https://images.unsplash.com/flagged/photo-1569231290694-70d80ea24b8e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+        images: [],
+        social: ["facebook", "insta"]
+      }
+    });
+    Accounts.createUser({
+      username: "So do you like jazz",
+      email: "jerry@test.com",
+      password: "12345",
+      profile: {
+        userType: "artist",
+        location: "Downtown Van",
+        description: "So do you like jazz?",
+        profileImage:
+          "https://images.unsplash.com/photo-1541804627596-3b5b9ef58c93?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+        images: [],
+        social: ["facebook", "insta"]
+      }
+    });
+    //////////////////////////////////////
+    /////////////// VENUES ///////////////
+    //////////////////////////////////////
+    Accounts.createUser({
       username: "venue test",
       email: "venue@test.com",
       password: "12345",
       profile: {
-        userType: "venue",
-        location: "East Vancouver",
-        description: "a super cool venue",
+        userType: "artist",
+        title: "Del Mar Dick Van Dyke",
+        location: "Vancouver",
+        description: "a super cool band",
         profileImage:
           "https://images.unsplash.com/photo-1518079893270-6222a4393c6d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
         images: [],
-        social: ["facebook", "insta", "twitter"]
+        social: ["facebook", "insta"]
+      }
+    });
+    Accounts.createUser({
+      username: "Theatre Hall",
+      email: "hall@test.com",
+      password: "12345",
+      profile: {
+        userType: "artist",
+        title: "N.W.A",
+        location: "Compton",
+        description: "Gangster rap yo",
+        profileImage:
+          "https://images.unsplash.com/photo-1507924538820-ede94a04019d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+        images: [],
+        social: ["facebook", "insta"]
+      }
+    });
+    Accounts.createUser({
+      username: "Polkaband",
+      email: "pb@test.com",
+      password: "12345",
+      profile: {
+        userType: "artist",
+        title: "Polka Dots",
+        location: "Langley",
+        description: "An upbeat, classical polka ensemble",
+        profileImage:
+          "https://images.unsplash.com/flagged/photo-1569231290694-70d80ea24b8e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+        images: [],
+        social: ["facebook", "insta"]
+      }
+    });
+    Accounts.createUser({
+      username: "So do you like jazz",
+      email: "jerry@test.com",
+      password: "12345",
+      profile: {
+        userType: "artist",
+        title: "Miles Davis",
+        location: "Downtown Van",
+        description: "So you like jazz?",
+        profileImage:
+          "https://images.unsplash.com/photo-1541804627596-3b5b9ef58c93?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+        images: [],
+        social: ["facebook", "insta"]
       }
     });
   }
