@@ -8,6 +8,7 @@ import {
   withStyles
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 import styles from "./styles";
 
 const EventsCard = ({ classes, event }) => {
@@ -41,6 +42,11 @@ const EventsCard = ({ classes, event }) => {
       </Card>
     </CardActionArea>
   );
+};
+
+EventsCard.propTypes = {
+  event: PropTypes.object,
+  classes: PropTypes.object
 };
 
 export default withStyles(styles)(EventsCard);
