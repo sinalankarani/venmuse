@@ -13,12 +13,19 @@ const styles = createStyles(theme => ({
     padding: theme.spacing(2, 4, 3)
   },
   gravatar: {
-    borderRadius: "30px"
+    borderRadius: "30px",
+    marginRight: "20px"
   },
   banner: {
     width: "100%",
     maxHeight: "400px",
     objectFit: "cover"
+  },
+  idContainer: {
+    display: "flex"
+  },
+  profileContainer: {
+    marginTop: "80px"
   }
 }));
 
