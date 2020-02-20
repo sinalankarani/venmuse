@@ -21,7 +21,7 @@ Meteor.methods({
         "You are unauthorized to add new events."
       );
     }
-    Events.insert({ ...event, owner: this.userId, filled: false, artistApplied: [] });
+    Events.insert({ ...event, owner: this.userId, filled: false, artistApplied: [], lineup: [] });
   },
   "events.removeEvent"(event) {
     console.log(event);
@@ -56,6 +56,39 @@ Meteor.methods({
     }
     Events.update(event._id, {
       $set: { artistApplied: [...event.artistApplied, Meteor.userId()] }
+    });
+  },
+
+  "events.approveArtist"(event, artistId) {
+    console.log(event);
+    if (event.filled) {
+      throw new Meteor.Error(
+        "events.approveArtist not authorized",
+        "Event lineup has already been filled"
+      );
+    }
+    if (event.owner !== this.userId) {
+      throw new Meteor.Error("events.approveArtist not authorized", "You do not own this event");
+    }
+    Events.update(event._id, {
+      $set: { filled: true, lineup: [artistId], artistApplied: [] }
+    });
+  },
+
+  "events.removeArtist"(event, artistId) {
+    if (event.owner !== this.userId) {
+      throw new Meteor.Error("events.removeArtist not authorized", "You do not own this event");
+    }
+    if (!event.artistApplied) {
+      throw new Meteor.Error(
+        "events.removeArtist no authorized",
+        "No artists have applied to your event. Womp womp."
+      );
+    }
+
+    let newArtistApplied = event.artistApplied.filter(artist => artist !== artistId);
+    Events.update(event._id, {
+      $set: { artistApplied: newArtistApplied }
     });
   },
 
