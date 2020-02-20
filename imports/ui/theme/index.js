@@ -1,12 +1,24 @@
 import { createMuiTheme } from "@material-ui/core/styles";
 
-const theme = createMuiTheme({
+export default createMuiTheme({
   palette: {
     primary: {
-      main: "#8f24d1"
+      main: "#FF9633", //orange
+      background: "#F7F7F7", //off-white
+      title: "#000000", //black
+      navicon: "#24252b" //dark off-gray
     },
     secondary: {
-      main: "#fff"
+      main: "#67687A" //off-gray
+    }
+  },
+  fonts: {
+    primary: {
+      main: "Roboto, sans-serif",
+      color: "#303030"
+    },
+    secondary: {
+      main: "Dhurjati, sans-serif"
     }
   }
 });

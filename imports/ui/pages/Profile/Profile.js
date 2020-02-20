@@ -1,0 +1,232 @@
+import React from "react";
+import SubmitEvent from "../../components/SubmitEvent";
+import { withTracker } from "meteor/react-meteor-data";
+import { Events } from "../../../api";
+import styles from "./styles";
+import { withStyles } from "@material-ui/core";
+import { Card, Grid, Modal, Backdrop, Fade, Button, Typography, Box } from "@material-ui/core";
+import FacebookIcon from "@material-ui/icons/Facebook";
+import InstagramIcon from "@material-ui/icons/Instagram";
+import TwitterIcon from "@material-ui/icons/Twitter";
+import { Meteor } from "meteor/meteor";
+import Gravatar from "react-gravatar";
+import Account from "../Account";
+import Loader from "../../components/Loader";
+import { Link } from "react-router-dom";
+
+const Profile = ({ user, users, userId, event, pastEvents, eventId, classes }) => {
+  const [openAccount, setOpenAccount] = React.useState(false);
+  const [openEvent, setOpenEvent] = React.useState(false);
+
+  const handleOpenAccount = () => {
+    setOpenAccount(true);
+  };
+  const handleOpenEvent = () => {
+    setOpenEvent(true);
+  };
+
+  const handleClose = () => {
+    setOpenAccount(false);
+    setOpenEvent(false);
+  };
+  const preventDefault = event => {
+    event.preventDefault();
+    console.log("clicked");
+  };
+
+  console.log(user);
+  return user && user.profile ? (
+    <Grid className={classes.profileContainer}>
+      <img src={user && user.profile.profileImage} className={classes.banner} />
+      <Card className={classes.card}>
+        <Box className={classes.idContainer}>
+          <Box className={classes.userContainer}>
+            {user ? <Gravatar className={classes.gravatar} email={user.emails[0].address} /> : null}
+            <Box className={classes.titleLocation}>
+              <Typography variant="h4"> {user.profile.title}</Typography>
+              <Typography variant="subtitle1" color="primary">
+                {user && user.profile && user.profile.location}
+              </Typography>
+              <Typography variant="body1">
+                {user && user.profile && user.profile.description}
+              </Typography>
+            </Box>
+          </Box>
+          <Box className={classes.buttonsContainer}>
+            {user._id === userId ? (
+              <div>
+                <Button
+                  className={classes.button}
+                  type="button"
+                  variant="contained"
+                  size="large"
+                  color="primary"
+                  onClick={handleOpenAccount}
+                >
+                  Update Profile{" "}
+                </Button>
+                <Modal
+                  aria-labelledby="transition-modal-title"
+                  aria-describedby="transition-modal-description"
+                  className={classes.modal}
+                  open={openAccount}
+                  onClose={handleClose}
+                  closeAfterTransition
+                  BackdropComponent={Backdrop}
+                  BackdropProps={{
+                    timeout: 500
+                  }}
+                >
+                  <Fade in={openAccount}>
+                    <div className={classes.paper}>
+                      <Account />
+                    </div>
+                  </Fade>
+                </Modal>
+              </div>
+            ) : (
+              <div>
+                <Button
+                  className={classes.button}
+                  type="button"
+                  variant="contained"
+                  size="large"
+                  color="primary"
+                  onClick={handleOpenAccount}
+                >
+                  {user.profile.userType === "artist" ? "Message Artist" : "Message Venue"}
+                </Button>
+                <Modal
+                  aria-labelledby="transition-modal-title"
+                  aria-describedby="transition-modal-description"
+                  className={classes.modal}
+                  open={openAccount}
+                  onClose={handleClose}
+                  closeAfterTransition
+                  BackdropComponent={Backdrop}
+                  BackdropProps={{
+                    timeout: 500
+                  }}
+                >
+                  <Fade in={openAccount}>
+                    <div className={classes.paper}></div>
+                  </Fade>
+                </Modal>
+              </div>
+            )}
+            {user.profile.userType === "venue" && user._id === userId ? (
+              <div>
+                <Button
+                  className={classes.button}
+                  type="button"
+                  variant="contained"
+                  size="large"
+                  color="primary"
+                  onClick={handleOpenEvent}
+                >
+                  Create New Event
+                </Button>
+                <Modal
+                  aria-labelledby="transition-modal-title"
+                  aria-describedby="transition-modal-description"
+                  className={classes.modal}
+                  open={openEvent}
+                  onClose={handleClose}
+                  closeAfterTransition
+                  BackdropComponent={Backdrop}
+                  BackdropProps={{
+                    timeout: 500
+                  }}
+                >
+                  <Fade in={openEvent}>
+                    <div className={classes.paper}>
+                      <SubmitEvent />
+                    </div>
+                  </Fade>
+                </Modal>
+              </div>
+            ) : null}
+          </Box>
+        </Box>
+      </Card>
+      {user && user.profile && user.profile.social ? (
+        <Box className={classes.social}>
+          <Typography variant="h5">Connect with {user.profile.title} on Social Media</Typography>
+          <Box className={classes.socialLinks}>
+            <Link
+              className={classes.link}
+              to={user && user.profile && user.profile.social && user.profile.social.facebook}
+              target="_blank"
+            >
+              <FacebookIcon className={classes.icon} /> Facebook
+            </Link>
+            <Link
+              className={classes.link}
+              to={user && user.profile && user.profile.social && user.profile.social.instagram}
+              target="_blank"
+            >
+              <InstagramIcon className={classes.icon} /> Instagram
+            </Link>
+            <Link
+              className={classes.link}
+              to={user.profile.social.twitter}
+              onClick={preventDefault}
+              target="_blank"
+            >
+              <TwitterIcon className={classes.icon} /> Twitter
+            </Link>
+          </Box>
+        </Box>
+      ) : null}
+      {/* {user.profile.userType === "venue" && } */}
+      {console.log(pastEvents)}
+    </Grid>
+  ) : event ? (
+    (console.log(event),
+    (
+      <Grid className={classes.profileContainer}>
+        <img src={event && event.imageurl} className={classes.banner} />
+        <Card className={classes.eventCard}>
+          <Box>
+            <Typography variant="h4"> {event.title}</Typography>
+            <Typography variant="h5" color="primary">
+              {event.location}
+            </Typography>
+            <Typography variant="subtitle1">{event.date}</Typography>
+            <Typography variant="body1">{event.description}</Typography>
+          </Box>
+          {!event.filled ? (
+            <Button
+              className={classes.button}
+              type="button"
+              variant="contained"
+              size="large"
+              color="primary"
+            >
+              Apply to Event
+            </Button>
+          ) : (
+            <Typography variant="h5" color="primary">
+              Lineup Filled
+            </Typography>
+          )}
+        </Card>
+      </Grid>
+    ))
+  ) : (
+    <Loader />
+  );
+};
+
+export default withTracker(({ userId, eventId }) => {
+  Meteor.subscribe("events");
+  Meteor.subscribe("users");
+
+  return {
+    pastEvents: Events.find({ owner: Meteor.userId() }).fetch(),
+    event: Events.find({ _id: eventId }).fetch()[0],
+    users: Meteor.users.find().fetch(),
+    user: Meteor.users.find({ _id: userId }).fetch()[0],
+    userId: Meteor.userId()
+  };
+})(withStyles(styles)(Profile));

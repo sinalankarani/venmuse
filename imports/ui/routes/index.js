@@ -1,9 +1,11 @@
 import React, { Fragment } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
-import Archive from "../pages/Archive";
+import Event from "../pages/Event";
+import Artist from "../pages/Artist";
+import Venue from "../pages/Venue";
 import Feed from "../pages/Feed";
 import Signup from "../pages/Signup";
-import Single from "../pages/Single";
+import Profile from "../pages/Profile";
 import Account from "../pages/Account";
 import NavBar from "../components/NavBar";
 import { Meteor } from "meteor/meteor";
@@ -12,17 +14,20 @@ import { withTracker } from "meteor/react-meteor-data";
 const Routes = ({ userId }) => {
   return !userId && !Meteor.loggingIn() ? (
     <Switch>
-      <Route exact path="/account" component={Account} />
-      <Redirect from="*" to="/account" />
+      <Route exact path="/signup" component={Signup} />
+      <Redirect from="*" to="/signup" />
     </Switch>
   ) : (
     <Fragment>
-      {console.log(userId)}
       <NavBar />
       <Switch>
         <Route exact path="/feed" component={Feed} />
-        <Route exact path="/archive" component={Archive} />
-        <Route exact path="/single" component={Single} />
+        <Route exact path="/account" component={Account} />
+        <Route exact path="/artist" component={Artist} />
+        <Route exact path="/event" component={Event} />
+        <Route exact path="/venue" component={Venue} />
+        <Route exact path="/profile" component={Profile} />
+        <Route exact path="/profile/:id" component={Profile} />
         <Redirect from="*" to="/feed" />
       </Switch>
     </Fragment>
