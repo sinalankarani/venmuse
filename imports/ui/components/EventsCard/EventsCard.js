@@ -8,6 +8,7 @@ import {
   withStyles
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 import styles from "./styles";
 
 const EventsCard = ({ classes, event }) => {
@@ -26,7 +27,10 @@ const EventsCard = ({ classes, event }) => {
         >
           <CardContent className={classes.content}>
             <CardMedia className={classes.media}>
-              <img src={event.imageurl ? event.imageurl : null} className={classes.image} />
+              <img
+                src={event.imageurl ? event.imageurl : null}
+                className={classes.image}
+              />
             </CardMedia>
             <div className={classes.eventDetails}>
               <Typography variant="body1" color="primary">
@@ -41,6 +45,16 @@ const EventsCard = ({ classes, event }) => {
       </Card>
     </CardActionArea>
   );
+};
+
+EventsCard.propTypes = {
+  event: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+    artist: PropTypes.array,
+    location: PropTypes.string
+  }),
+  classes: PropTypes.object
 };
 
 export default withStyles(styles)(EventsCard);
