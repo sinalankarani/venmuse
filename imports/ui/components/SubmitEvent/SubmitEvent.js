@@ -5,6 +5,7 @@ import { withTracker } from "meteor/react-meteor-data";
 import { withRouter } from "react-router-dom";
 import validate from "./helpers/";
 import { Meteor } from "meteor/meteor";
+
 import PropTypes from "prop-types";
 import styles from "./styles";
 import {
@@ -41,6 +42,11 @@ class SubmitEvent extends React.Component {
       description: values.description,
       tags: values.tags
     };
+    Meteor.call("events.addNewEvent", newEvent, (err, res) => {
+      if (err) {
+        alert(err.reason);
+      }
+    });
     Meteor.call("events.addNewEvent", newEvent);
     this.props.history.push("/feed");
   };
@@ -84,11 +90,7 @@ class SubmitEvent extends React.Component {
                   type="text"
                   render={({ input, meta }) => (
                     <>
-                      <TextField
-                        label="Title"
-                        className={classes.fields}
-                        {...input}
-                      />
+                      <TextField label="Title" className={classes.fields} {...input} />
                       {meta.error && meta.touched && (
                         <span className={classes.error}>{meta.error}</span>
                       )}
@@ -103,11 +105,7 @@ class SubmitEvent extends React.Component {
                     type="text"
                     render={({ input, meta }) => (
                       <>
-                        <TextField
-                          label="Location"
-                          className={classes.fields}
-                          {...input}
-                        />
+                        <TextField label="Location" className={classes.fields} {...input} />
                         {meta.error && meta.touched && (
                           <span className={classes.error}>{meta.error}</span>
                         )}
@@ -122,11 +120,7 @@ class SubmitEvent extends React.Component {
                   type="text"
                   render={({ input, meta }) => (
                     <>
-                      <TextField
-                        label="Description"
-                        className={classes.fields}
-                        {...input}
-                      />
+                      <TextField label="Description" className={classes.fields} {...input} />
                       {meta.error && meta.touched && (
                         <span className={classes.error}>{meta.error}</span>
                       )}
@@ -172,9 +166,7 @@ class SubmitEvent extends React.Component {
                         >
                           {tags.map(tag => (
                             <MenuItem key={tag} value={tag}>
-                              <Checkbox
-                                checked={input.value.indexOf(tag) > -1}
-                              />
+                              <Checkbox checked={input.value.indexOf(tag) > -1} />
                               <ListItemText primary={tag} />
                             </MenuItem>
                           ))}
@@ -188,11 +180,7 @@ class SubmitEvent extends React.Component {
                 />
 
                 {/* SUBMIT NEW EVENT */}
-                <Button
-                  type="submit"
-                  variant="contained"
-                  className={classes.submit}
-                >
+                <Button type="submit" variant="contained" className={classes.submit}>
                   Submit
                 </Button>
               </form>

@@ -38,7 +38,26 @@ const Profile = ({ user, users, userId, event, myEvents, eventId, classes }) => 
   };
 
   const applyEvent = () => {
-    Meteor.call("events.applyToEvent", event);
+    Meteor.call("events.applyToEvent", event, (err, res) => {
+      if (err) {
+        alert(err.reason);
+      }
+    });
+  };
+  const approveArtist = artistApplied => {
+    Meteor.call("events.approveArtist", event, artistApplied, (err, res) => {
+      if (err) {
+        alert(err.reason);
+      }
+    });
+  };
+
+  const removeArtist = artistApplied => {
+    Meteor.call("events.removeArtist", event, artistApplied, (err, res) => {
+      if (err) {
+        alert(err.reason);
+      }
+    });
   };
 
   return user && user.profile ? (
@@ -228,12 +247,25 @@ const Profile = ({ user, users, userId, event, myEvents, eventId, classes }) => 
         ? (console.log(event.artistApplied),
           event.artistApplied.map(
             appliedArtist => (
+              console.log(appliedArtist),
               console.log(Meteor.users.find({ _id: appliedArtist }).fetch()),
               (
-                <div>
+                <div key={appliedArtist}>
                   <ArtistCard artist={Meteor.users.find({ _id: appliedArtist }).fetch()[0]} />
-                  <Button>Accept Application</Button>
-                  <Button>Rejected</Button>
+                  <Button
+                    onClick={() => {
+                      approveArtist(appliedArtist);
+                    }}
+                  >
+                    Accept Application
+                  </Button>
+                  <Button
+                    onClick={() => {
+                      removeArtist(appliedArtist);
+                    }}
+                  >
+                    Reject
+                  </Button>
                 </div>
               )
             )
