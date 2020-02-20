@@ -14,6 +14,8 @@ import Account from "../Account";
 import Loader from "../../components/Loader";
 import { Link } from "react-router-dom";
 import EventsCard from "../../components/EventsCard";
+import ArtistCard from "../../components/ArtistCard";
+
 import Notification from "../../components/Notification/Notification";
 
 const Profile = ({ user, users, userId, event, myEvents, eventId, classes }) => {
@@ -203,23 +205,40 @@ const Profile = ({ user, users, userId, event, myEvents, eventId, classes }) => 
           <Typography variant="subtitle1">{event.date}</Typography>
           <Typography variant="body1">{event.description}</Typography>
         </Box>
-        {!event.filled ? (
-          <Button
-            className={classes.button}
-            type="button"
-            variant="contained"
-            size="large"
-            color="primary"
-            onClick={applyEvent}
-          >
-            Apply to Event
-          </Button>
-        ) : (
-          <Typography variant="h5" color="primary">
-            Lineup Filled
-          </Typography>
-        )}
+        {event.owner !== userId ? (
+          !event.filled ? (
+            <Button
+              className={classes.button}
+              type="button"
+              variant="contained"
+              size="large"
+              color="primary"
+              onClick={applyEvent}
+            >
+              Apply to Event
+            </Button>
+          ) : (
+            <Typography variant="h5" color="primary">
+              Lineup Filled
+            </Typography>
+          )
+        ) : null}
       </Card>
+      {event.owner === userId
+        ? (console.log(event.artistApplied),
+          event.artistApplied.map(
+            appliedArtist => (
+              console.log(Meteor.users.find({ _id: appliedArtist }).fetch()),
+              (
+                <div>
+                  <ArtistCard artist={Meteor.users.find({ _id: appliedArtist }).fetch()[0]} />
+                  <Button>Accept Application</Button>
+                  <Button>Rejected</Button>
+                </div>
+              )
+            )
+          ))
+        : null}
     </Grid>
   ) : (
     <Loader />

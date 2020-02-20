@@ -4,7 +4,7 @@ import { Meteor } from "meteor/meteor";
 import { withTracker } from "meteor/react-meteor-data";
 
 const Notification = ({ myEvents }) => {
-  console.log(typeof myEvents);
+  console.log(myEvents);
   let counter = 0;
   return (
     <div>
