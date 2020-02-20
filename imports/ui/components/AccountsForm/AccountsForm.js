@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import { Accounts } from 'meteor/accounts-base';
-import { Meteor } from 'meteor/meteor';
-import { Form, Field } from 'react-final-form';
-import { withRouter } from 'react-router-dom';
+import React, { Component } from "react";
+import { Accounts } from "meteor/accounts-base";
+import { Meteor } from "meteor/meteor";
+import { Form, Field } from "react-final-form";
+import { withRouter } from "react-router-dom";
 import {
   Button,
   Box,
@@ -13,11 +13,11 @@ import {
   TextField,
   Typography,
   withStyles
-} from '@material-ui/core/';
-import styles from './styles';
-import validate from './helpers';
-import StoreIcon from '@material-ui/icons/Store';
-import MusicNoteIcon from '@material-ui/icons/MusicNote';
+} from "@material-ui/core/";
+import styles from "./styles";
+import validate from "./helpers";
+import StoreIcon from "@material-ui/icons/Store";
+import MusicNoteIcon from "@material-ui/icons/MusicNote";
 
 class AccountsForm extends Component {
   constructor(props) {
@@ -37,7 +37,7 @@ class AccountsForm extends Component {
         email,
         password,
         profile: {
-          userType: this.state.userTypeToggle ? 'venue' : 'artist'
+          userType: this.state.userTypeToggle ? "venue" : "artist"
         }
       },
       error => {
@@ -83,7 +83,7 @@ class AccountsForm extends Component {
                   <>
                     <FormControlLabel
                       label={
-                        this.state.userTypeToggle === true ? 'Venue' : 'Artist'
+                        this.state.userTypeToggle === true ? "VENUE" : "ARTIST"
                       }
                       control={<Switch onChange={this.changeUserType} />}
                       labelPlacement="top"
@@ -91,24 +91,24 @@ class AccountsForm extends Component {
                     <Field
                       name="email"
                       render={({ input, meta }) => (
-                        <>
+                        <div className={classes.inputContainer}>
                           <TextField
                             name="email"
                             type="text"
-                            placeholder="What's your email?"
-                            label="Email"
+                            placeholder="WHAT'S YOUR EMAIL?"
+                            label="EMAIL"
                             {...input}
                           />
                           {meta.error && meta.touched && (
                             <span className={classes.error}>{meta.error}</span>
                           )}
-                        </>
+                        </div>
                       )}
                     />
                   </>
                 ) : (
                   <Typography variant="h4" className={classes.title}>
-                    Sign in{' '}
+                    Sign in{" "}
                   </Typography>
                 )}
                 <Field
@@ -118,8 +118,8 @@ class AccountsForm extends Component {
                       <TextField
                         name="username"
                         type="text"
-                        label="User Name"
-                        placeholder="What's your username?"
+                        label="USERNAME"
+                        placeholder="WHAT'S YOUR USERNAME"
                         {...input}
                       />
                       {meta.error && meta.touched && (
@@ -140,8 +140,8 @@ class AccountsForm extends Component {
                       <TextField
                         name="password"
                         type="password"
-                        label="Password"
-                        placeholder="What's your password?"
+                        label="PASSWORD"
+                        placeholder="WHAT'S YOUR PASSWORD"
                         {...input}
                       />
                       {meta.error && meta.touched && (
@@ -161,7 +161,7 @@ class AccountsForm extends Component {
                   disabled={pristine}
                   className={classes.button}
                 >
-                  {this.state.formToggle ? 'Enter' : 'Create Account'}
+                  {this.state.formToggle ? "Enter" : "Create Account"}
                 </Button>
                 <Button
                   className={classes.button}
@@ -174,8 +174,8 @@ class AccountsForm extends Component {
                   }
                 >
                   {this.state.formToggle
-                    ? 'New to VenMuse? Register'
-                    : 'Sign in'}
+                    ? "New to VenMuse? Register"
+                    : "Sign in"}
                 </Button>
               </Box>
             </form>

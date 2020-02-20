@@ -70,13 +70,6 @@ const NavBar = ({ classes }) => {
               alt="logo"
             />
           </NavLink>
-          <NavLink
-            to={`profile/${Meteor.userId()}`}
-            activeClassName="selected"
-            className={classes.link}
-          >
-            PROFILE
-          </NavLink>
           <Button
             aria-controls="customized-menu"
             aria-haspopup="true"
@@ -114,7 +107,7 @@ const NavBar = ({ classes }) => {
           </StyledMenu>
           <div className={classes.navlinks}>
             <NavLink
-              to="/account"
+              to={`profile/${Meteor.userId()}`}
               activeClassName="selected"
               className={classes.link}
             >
