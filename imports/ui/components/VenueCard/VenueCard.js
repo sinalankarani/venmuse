@@ -8,6 +8,7 @@ import {
   withStyles
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 import styles from "./styles";
 
 const VenueCard = ({ classes, venue }) => {
@@ -40,6 +41,18 @@ const VenueCard = ({ classes, venue }) => {
       </CardActionArea>
     )
   );
+};
+
+VenueCard.propTypes = {
+  venue: PropTypes.shape({
+    profile: PropTypes.shape({
+      userType: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      location: PropTypes.string.isRequired,
+      description: PropTypes.string
+    })
+  }),
+  classes: PropTypes.object
 };
 
 export default withStyles(styles)(VenueCard);
