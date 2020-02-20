@@ -4,7 +4,16 @@ import { withTracker } from "meteor/react-meteor-data";
 import { Events } from "../../../api";
 import styles from "./styles";
 import { withStyles } from "@material-ui/core";
-import { Card, Grid, Modal, Backdrop, Fade, Button, Typography, Box } from "@material-ui/core";
+import {
+  Card,
+  Grid,
+  Modal,
+  Backdrop,
+  Fade,
+  Button,
+  Typography,
+  Box
+} from "@material-ui/core";
 import FacebookIcon from "@material-ui/icons/Facebook";
 import InstagramIcon from "@material-ui/icons/Instagram";
 import TwitterIcon from "@material-ui/icons/Twitter";
@@ -13,8 +22,17 @@ import Gravatar from "react-gravatar";
 import Account from "../Account";
 import Loader from "../../components/Loader";
 import { Link } from "react-router-dom";
+import EventsCard from "../../components/EventsCard";
 
-const Profile = ({ user, users, userId, event, pastEvents, eventId, classes }) => {
+const Profile = ({
+  user,
+  users,
+  userId,
+  event,
+  myEvents,
+  eventId,
+  classes
+}) => {
   const [openAccount, setOpenAccount] = React.useState(false);
   const [openEvent, setOpenEvent] = React.useState(false);
 
@@ -41,7 +59,12 @@ const Profile = ({ user, users, userId, event, pastEvents, eventId, classes }) =
       <Card className={classes.card}>
         <Box className={classes.idContainer}>
           <Box className={classes.userContainer}>
-            {user ? <Gravatar className={classes.gravatar} email={user.emails[0].address} /> : null}
+            {user ? (
+              <Gravatar
+                className={classes.gravatar}
+                email={user.emails[0].address}
+              />
+            ) : null}
             <Box className={classes.titleLocation}>
               <Typography variant="h4"> {user.profile.title}</Typography>
               <Typography variant="subtitle1" color="primary">
@@ -94,7 +117,9 @@ const Profile = ({ user, users, userId, event, pastEvents, eventId, classes }) =
                   color="primary"
                   onClick={handleOpenAccount}
                 >
-                  {user.profile.userType === "artist" ? "Message Artist" : "Message Venue"}
+                  {user.profile.userType === "artist"
+                    ? "Message Artist"
+                    : "Message Venue"}
                 </Button>
                 <Modal
                   aria-labelledby="transition-modal-title"
@@ -151,18 +176,30 @@ const Profile = ({ user, users, userId, event, pastEvents, eventId, classes }) =
       </Card>
       {user && user.profile && user.profile.social ? (
         <Box className={classes.social}>
-          <Typography variant="h5">Connect with {user.profile.title} on Social Media</Typography>
+          <Typography variant="h5">
+            Connect with {user.profile.title} on Social Media
+          </Typography>
           <Box className={classes.socialLinks}>
             <Link
               className={classes.link}
-              to={user && user.profile && user.profile.social && user.profile.social.facebook}
+              to={
+                user &&
+                user.profile &&
+                user.profile.social &&
+                user.profile.social.facebook
+              }
               target="_blank"
             >
               <FacebookIcon className={classes.icon} /> Facebook
             </Link>
             <Link
               className={classes.link}
-              to={user && user.profile && user.profile.social && user.profile.social.instagram}
+              to={
+                user &&
+                user.profile &&
+                user.profile.social &&
+                user.profile.social.instagram
+              }
               target="_blank"
             >
               <InstagramIcon className={classes.icon} /> Instagram
@@ -178,8 +215,13 @@ const Profile = ({ user, users, userId, event, pastEvents, eventId, classes }) =
           </Box>
         </Box>
       ) : null}
-      {/* {user.profile.userType === "venue" && } */}
-      {console.log(pastEvents)}
+      <Grid container spacing={2} className={classes.eventContainer}>
+        {myEvents.map(event => (
+          <Grid item key={event._id} xs={12} sm={6} md={4} lg={3}>
+            <EventsCard event={event} />
+          </Grid>
+        ))}
+      </Grid>
     </Grid>
   ) : event ? (
     (console.log(event),
@@ -223,7 +265,7 @@ export default withTracker(({ userId, eventId }) => {
   Meteor.subscribe("users");
 
   return {
-    pastEvents: Events.find({ owner: Meteor.userId() }).fetch(),
+    myEvents: Events.find({ owner: userId }).fetch(),
     event: Events.find({ _id: eventId }).fetch()[0],
     users: Meteor.users.find().fetch(),
     user: Meteor.users.find({ _id: userId }).fetch()[0],
