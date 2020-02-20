@@ -188,8 +188,8 @@ class AccountsForm extends Component {
 }
 
 AccountsForm.propTypes = {
-  username: PropTypes.string.isRequired,
-  password: PropTypes.string.isRequired,
+  username: PropTypes.string,
+  password: PropTypes.string,
   email: PropTypes.string
 };
 
