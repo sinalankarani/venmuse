@@ -1,7 +1,7 @@
 const styles = theme => {
   return {
     card: {
-      maxWidth: 350,
+      width: "28vw",
       height: 350
     },
     image: {
