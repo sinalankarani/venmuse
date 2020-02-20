@@ -17,10 +17,16 @@ const VenueCard = ({ classes, venue }) => {
     venue.profile.userType === "venue" && (
       <CardActionArea>
         <Card className={classes.card}>
-          <Link to={venue && venue._id ? `/profile/${venue && venue._id}` : ""}>
+          <Link
+            className={classes.link}
+            to={venue && venue._id ? `/profile/${venue && venue._id}` : ""}
+          >
             <CardContent className={classes.content}>
               <CardMedia className={classes.media}>
-                <img src={venue.profile.profileImage} className={classes.image} />
+                <img
+                  src={venue.profile.profileImage}
+                  className={classes.image}
+                />
               </CardMedia>
               <div className={classes.venueDetails}>
                 <Typography variant="h6">{venue.profile.title}</Typography>
