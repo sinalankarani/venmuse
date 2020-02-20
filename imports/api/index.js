@@ -35,6 +35,7 @@ Meteor.methods({
   },
 
   "events.applyToEvent"(event) {
+    console.log(event);
     if (Meteor.user().profile.userType !== "artist") {
       throw new Meteor.Error(
         "events.applyToEvent not authorized",
