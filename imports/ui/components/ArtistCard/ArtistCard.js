@@ -8,7 +8,7 @@ import {
   withStyles
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
-// import PropTypes from "prop-types";
+import PropTypes from "prop-types";
 import styles from "./styles";
 
 const ArtistCard = ({ classes, artist }) => {
@@ -52,9 +52,16 @@ const ArtistCard = ({ classes, artist }) => {
   );
 };
 
-// ArtistCard.propTypes = {
-//   user: PropTypes.object,
-//   classes: PropTypes.object
-// };
+ArtistCard.propTypes = {
+  artist: PropTypes.shape({
+    profile: PropTypes.shape({
+      userType: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      location: PropTypes.string,
+      description: PropTypes.string
+    })
+  }),
+  classes: PropTypes.object
+};
 
 export default withStyles(styles)(ArtistCard);
