@@ -4,7 +4,7 @@ import { withTracker } from "meteor/react-meteor-data";
 import { Events } from "../../../api";
 import styles from "./styles";
 import { withStyles } from "@material-ui/core";
-import { Card, Grid, Modal, Backdrop, Fade, Button } from "@material-ui/core";
+import { Card, Grid, Modal, Backdrop, Fade, Button, Typography, Box } from "@material-ui/core";
 import FacebookIcon from "@material-ui/icons/Facebook";
 import InstagramIcon from "@material-ui/icons/Instagram";
 import TwitterIcon from "@material-ui/icons/Twitter";
@@ -14,28 +14,35 @@ import Account from "../Account";
 import Loader from "../../components/Loader";
 
 const Profile = ({ user, users, userId, event, eventId, classes }) => {
-  const [open, setOpen] = React.useState(false);
+  const [openAccount, setOpenAccount] = React.useState(false);
+  const [openEvent, setOpenEvent] = React.useState(false);
 
-  const handleOpen = () => {
-    setOpen(true);
+  const handleOpenAccount = () => {
+    setOpenAccount(true);
+  };
+  const handleOpenEvent = () => {
+    setOpenEvent(true);
   };
 
   const handleClose = () => {
-    setOpen(false);
+    setOpenAccount(false);
+    setOpenEvent(false);
   };
+  console.log(user);
   return user && user.profile ? (
-    <Grid>
+    <Grid className={classes.profileContainer}>
       <img src={user && user.profile.profileImage} className={classes.banner} />
       <Card>
-        {user ? (
-          <Gravatar
-            className={classes.gravatar}
-            email={user.emails[0].address}
-          />
-        ) : null}
-        <h1> {user.title}</h1>
-        <p>{user && user.profile && user.profile.location}</p>
-        <p>{user && user.profile && user.profile.description}</p>
+        <Box className={classes.idContainer}>
+          {user ? <Gravatar className={classes.gravatar} email={user.emails[0].address} /> : null}
+          <Box>
+            <Typography variant="h4"> {user.profile.title}</Typography>
+            <Typography variant="subtitle1">
+              {user && user.profile && user.profile.location}
+            </Typography>
+          </Box>
+        </Box>
+        <Typography variant="body1">{user && user.profile && user.profile.description}</Typography>
         {user._id === userId ? (
           <div>
             <Button
@@ -43,7 +50,7 @@ const Profile = ({ user, users, userId, event, eventId, classes }) => {
               variant="contained"
               size="large"
               color="primary"
-              onClick={handleOpen}
+              onClick={handleOpenAccount}
             >
               Update Profile{" "}
             </Button>
@@ -51,7 +58,7 @@ const Profile = ({ user, users, userId, event, eventId, classes }) => {
               aria-labelledby="transition-modal-title"
               aria-describedby="transition-modal-description"
               className={classes.modal}
-              open={open}
+              open={openAccount}
               onClose={handleClose}
               closeAfterTransition
               BackdropComponent={Backdrop}
@@ -59,7 +66,7 @@ const Profile = ({ user, users, userId, event, eventId, classes }) => {
                 timeout: 500
               }}
             >
-              <Fade in={open}>
+              <Fade in={openAccount}>
                 <div className={classes.paper}>
                   <Account />
                 </div>
@@ -96,7 +103,7 @@ const Profile = ({ user, users, userId, event, eventId, classes }) => {
             variant="contained"
             size="large"
             color="primary"
-            onClick={handleOpen}
+            onClick={handleOpenEvent}
           >
             Create a New Event
           </Button>
@@ -104,7 +111,7 @@ const Profile = ({ user, users, userId, event, eventId, classes }) => {
             aria-labelledby="transition-modal-title"
             aria-describedby="transition-modal-description"
             className={classes.modal}
-            open={open}
+            open={openEvent}
             onClose={handleClose}
             closeAfterTransition
             BackdropComponent={Backdrop}
@@ -112,7 +119,7 @@ const Profile = ({ user, users, userId, event, eventId, classes }) => {
               timeout: 500
             }}
           >
-            <Fade in={open}>
+            <Fade in={openEvent}>
               <div className={classes.paper}>
                 <SubmitEvent />
               </div>
@@ -176,7 +183,7 @@ const Profile = ({ user, users, userId, event, eventId, classes }) => {
             <h2>Connect with us on Social Media</h2>
 
             <p key="facebook">
-              <a href={user.profile.social.facebook} target="_blank">
+              <a href={user.profile.social.facebook.value} target="_blank">
                 <FacebookIcon />
               </a>
             </p>

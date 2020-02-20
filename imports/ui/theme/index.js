@@ -14,7 +14,8 @@ export default createMuiTheme({
   },
   fonts: {
     primary: {
-      main: "Roboto, sans-serif"
+      main: "Roboto, sans-serif",
+      color: "#303030"
     },
     secondary: {
       main: "Dhurjati, sans-serif"
