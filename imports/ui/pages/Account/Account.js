@@ -39,7 +39,11 @@ class Account extends React.Component {
               }
             }
           };
-          Meteor.call("users.updateProfile", updatedProfile);
+          Meteor.call("users.updateProfile", updatedProfile, (err, res) => {
+            if (err) {
+              alert(err.reason);
+            }
+          });
         }}
         render={({ handleSubmit }) => (
           <form onSubmit={handleSubmit}>
@@ -47,25 +51,15 @@ class Account extends React.Component {
             {/* USERNAME */}
             <Typography>{this.props.user?.username}</Typography>
             {/* USERTYPE */}
-            <Typography>
-              YOU ARE: {this.props.user?.profile?.userType}
-            </Typography>
+            <Typography>YOU ARE: {this.props.user?.profile?.userType}</Typography>
             {/* EMAIL */}
             <Typography>{this.props.user?.emails[0].address}</Typography>
             {/* LOCATION */}
-            <Field
-              name="location"
-              render={({ input }) => <TextField {...input} />}
-            />
+            <Field name="location" render={({ input }) => <TextField {...input} />} />
             PROFILE IMAGE
             <Typography>
               <Button>
-                <input
-                  accept="image/*"
-                  id="contained-button-file"
-                  multiple
-                  type="file"
-                />
+                <input accept="image/*" id="contained-button-file" multiple type="file" />
                 <label htmlFor="contained-button-file">UPLOAD IMAGE</label>
               </Button>
               {/* PROFILE IMAGE:{" "}
@@ -74,23 +68,11 @@ class Account extends React.Component {
               /> */}
             </Typography>
             {/* DESCRIPTION */}
-            <Field
-              name="description"
-              render={({ input }) => <TextField {...input} />}
-            />
+            <Field name="description" render={({ input }) => <TextField {...input} />} />
             {/* SOCIAL MEDIA */}
-            <Field
-              name="facebook"
-              render={({ input }) => <TextField {...input} />}
-            />
-            <Field
-              name="instagram"
-              render={({ input }) => <TextField {...input} />}
-            />
-            <Field
-              name="twitter"
-              render={({ input }) => <TextField {...input} />}
-            />
+            <Field name="facebook" render={({ input }) => <TextField {...input} />} />
+            <Field name="instagram" render={({ input }) => <TextField {...input} />} />
+            <Field name="twitter" render={({ input }) => <TextField {...input} />} />
             <Button type="submit">Save</Button>
           </form>
         )}
