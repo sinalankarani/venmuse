@@ -13,7 +13,7 @@ Meteor.startup(() => {
         .startOf()
         .fromNow(),
       title: 'Valentimes ball',
-      location: 'Da Club', //Venue.name
+      location: 'Da Club',
       description: 'A super fun love filled night of valentimes day fun',
       imageurl:
         'https://images.unsplash.com/photo-1556035511-3168381ea4d4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
@@ -29,7 +29,7 @@ Meteor.startup(() => {
         .startOf()
         .fromNow(),
       title: 'Blaze it',
-      location: 'Da Club', //Venue.name
+      location: 'Da Club',
       description: '42069',
       imageurl:
         'https://images.unsplash.com/photo-1517849845537-4d257902454a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
@@ -44,7 +44,7 @@ Meteor.startup(() => {
         .startOf()
         .fromNow(),
       title: 'Christmas Jolly Joy Jamboree',
-      location: 'Christmas Market', //Venue.name
+      location: 'Christmas Market',
       description: '',
       imageurl:
         'https://images.unsplash.com/photo-1512729360855-0d1e1b0983a2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
@@ -199,36 +199,3 @@ Meteor.startup(() => {
     });
   }
 });
-
-//////////////////////////////////////// Current DB schema
-// Collection: Events
-// - id
-// -due date (event date)
-// - date created
-// - title
-// -desc
-// -Venue.location (Google Maps iframe)
-// - Venue.id
-// - imageurl
-// -Artist.id []
-
-// Collection: Artist
-// - id
-// - name
-// -location (Google Maps iframe)
-// - desc
-// - media (api to music)
-// - social media
-// - genre [tags]
-// -imageurl
-// - additional images [string]
-
-// Collection: Venue
-// - id
-// - name
-// -location
-// -desc
-// -social media
-// -genre [tags]
-// - imageurl
-// -additional images [string]

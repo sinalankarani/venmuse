@@ -35,7 +35,7 @@ if (Meteor.isServer) {
         {},
         {
           fields: {
-            _id: 1,
+            emails: 1,
             profile: 1,
             username: 1
           }
