@@ -190,12 +190,7 @@ const Profile = ({ user, users, userId, event, myEvents, eventId, classes }) => 
               </a>
             )}
             {user?.profile?.social?.twitter && (
-              <a
-                className={classes.link}
-                href={user?.profile?.social?.twitter}
-                onClick={preventDefault}
-                target="_blank"
-              >
+              <a className={classes.link} href={user?.profile?.social?.twitter} target="_blank">
                 <TwitterIcon className={classes.icon} /> Twitter
               </a>
             )}
