@@ -5,7 +5,8 @@ import {
   CardMedia,
   Typography,
   CardActionArea,
-  withStyles
+  withStyles,
+  Box
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
@@ -33,16 +34,23 @@ const EventsCard = ({ classes, event }) => {
                   <p className={classes.counter}>{counter}</p>
                 </div>
               ) : null}
-              <Typography
-                variant="body1"
-                color="primary"
-                className={classes.date}
-              >
+              <Typography variant="body1" color="primary" className={classes.date}>
                 {event.date}
               </Typography>
               <Typography variant="h6">{event.title}</Typography>
-              <Typography variant="body1">{event.artist}</Typography>
-              <Typography variant="body2">{event.location}</Typography>
+              <Typography color="primary" variant="body2">
+                {event.location}
+              </Typography>
+              {console.log(event)}
+              <Typography variant="body1">
+                {event.lineup.length ? (
+                  `Line Up: ${event.lineup}`
+                ) : (
+                  <Box component="span" className={classes.lineup}>
+                    Seeking Artists
+                  </Box>
+                )}
+              </Typography>
             </div>
           </CardContent>
         </Link>

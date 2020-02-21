@@ -41,6 +41,17 @@ const styles = theme => {
     counter: {
       color: "white",
       fontWeight: "bold"
+    },
+    lineup: {
+      backgroundColor: "rgba(255, 150, 51, 0.85)",
+      color: theme.palette.primary.background,
+      fontWeight: "bold",
+      border: "2px solid #fff",
+      position: "absolute",
+      top: "15%",
+      left: "50%",
+      transform: "translate(-50%)",
+      padding: "10px"
     }
   };
 };

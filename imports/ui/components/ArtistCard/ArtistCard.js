@@ -10,6 +10,7 @@ import {
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import styles from "./styles";
+import LocationOnIcon from "@material-ui/icons/LocationOn";
 
 const ArtistCard = ({ classes, artist }) => {
   return (
@@ -39,11 +40,12 @@ const ArtistCard = ({ classes, artist }) => {
                 <Typography variant="h6">
                   {artist.profile.title || "[Artist Name Placeholder]"}
                 </Typography>
+                <Typography variant="body2" color="primary">
+                  <LocationOnIcon />
+                  {artist.profile.location || "[Location Placeholder]"}
+                </Typography>
                 <Typography variant="body2" color="secondary">
                   {artist.profile.description || "[Description Placeholder]"}
-                </Typography>
-                <Typography variant="body2">
-                  {artist.profile.location || "[Location Placeholder]"}
                 </Typography>
               </div>
             </CardContent>

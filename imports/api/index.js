@@ -19,6 +19,7 @@ if (Meteor.isServer) {
             imageurl: 1,
             lineup: 1,
             location: 1,
+            owner: 1,
             tags: 1,
             title: 1
           }
