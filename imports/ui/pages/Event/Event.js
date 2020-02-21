@@ -9,8 +9,10 @@ const Event = ({ classes }) => {
       <Container className={classes.banner}>
         <Typography className={classes.bannertext}>EVENTS</Typography>
         <img className={classes.bannerimage} src="/images/event.jpg" />
-      </Container>{" "}
-      <EventsContainer />
+      </Container>
+      <div className={classes.contentcontainer}>
+        <EventsContainer />
+      </div>
     </div>
   );
 };

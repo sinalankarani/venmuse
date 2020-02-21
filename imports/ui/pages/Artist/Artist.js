@@ -9,8 +9,10 @@ const Artist = ({ classes }) => {
       <Container className={classes.banner}>
         <Typography className={classes.bannertext}>ARTISTS</Typography>
         <img className={classes.bannerimage} src="/images/artist.jpg" />
-      </Container>{" "}
-      <ArtistContainer />
+      </Container>
+      <div className={classes.contentcontainer}>
+        <ArtistContainer />
+      </div>
     </div>
   );
 };

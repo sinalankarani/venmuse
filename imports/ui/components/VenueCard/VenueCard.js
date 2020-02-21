@@ -10,12 +10,13 @@ import {
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import styles from "./styles";
+import LocationOnIcon from "@material-ui/icons/LocationOn";
 
 const VenueCard = ({ classes, venue }) => {
   return (
     venue &&
     venue.profile.userType === "venue" && (
-      <CardActionArea className={classes.card}>
+      <CardActionArea>
         <Card className={classes.card}>
           <Link
             className={classes.link}
@@ -30,10 +31,13 @@ const VenueCard = ({ classes, venue }) => {
               </CardMedia>
               <div className={classes.venueDetails}>
                 <Typography variant="h6">{venue.profile.title || "[Venue Title]"}</Typography>
+                <Typography color="primary">
+                  <LocationOnIcon />
+                  {venue.profile.location || "[Venue Location]"}
+                </Typography>
                 <Typography variant="body2" color="secondary">
                   {venue.profile.description || "Description description"}
                 </Typography>
-                <Typography>{venue.profile.location || "[Venue Location]"}</Typography>
               </div>
             </CardContent>
           </Link>

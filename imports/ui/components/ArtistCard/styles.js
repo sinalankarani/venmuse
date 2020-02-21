@@ -1,7 +1,9 @@
 const styles = theme => {
   return {
     card: {
-      height: 350
+      height: 350,
+      border: theme.palette.secondary.main + " 3px solid",
+      borderRadius: "0px"
     },
     image: {
       width: "100%",
