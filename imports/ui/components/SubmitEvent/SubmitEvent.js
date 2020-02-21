@@ -1,13 +1,13 @@
-import React from 'react';
-import { Events } from '../../../api/';
-import { Form, Field } from 'react-final-form';
-import { withTracker } from 'meteor/react-meteor-data';
-import { withRouter } from 'react-router-dom';
-import validate from './helpers/';
-import { Meteor } from 'meteor/meteor';
+import React from "react";
+import { Events } from "../../../api/";
+import { Form, Field } from "react-final-form";
+import { withTracker } from "meteor/react-meteor-data";
+import { withRouter } from "react-router-dom";
+import validate from "./helpers/";
+import { Meteor } from "meteor/meteor";
 
-import PropTypes from 'prop-types';
-import styles from './styles';
+import PropTypes from "prop-types";
+import styles from "./styles";
 import {
   Button,
   Card,
@@ -21,8 +21,8 @@ import {
   FormControl,
   InputLabel,
   Input
-} from '@material-ui/core';
-import moment from 'moment';
+} from "@material-ui/core";
+import moment from "moment";
 
 class SubmitEvent extends React.Component {
   constructor(props) {
@@ -42,36 +42,36 @@ class SubmitEvent extends React.Component {
       description: values.description,
       tags: values.tags
     };
-    Meteor.call('events.addNewEvent', newEvent, (err, res) => {
+    Meteor.call("events.addNewEvent", newEvent, (err, res) => {
       if (err) {
         alert(err.reason);
       }
     });
-    this.props.history.push('/feed');
+    this.props.handleClose();
   };
 
   render() {
     const { classes } = this.props;
     const tags = [
-      'Blues',
-      'Classical',
-      'Comedy',
-      'Country',
-      'Dance Performance',
-      'Electronic',
-      'Folk',
-      'Hip hop',
-      'Indie',
-      'Jazz',
-      'Musical Theatre',
-      'Metal',
-      'Pop',
-      'Punk',
-      'R&B',
-      'Rap',
-      'Reggae',
-      'Rock',
-      'Top 40'
+      "Blues",
+      "Classical",
+      "Comedy",
+      "Country",
+      "Dance Performance",
+      "Electronic",
+      "Folk",
+      "Hip hop",
+      "Indie",
+      "Jazz",
+      "Musical Theatre",
+      "Metal",
+      "Pop",
+      "Punk",
+      "R&B",
+      "Rap",
+      "Reggae",
+      "Rock",
+      "Top 40"
     ];
     return (
       <Card className={classes.formContainer}>
@@ -172,7 +172,7 @@ class SubmitEvent extends React.Component {
                         <Select
                           multiple
                           input={<Input />}
-                          renderValue={selected => selected.join(', ')}
+                          renderValue={selected => selected.join(", ")}
                           {...input}
                         >
                           {tags.map(tag => (
@@ -217,8 +217,8 @@ SubmitEvent.propTypes = {
 };
 
 export default withTracker(() => {
-  Meteor.subscribe('events');
-  Meteor.subscribe('users');
+  Meteor.subscribe("events");
+  Meteor.subscribe("users");
   return {
     events: Events.find({}).fetch(),
     userId: Meteor.userId(),
