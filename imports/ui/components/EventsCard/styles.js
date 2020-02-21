@@ -1,7 +1,10 @@
 const styles = theme => {
   return {
     card: {
-      height: 350
+      position: "relative",
+      height: 350,
+      border: theme.palette.secondary.main + " 2px solid",
+      borderRadius: "0px"
     },
     image: {
       width: "100%",
@@ -19,8 +22,22 @@ const styles = theme => {
       textDecoration: "none",
       color: theme.fonts.primary.color
     },
-    applied: {
-      border: "2px solid red"
+    notifyCounter: {
+      height: 30,
+      width: 30,
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      borderRadius: "50%",
+      backgroundColor: theme.palette.primary.main,
+      zIndex: "1",
+      fontSize: 25,
+      alignSelf: "flex-end",
+      boxShadow: "2px 1px 6px "
+    },
+    counter: {
+      color: "white",
+      fontWeight: "bold"
     }
   };
 };
