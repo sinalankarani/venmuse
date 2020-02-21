@@ -53,7 +53,7 @@ const EventsCard = ({ classes, event }) => {
               {console.log(event)}
               <Typography variant="body1">
                 {event.lineup.length ? (
-                  `Line Up: ${event.lineup}`
+                  `Line Up: ${event.lineup.join(", ")}`
                 ) : (
                   <Box component="span" className={classes.lineup}>
                     Seeking Artists

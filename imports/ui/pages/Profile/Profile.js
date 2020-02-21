@@ -76,7 +76,7 @@ const Profile = ({
       }
     });
   };
-
+  console.log(myEvents.length);
   return user && user.profile ? (
     <Grid className={classes.profileContainer}>
       <Notification />
@@ -255,13 +255,18 @@ const Profile = ({
           </Box>
         </Box>
       ) : null}
-      <Grid container spacing={2} className={classes.eventContainer}>
-        {myEvents.map(event => (
-          <Grid item key={event._id} xs={12} sm={6} md={4} lg={3}>
-            <EventsCard event={event} />
+      {myEvents.length ? (
+        <div className={classes.myEventsContainer}>
+          <Typography className={classes.myEventsTitle}>My Events</Typography>
+          <Grid container spacing={2} className={classes.eventContainer}>
+            {myEvents.map(event => (
+              <Grid item key={event._id} xs={12} sm={6} md={4} lg={3}>
+                <EventsCard event={event} />
+              </Grid>
+            ))}
           </Grid>
-        ))}
-      </Grid>
+        </div>
+      ) : null}
     </Grid>
   ) : event ? (
     <Grid className={classes.profileContainer}>

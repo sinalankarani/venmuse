@@ -60,6 +60,14 @@ const styles = createStyles(theme => ({
     display: "flex",
     justifyContent: "space-between"
   },
+  myEventsContainer: {
+    margin: "0 3rem"
+  },
+  myEventsTitle: {
+    fontFamily: theme.fonts.secondary.main,
+    fontSize: "3rem",
+    textTransform: "uppercase"
+  },
   buttonsContainer: { display: "flex", flexDirection: "column" },
   button: {
     maxHeight: "50px",
