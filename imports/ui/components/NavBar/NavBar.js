@@ -121,12 +121,20 @@ const NavBar = ({ classes }) => {
             activeClassName="selected"
             className={classes.link}
           >
-            <img
-              src={"/images/logo/Final/full-logo.png"}
-              height="75px"
-              width="px"
-              alt="logo"
-            />
+            <div className={classes.logo}>
+              <img
+                src={"/images/logo/Final/full-logo.png"}
+                height="75px"
+                alt="logo"
+              />
+            </div>
+            <div className={classes.logomobile}>
+              <img
+                src={"/images/logo/Final/logo.png"}
+                height="60px"
+                alt="logo"
+              />
+            </div>
           </NavLink>
 
           <StyledMenu

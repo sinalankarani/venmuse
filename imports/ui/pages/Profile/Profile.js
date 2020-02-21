@@ -4,7 +4,16 @@ import { withTracker } from "meteor/react-meteor-data";
 import { Events } from "../../../api";
 import styles from "./styles";
 import { withStyles } from "@material-ui/core";
-import { Card, Grid, Modal, Backdrop, Fade, Button, Typography, Box } from "@material-ui/core";
+import {
+  Card,
+  Grid,
+  Modal,
+  Backdrop,
+  Fade,
+  Button,
+  Typography,
+  Box
+} from "@material-ui/core";
 import FacebookIcon from "@material-ui/icons/Facebook";
 import InstagramIcon from "@material-ui/icons/Instagram";
 import TwitterIcon from "@material-ui/icons/Twitter";
@@ -18,7 +27,15 @@ import ArtistCard from "../../components/ArtistCard";
 
 import Notification from "../../components/Notification/Notification";
 
-const Profile = ({ user, users, userId, event, myEvents, eventId, classes }) => {
+const Profile = ({
+  user,
+  users,
+  userId,
+  event,
+  myEvents,
+  eventId,
+  classes
+}) => {
   const [openAccount, setOpenAccount] = React.useState(false);
   const [openEvent, setOpenEvent] = React.useState(false);
 
@@ -67,7 +84,12 @@ const Profile = ({ user, users, userId, event, myEvents, eventId, classes }) => 
       <Card className={classes.card}>
         <Box className={classes.idContainer}>
           <Box className={classes.userContainer}>
-            {user ? <Gravatar className={classes.gravatar} email={user.emails[0].address} /> : null}
+            {user ? (
+              <Gravatar
+                className={classes.gravatar}
+                email={user.emails[0].address}
+              />
+            ) : null}
             <Box className={classes.titleLocation}>
               <Typography variant="h4"> {user.profile.title}</Typography>
               <Typography variant="subtitle1" color="primary">
@@ -120,7 +142,9 @@ const Profile = ({ user, users, userId, event, myEvents, eventId, classes }) => 
                   color="primary"
                   onClick={handleOpenAccount}
                 >
-                  {user.profile.userType === "artist" ? "Message Artist" : "Message Venue"}
+                  {user.profile.userType === "artist"
+                    ? "Message Artist"
+                    : "Message Venue"}
                 </Button>
                 <Modal
                   aria-labelledby="transition-modal-title"
@@ -166,7 +190,7 @@ const Profile = ({ user, users, userId, event, myEvents, eventId, classes }) => 
                 >
                   <Fade in={openEvent}>
                     <div className={classes.paper}>
-                      <SubmitEvent />
+                      <SubmitEvent handleClose={handleClose} />
                     </div>
                   </Fade>
                 </Modal>
@@ -177,30 +201,38 @@ const Profile = ({ user, users, userId, event, myEvents, eventId, classes }) => 
       </Card>
       {user && user.profile && user.profile.social ? (
         <Box className={classes.social}>
-          <Typography variant="h5">Connect with {user.profile.title} on Social Media</Typography>
+          <Typography variant="h5">
+            Connect with {user.profile.title} on Social Media
+          </Typography>
           <Box className={classes.socialLinks}>
-            <a
-              className={classes.link}
-              href={user && user.profile && user.profile.social && user.profile.social.facebook}
-              target="_blank"
-            >
-              <FacebookIcon className={classes.icon} /> Facebook
-            </a>
-            <a
-              className={classes.link}
-              href={user && user.profile && user.profile.social && user.profile.social.instagram}
-              target="_blank"
-            >
-              <InstagramIcon className={classes.icon} /> Instagram
-            </a>
-            <a
-              className={classes.link}
-              href={user.profile.social.twitter}
-              onClick={preventDefault}
-              target="_blank"
-            >
-              <TwitterIcon className={classes.icon} /> Twitter
-            </a>
+            {user?.profile?.social?.facebook && (
+              <a
+                className={classes.link}
+                href={user?.profile?.social?.facebook}
+                target="_blank"
+              >
+                <FacebookIcon className={classes.icon} /> Facebook
+              </a>
+            )}
+            {user?.profile?.social?.instagram && (
+              <a
+                className={classes.link}
+                href={user?.profile?.social?.instagram}
+                target="_blank"
+              >
+                <InstagramIcon className={classes.icon} /> Instagram
+              </a>
+            )}
+            {user?.profile?.social?.twitter && (
+              <a
+                className={classes.link}
+                href={user?.profile?.social?.twitter}
+                onClick={preventDefault}
+                target="_blank"
+              >
+                <TwitterIcon className={classes.icon} /> Twitter
+              </a>
+            )}
           </Box>
         </Box>
       ) : null}
@@ -251,7 +283,11 @@ const Profile = ({ user, users, userId, event, myEvents, eventId, classes }) => 
               console.log(Meteor.users.find({ _id: appliedArtist }).fetch()),
               (
                 <div key={appliedArtist}>
-                  <ArtistCard artist={Meteor.users.find({ _id: appliedArtist }).fetch()[0]} />
+                  <ArtistCard
+                    artist={
+                      Meteor.users.find({ _id: appliedArtist }).fetch()[0]
+                    }
+                  />
                   <Button
                     onClick={() => {
                       approveArtist(appliedArtist);

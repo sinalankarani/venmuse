@@ -11,18 +11,14 @@ const styles = theme => {
       overflow: "hidden",
       maxWidth: "100%",
       [theme.breakpoints.down("sm")]: {
-        height: "550px"
-      },
-      [theme.breakpoints.down("sm")]: {
-        height: "600px"
-      },
-      [theme.breakpoints.down("xs")]: {
-        height: "650px"
+        height: "400px"
       }
     },
     bannerimage: {
       width: "100%",
-      opacity: 0.5
+      opacity: 0.5,
+      objectFit: "cover",
+      minHeight: "400px"
     },
     bannertext: {
       fontFamily: theme.fonts.secondary.main,
@@ -34,15 +30,11 @@ const styles = theme => {
       top: "25vh",
       letterSpacing: "1rem",
       [theme.breakpoints.down("md")]: {
-        fontSize: "3rem"
+        letterSpacing: "0.3rem"
       },
       [theme.breakpoints.down("sm")]: {
-        fontSize: "3rem",
-        transform: "translateY(-6rem)"
-      },
-      [theme.breakpoints.down("xs")]: {
-        fontSize: "1.8rem",
-        transform: "translateY(-11rem)"
+        fontSize: "4rem",
+        transform: "translateY(-7rem)"
       }
     },
     title: {
