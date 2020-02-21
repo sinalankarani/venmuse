@@ -7,7 +7,8 @@ const styles = theme => ({
   formtitle: {
     fontFamily: theme.fonts.secondary.main,
     fontSize: "3rem",
-    lineHeight: 1
+    lineHeight: 1,
+    marginBottom: "1.5rem"
   },
   formlabel: {
     fontFamily: theme.fonts.secondary.main,

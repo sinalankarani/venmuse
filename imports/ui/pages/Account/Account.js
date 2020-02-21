@@ -49,14 +49,14 @@ class Account extends React.Component {
             <Typography className={classes.formtitle}>EDIT PROFILE</Typography>
 
             {/* USERNAME */}
-            <Typography className={classes.formlabel}>username: </Typography>
+            <Typography className={classes.formlabel}>username </Typography>
             <Typography>{this.props.user?.username}</Typography>
             {/* EMAIL */}
-            <Typography className={classes.formlabel}>email: </Typography>
+            <Typography className={classes.formlabel}>email </Typography>
             <Typography>{this.props.user?.emails[0].address}</Typography>
             {/* TITLE */}
             <Typography className={classes.formlabel}>
-              {this.props.user?.profile?.userType} name:
+              {this.props.user?.profile?.userType} name
             </Typography>
             <Field
               name="title"
@@ -66,13 +66,8 @@ class Account extends React.Component {
               )}
             />
 
-            {/* USERTYPE */}
-            {/* <Typography>
-              YOU ARE: {this.props.user?.profile?.userType}
-            </Typography> */}
-
             {/* LOCATION */}
-            <Typography className={classes.formlabel}>location: </Typography>
+            <Typography className={classes.formlabel}>location </Typography>
             <Field
               name="location"
               render={({ input }) => (
@@ -84,7 +79,7 @@ class Account extends React.Component {
             />
             {/* PROFILE IMAGE */}
             <Typography className={classes.formlabel}>
-              profile image url:{" "}
+              profile image url{" "}
             </Typography>
             <Field
               name="profileImage"
@@ -96,7 +91,7 @@ class Account extends React.Component {
               )}
             />
             {/* DESCRIPTION */}
-            <Typography className={classes.formlabel}>description: </Typography>
+            <Typography className={classes.formlabel}>description </Typography>
             <Field
               name="description"
               render={({ input }) => (
@@ -107,9 +102,7 @@ class Account extends React.Component {
               )}
             />
             {/* SOCIAL MEDIA */}
-            <Typography className={classes.formlabel}>
-              Facebook url:{" "}
-            </Typography>
+            <Typography className={classes.formlabel}>Facebook url </Typography>
             <Field
               name="facebook"
               render={({ input }) => (
@@ -121,7 +114,7 @@ class Account extends React.Component {
               )}
             />
             <Typography className={classes.formlabel}>
-              Instagram url:{" "}
+              Instagram url{" "}
             </Typography>
             <Field
               name="instagram"
@@ -133,7 +126,7 @@ class Account extends React.Component {
                 />
               )}
             />
-            <Typography className={classes.formlabel}>Twitter url: </Typography>
+            <Typography className={classes.formlabel}>Twitter url </Typography>
             <Field
               name="twitter"
               render={({ input }) => (

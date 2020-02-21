@@ -27,7 +27,7 @@ const styles = theme => ({
     width: "100%",
     textAlign: "center",
     opacity: "100%",
-    top: "14vh",
+    top: "14rem",
     letterSpacing: "1rem",
     [theme.breakpoints.down("xs")]: {
       fontSize: "4rem"
