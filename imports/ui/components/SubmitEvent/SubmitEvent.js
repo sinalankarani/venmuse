@@ -5,6 +5,7 @@ import { withTracker } from "meteor/react-meteor-data";
 import { withRouter } from "react-router-dom";
 import validate from "./helpers/";
 import { Meteor } from "meteor/meteor";
+
 import PropTypes from "prop-types";
 import styles from "./styles";
 import {
@@ -41,8 +42,12 @@ class SubmitEvent extends React.Component {
       description: values.description,
       tags: values.tags
     };
-    Meteor.call("events.addNewEvent", newEvent);
-    this.props.history.push("/feed");
+    Meteor.call("events.addNewEvent", newEvent, (err, res) => {
+      if (err) {
+        alert(err.reason);
+      }
+    });
+    this.props.handleClose();
   };
 
   render() {
