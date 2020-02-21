@@ -206,32 +206,32 @@ const Profile = ({
           </Typography>
           <Box className={classes.socialLinks}>
             {user?.profile?.social?.facebook && (
-              <Link
+              <a
                 className={classes.link}
-                to={user?.profile?.social?.facebook}
+                href={user?.profile?.social?.facebook}
                 target="_blank"
               >
                 <FacebookIcon className={classes.icon} /> Facebook
-              </Link>
+              </a>
             )}
             {user?.profile?.social?.instagram && (
-              <Link
+              <a
                 className={classes.link}
-                to={user?.profile?.social?.instagram}
+                href={user?.profile?.social?.instagram}
                 target="_blank"
               >
                 <InstagramIcon className={classes.icon} /> Instagram
-              </Link>
+              </a>
             )}
             {user?.profile?.social?.twitter && (
-              <Link
+              <a
                 className={classes.link}
-                to={user?.profile?.social?.twitter}
+                href={user?.profile?.social?.twitter}
                 onClick={preventDefault}
                 target="_blank"
               >
                 <TwitterIcon className={classes.icon} /> Twitter
-              </Link>
+              </a>
             )}
           </Box>
         </Box>
