@@ -8,11 +8,18 @@ import {
   withStyles
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 import styles from "./styles";
 
 const EventsCard = ({ classes, event }) => {
+  let notifyCheck;
+  {
+    event.owner === Meteor.userId() && event?.artistApplied?.length
+      ? (notifyCheck = classes.applied)
+      : (notifyCheck = classes.card);
+  }
   return (
-    <CardActionArea className={classes.card}>
+    <CardActionArea className={notifyCheck}>
       <Card className={classes.card}>
         <Link
           className={classes.link}
@@ -38,6 +45,16 @@ const EventsCard = ({ classes, event }) => {
       </Card>
     </CardActionArea>
   );
+};
+
+EventsCard.propTypes = {
+  event: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+    artist: PropTypes.array,
+    location: PropTypes.string
+  }),
+  classes: PropTypes.object
 };
 
 export default withStyles(styles)(EventsCard);

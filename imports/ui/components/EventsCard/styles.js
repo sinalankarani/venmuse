@@ -1,7 +1,6 @@
 const styles = theme => {
   return {
     card: {
-      maxWidth: 350,
       height: 350
     },
     image: {
@@ -19,6 +18,9 @@ const styles = theme => {
     link: {
       textDecoration: "none",
       color: theme.fonts.primary.color
+    },
+    applied: {
+      border: "2px solid red"
     }
   };
 };

@@ -19,11 +19,9 @@ import { withTracker } from "meteor/react-meteor-data";
 import PowerSettingsNewIcon from "@material-ui/icons/PowerSettingsNew";
 import PersonOutlineTwoToneIcon from "@material-ui/icons/PersonOutlineTwoTone";
 import ExploreTwoToneIcon from "@material-ui/icons/ExploreTwoTone";
-
 import EventAvailableTwoToneIcon from "@material-ui/icons/EventAvailableTwoTone";
 import GroupTwoToneIcon from "@material-ui/icons/GroupTwoTone";
 import HomeTwoToneIcon from "@material-ui/icons/HomeTwoTone";
-
 import AssignmentIndTwoToneIcon from "@material-ui/icons/AssignmentIndTwoTone";
 
 const StyledMenu = withStyles({
@@ -114,7 +112,6 @@ const NavBar = ({ classes }) => {
       </NavLink>
     </div>
   );
-
   return (
     <nav className={classes.root}>
       <AppBar className={classes.appbar} position="static">
