@@ -27,7 +27,7 @@ const ArtistCard = ({ classes, artist }) => {
                   src={
                     artist.profile.profileImage
                       ? artist.profile.profileImage
-                      : null
+                      : "https://baconmockup.com/640/360"
                   }
                   alt="profile-image"
                   height="300px"
@@ -36,12 +36,14 @@ const ArtistCard = ({ classes, artist }) => {
                 />
               </CardMedia>
               <div className={classes.eventDetails}>
-                <Typography variant="h6">{artist.profile.title}</Typography>
+                <Typography variant="h6">
+                  {artist.profile.title || "[Artist Name Placeholder]"}
+                </Typography>
                 <Typography variant="body2" color="secondary">
-                  {artist.profile.description}
+                  {artist.profile.description || "[Description Placeholder]"}
                 </Typography>
                 <Typography variant="body2">
-                  {artist.profile.location}
+                  {artist.profile.location || "[Location Placeholder]"}
                 </Typography>
               </div>
             </CardContent>

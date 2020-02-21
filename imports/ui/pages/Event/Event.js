@@ -1,7 +1,7 @@
-import React from "react";
-import EventsContainer from "../../containers/EventsContainer";
-import { withStyles, Typography, Container } from "@material-ui/core";
-import styles from "./styles";
+import React from 'react';
+import EventsContainer from '../../containers/EventsContainer';
+import { withStyles, Typography, Container } from '@material-ui/core';
+import styles from './styles';
 
 const Event = ({ classes }) => {
   return (
@@ -9,7 +9,7 @@ const Event = ({ classes }) => {
       <Container className={classes.banner}>
         <Typography className={classes.bannertext}>EVENTS</Typography>
         <img className={classes.bannerimage} src="/images/event.jpg" />
-      </Container>{" "}
+      </Container>
       <EventsContainer />
     </div>
   );
