@@ -166,7 +166,7 @@ const Profile = ({ user, users, userId, event, myEvents, eventId, classes }) => 
                 >
                   <Fade in={openEvent}>
                     <div className={classes.paper}>
-                      <SubmitEvent />
+                      <SubmitEvent handleClose={handleClose} />
                     </div>
                   </Fade>
                 </Modal>
@@ -179,23 +179,26 @@ const Profile = ({ user, users, userId, event, myEvents, eventId, classes }) => 
         <Box className={classes.social}>
           <Typography variant="h5">Connect with {user.profile.title} on Social Media</Typography>
           <Box className={classes.socialLinks}>
-            <a
-              className={classes.link}
-              href={user && user.profile && user.profile.social && user.profile.social.facebook}
-              target="_blank"
-            >
-              <FacebookIcon className={classes.icon} /> Facebook
-            </a>
-            <a
-              className={classes.link}
-              href={user && user.profile && user.profile.social && user.profile.social.instagram}
-              target="_blank"
-            >
-              <InstagramIcon className={classes.icon} /> Instagram
-            </a>
-            <a className={classes.link} href={user.profile.social.twitter} target="_blank">
-              <TwitterIcon className={classes.icon} /> Twitter
-            </a>
+            {user?.profile?.social?.facebook && (
+              <a className={classes.link} href={user?.profile?.social?.facebook} target="_blank">
+                <FacebookIcon className={classes.icon} /> Facebook
+              </a>
+            )}
+            {user?.profile?.social?.instagram && (
+              <a className={classes.link} href={user?.profile?.social?.instagram} target="_blank">
+                <InstagramIcon className={classes.icon} /> Instagram
+              </a>
+            )}
+            {user?.profile?.social?.twitter && (
+              <a
+                className={classes.link}
+                href={user?.profile?.social?.twitter}
+                onClick={preventDefault}
+                target="_blank"
+              >
+                <TwitterIcon className={classes.icon} /> Twitter
+              </a>
+            )}
           </Box>
         </Box>
       ) : null}

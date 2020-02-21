@@ -11,18 +11,14 @@ const styles = theme => ({
     overflow: "hidden",
     maxWidth: "100%",
     [theme.breakpoints.down("sm")]: {
-      height: "550px"
-    },
-    [theme.breakpoints.down("sm")]: {
-      height: "600px"
-    },
-    [theme.breakpoints.down("xs")]: {
-      height: "650px"
+      height: "400px"
     }
   },
   bannerimage: {
     width: "100%",
-    opacity: 0.5
+    opacity: 0.5,
+    objectFit: "cover",
+    minHeight: "400px"
   },
   bannertext: {
     fontFamily: theme.fonts.secondary.main,
@@ -35,7 +31,7 @@ const styles = theme => ({
     letterSpacing: "1rem",
     [theme.breakpoints.down("xs")]: {
       fontSize: "4rem",
-      transform: "translateY(-10rem)"
+      transform: "translateY(-3rem)"
     }
   }
 });
