@@ -1,13 +1,12 @@
-import React from "react";
-import { Meteor } from "meteor/meteor";
-import { withTracker } from "meteor/react-meteor-data";
-import { Typography, Button, TextField, withStyles } from "@material-ui/core";
-import { Form, Field } from "react-final-form";
-import styles from "./styles";
+import React from 'react';
+import { Meteor } from 'meteor/meteor';
+import { withTracker } from 'meteor/react-meteor-data';
+import { Typography, Button, TextField, withStyles } from '@material-ui/core';
+import { Form, Field } from 'react-final-form';
+import styles from './styles';
 
 class Account extends React.Component {
   render() {
-    console.log(this.props.user);
     const { classes } = this.props;
     return (
       <Form
@@ -24,7 +23,6 @@ class Account extends React.Component {
           // the question mark - nullish coalescing google please
         }}
         onSubmit={values => {
-          console.log(values);
           const updatedProfile = {
             profile: {
               title: values.title,
@@ -38,7 +36,7 @@ class Account extends React.Component {
               }
             }
           };
-          Meteor.call("users.updateProfile", updatedProfile, (err, res) => {
+          Meteor.call('users.updateProfile', updatedProfile, (err, res) => {
             if (err) {
               alert(err.reason);
             }
@@ -78,7 +76,7 @@ class Account extends React.Component {
             />
             {/* PROFILE IMAGE */}
             <Typography className={classes.formlabel}>
-              profile image url{" "}
+              profile image url{' '}
             </Typography>
             <Field
               name="profileImage"
@@ -113,7 +111,7 @@ class Account extends React.Component {
               )}
             />
             <Typography className={classes.formlabel}>
-              Instagram url{" "}
+              Instagram url{' '}
             </Typography>
             <Field
               name="instagram"
@@ -147,7 +145,7 @@ class Account extends React.Component {
 }
 
 export default withTracker(() => {
-  Meteor.subscribe("users");
+  Meteor.subscribe('users');
   return {
     user: Meteor.user()
   };
