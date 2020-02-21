@@ -1,10 +1,9 @@
-import React from "react";
-import { Events } from "../../../api";
-import { Meteor } from "meteor/meteor";
-import { withTracker } from "meteor/react-meteor-data";
+import React from 'react';
+import { Events } from '../../../api';
+import { Meteor } from 'meteor/meteor';
+import { withTracker } from 'meteor/react-meteor-data';
 
 const Notification = ({ myEvents }) => {
-  console.log(myEvents);
   let counter = 0;
   return (
     <div>
@@ -19,7 +18,7 @@ const Notification = ({ myEvents }) => {
 };
 
 export default withTracker(() => {
-  Meteor.subscribe("events");
+  Meteor.subscribe('events');
   return {
     myEvents: Events.find({ owner: Meteor.userId() }).fetch()
   };
