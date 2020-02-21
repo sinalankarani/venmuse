@@ -5,6 +5,10 @@ const styles = theme => {
       border: theme.palette.secondary.main + " 3px solid",
       borderRadius: "0px"
     },
+    date: {
+      fontFamily: theme.fonts.secondary.main,
+      textTransform: "uppercase"
+    },
     image: {
       width: "100%",
       height: 150,

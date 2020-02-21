@@ -13,7 +13,6 @@ import styles from "./styles";
 
 const EventsCard = ({ classes, event }) => {
   let counter = event?.artistApplied?.length;
-
   return (
     <CardActionArea>
       <Card className={classes.card}>
@@ -35,7 +34,11 @@ const EventsCard = ({ classes, event }) => {
                   <p className={classes.counter}>{counter}</p>
                 </div>
               ) : null}
-              <Typography variant="body1" color="primary">
+              <Typography
+                variant="body1"
+                color="primary"
+                className={classes.date}
+              >
                 {event.date}
               </Typography>
               <Typography variant="h6">{event.title}</Typography>
