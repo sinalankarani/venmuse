@@ -19,6 +19,7 @@ if (Meteor.isServer) {
             imageurl: 1,
             lineup: 1,
             location: 1,
+            owner: 1,
             tags: 1,
             title: 1
           }
@@ -72,6 +73,7 @@ Meteor.methods({
   },
 
   'events.applyToEvent'(event) {
+    console.log(event);
     if (Meteor.user().profile.userType !== 'artist') {
       throw new Meteor.Error(
         'events.applyToEvent not authorized',
@@ -93,6 +95,7 @@ Meteor.methods({
     Events.update(event._id, {
       $set: { artistApplied: [...event.artistApplied, Meteor.userId()] }
     });
+    console.log(event);
   },
 
   'events.approveArtist'(event, artistId) {
