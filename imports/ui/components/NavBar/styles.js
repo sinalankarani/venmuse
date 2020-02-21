@@ -20,6 +20,19 @@ const styles = theme => {
       flexGrow: 1,
       opacity: 1
     },
+    logo: {
+      [theme.breakpoints.down("xs")]: {
+        display: "none"
+      }
+    },
+    logomobile: {
+      [theme.breakpoints.up("sm")]: {
+        display: "none"
+      },
+      [theme.breakpoints.down("xs")]: {
+        display: "block"
+      }
+    },
     link: {
       textDecoration: "none",
       color: "black",
@@ -67,6 +80,9 @@ const styles = theme => {
       width: "125px",
       "&:hover": {
         color: theme.palette.primary.main
+      },
+      [theme.breakpoints.down("md")]: {
+        width: "70px"
       }
     },
     discoverlabel: {
@@ -89,7 +105,10 @@ const styles = theme => {
     navlinks: {
       width: "375px",
       display: "flex",
-      justifyContent: "space-between"
+      justifyContent: "space-between",
+      [theme.breakpoints.down("xs")]: {
+        width: "210px"
+      }
     },
     fullList: {
       margin: "0 auto",
