@@ -10,7 +10,7 @@ const Notification = ({ myEvents }) => {
       {myEvents &&
         myEvents.map(myEvent => {
           myEvent && myEvent.artistApplied && myEvent.artistApplied.length
-            ? ((counter += myEvent.artistApplied.length), console.log(counter))
+            ? (counter += myEvent.artistApplied.length)
             : null;
         })}
     </div>

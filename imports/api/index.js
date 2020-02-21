@@ -28,7 +28,6 @@ if (Meteor.isServer) {
     })
   );
 
-  //////////////////KIERAN WILL REMOVE LATER - NOONE ELSE!
   Meteor.publish(
     'users',
     (usersPublication = () => {

@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Card,
   CardContent,
@@ -7,10 +7,10 @@ import {
   CardActionArea,
   withStyles,
   Box
-} from "@material-ui/core";
-import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
-import styles from "./styles";
+} from '@material-ui/core';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import styles from './styles';
 
 const EventsCard = ({ classes, event }) => {
   let counter = event?.artistApplied?.length;
@@ -19,7 +19,7 @@ const EventsCard = ({ classes, event }) => {
       <Card className={classes.card}>
         <Link
           className={classes.link}
-          to={event && event._id ? `/profile/${event && event._id}` : ""}
+          to={event && event._id ? `/profile/${event && event._id}` : ''}
         >
           <CardContent className={classes.content}>
             <CardMedia className={classes.media}>
@@ -27,7 +27,7 @@ const EventsCard = ({ classes, event }) => {
                 src={
                   event.imageurl
                     ? event.imageurl
-                    : "https://placekitten.com/640/360"
+                    : 'https://placekitten.com/640/360'
                 }
                 className={classes.image}
               />
@@ -50,7 +50,6 @@ const EventsCard = ({ classes, event }) => {
               <Typography color="primary" variant="body2">
                 {event.location}
               </Typography>
-              {console.log(event)}
               <Typography variant="body1">
                 {event.lineup.length ? (
                   `Line Up: ${event.lineup}`
