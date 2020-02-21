@@ -13,8 +13,12 @@ import Gravatar from "react-gravatar";
 import Account from "../Account";
 import Loader from "../../components/Loader";
 import { Link } from "react-router-dom";
+import EventsCard from "../../components/EventsCard";
+import ArtistCard from "../../components/ArtistCard";
 
-const Profile = ({ user, users, userId, event, pastEvents, eventId, classes }) => {
+import Notification from "../../components/Notification/Notification";
+
+const Profile = ({ user, users, userId, event, myEvents, eventId, classes }) => {
   const [openAccount, setOpenAccount] = React.useState(false);
   const [openEvent, setOpenEvent] = React.useState(false);
 
@@ -31,12 +35,34 @@ const Profile = ({ user, users, userId, event, pastEvents, eventId, classes }) =
   };
   const preventDefault = event => {
     event.preventDefault();
-    console.log("clicked");
   };
 
-  console.log(user);
+  const applyEvent = () => {
+    Meteor.call("events.applyToEvent", event, (err, res) => {
+      if (err) {
+        alert(err.reason);
+      }
+    });
+  };
+  const approveArtist = artistApplied => {
+    Meteor.call("events.approveArtist", event, artistApplied, (err, res) => {
+      if (err) {
+        alert(err.reason);
+      }
+    });
+  };
+
+  const removeArtist = artistApplied => {
+    Meteor.call("events.removeArtist", event, artistApplied, (err, res) => {
+      if (err) {
+        alert(err.reason);
+      }
+    });
+  };
+
   return user && user.profile ? (
     <Grid className={classes.profileContainer}>
+      <Notification />
       <img src={user && user.profile.profileImage} className={classes.banner} />
       <Card className={classes.card}>
         <Box className={classes.idContainer}>
@@ -140,7 +166,7 @@ const Profile = ({ user, users, userId, event, pastEvents, eventId, classes }) =
                 >
                   <Fade in={openEvent}>
                     <div className={classes.paper}>
-                      <SubmitEvent />
+                      <SubmitEvent handleClose={handleClose} />
                     </div>
                   </Fade>
                 </Modal>
@@ -153,55 +179,53 @@ const Profile = ({ user, users, userId, event, pastEvents, eventId, classes }) =
         <Box className={classes.social}>
           <Typography variant="h5">Connect with {user.profile.title} on Social Media</Typography>
           <Box className={classes.socialLinks}>
-            <Link
-              className={classes.link}
-              to={user && user.profile && user.profile.social && user.profile.social.facebook}
-              target="_blank"
-            >
-              <FacebookIcon className={classes.icon} /> Facebook
-            </Link>
-            <Link
-              className={classes.link}
-              to={user && user.profile && user.profile.social && user.profile.social.instagram}
-              target="_blank"
-            >
-              <InstagramIcon className={classes.icon} /> Instagram
-            </Link>
-            <Link
-              className={classes.link}
-              to={user.profile.social.twitter}
-              onClick={preventDefault}
-              target="_blank"
-            >
-              <TwitterIcon className={classes.icon} /> Twitter
-            </Link>
+            {user?.profile?.social?.facebook && (
+              <a className={classes.link} href={user?.profile?.social?.facebook} target="_blank">
+                <FacebookIcon className={classes.icon} /> Facebook
+              </a>
+            )}
+            {user?.profile?.social?.instagram && (
+              <a className={classes.link} href={user?.profile?.social?.instagram} target="_blank">
+                <InstagramIcon className={classes.icon} /> Instagram
+              </a>
+            )}
+            {user?.profile?.social?.twitter && (
+              <a className={classes.link} href={user?.profile?.social?.twitter} target="_blank">
+                <TwitterIcon className={classes.icon} /> Twitter
+              </a>
+            )}
           </Box>
         </Box>
       ) : null}
-      {/* {user.profile.userType === "venue" && } */}
-      {console.log(pastEvents)}
+      <Grid container spacing={2} className={classes.eventContainer}>
+        {myEvents.map(event => (
+          <Grid item key={event._id} xs={12} sm={6} md={4} lg={3}>
+            <EventsCard event={event} />
+          </Grid>
+        ))}
+      </Grid>
     </Grid>
   ) : event ? (
-    (console.log(event),
-    (
-      <Grid className={classes.profileContainer}>
-        <img src={event && event.imageurl} className={classes.banner} />
-        <Card className={classes.eventCard}>
-          <Box>
-            <Typography variant="h4"> {event.title}</Typography>
-            <Typography variant="h5" color="primary">
-              {event.location}
-            </Typography>
-            <Typography variant="subtitle1">{event.date}</Typography>
-            <Typography variant="body1">{event.description}</Typography>
-          </Box>
-          {!event.filled ? (
+    <Grid className={classes.profileContainer}>
+      <img src={event && event.imageurl} className={classes.banner} />
+      <Card className={classes.eventCard}>
+        <Box>
+          <Typography variant="h4"> {event.title}</Typography>
+          <Typography variant="h5" color="primary">
+            {event.location}
+          </Typography>
+          <Typography variant="subtitle1">{event.date}</Typography>
+          <Typography variant="body1">{event.description}</Typography>
+        </Box>
+        {event.owner !== userId ? (
+          !event.filled ? (
             <Button
               className={classes.button}
               type="button"
               variant="contained"
               size="large"
               color="primary"
+              onClick={applyEvent}
             >
               Apply to Event
             </Button>
@@ -209,10 +233,38 @@ const Profile = ({ user, users, userId, event, pastEvents, eventId, classes }) =
             <Typography variant="h5" color="primary">
               Lineup Filled
             </Typography>
-          )}
-        </Card>
-      </Grid>
-    ))
+          )
+        ) : null}
+      </Card>
+      {event.owner === userId
+        ? (console.log(event.artistApplied),
+          event.artistApplied.map(
+            appliedArtist => (
+              console.log(appliedArtist),
+              console.log(Meteor.users.find({ _id: appliedArtist }).fetch()),
+              (
+                <div key={appliedArtist}>
+                  <ArtistCard artist={Meteor.users.find({ _id: appliedArtist }).fetch()[0]} />
+                  <Button
+                    onClick={() => {
+                      approveArtist(appliedArtist);
+                    }}
+                  >
+                    Accept Application
+                  </Button>
+                  <Button
+                    onClick={() => {
+                      removeArtist(appliedArtist);
+                    }}
+                  >
+                    Reject
+                  </Button>
+                </div>
+              )
+            )
+          ))
+        : null}
+    </Grid>
   ) : (
     <Loader />
   );
@@ -223,7 +275,7 @@ export default withTracker(({ userId, eventId }) => {
   Meteor.subscribe("users");
 
   return {
-    pastEvents: Events.find({ owner: Meteor.userId() }).fetch(),
+    myEvents: Events.find({ owner: userId }).fetch(),
     event: Events.find({ _id: eventId }).fetch()[0],
     users: Meteor.users.find().fetch(),
     user: Meteor.users.find({ _id: userId }).fetch()[0],

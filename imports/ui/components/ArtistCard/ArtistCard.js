@@ -8,13 +8,14 @@ import {
   withStyles
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 import styles from "./styles";
 
 const ArtistCard = ({ classes, artist }) => {
   return (
     artist &&
     artist.profile.userType === "artist" && (
-      <CardActionArea>
+      <CardActionArea className={classes.card}>
         <Card className={classes.card}>
           <Link
             className={classes.link}
@@ -49,6 +50,18 @@ const ArtistCard = ({ classes, artist }) => {
       </CardActionArea>
     )
   );
+};
+
+ArtistCard.propTypes = {
+  artist: PropTypes.shape({
+    profile: PropTypes.shape({
+      userType: PropTypes.string.isRequired,
+      title: PropTypes.string,
+      location: PropTypes.string,
+      description: PropTypes.string
+    })
+  }),
+  classes: PropTypes.object
 };
 
 export default withStyles(styles)(ArtistCard);

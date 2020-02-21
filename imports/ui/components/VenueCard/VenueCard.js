@@ -8,14 +8,14 @@ import {
   withStyles
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 import styles from "./styles";
 
 const VenueCard = ({ classes, venue }) => {
-  console.log(venue);
   return (
     venue &&
     venue.profile.userType === "venue" && (
-      <CardActionArea>
+      <CardActionArea className={classes.card}>
         <Card className={classes.card}>
           <Link
             className={classes.link}
@@ -41,6 +41,18 @@ const VenueCard = ({ classes, venue }) => {
       </CardActionArea>
     )
   );
+};
+
+VenueCard.propTypes = {
+  venue: PropTypes.shape({
+    profile: PropTypes.shape({
+      userType: PropTypes.string.isRequired,
+      title: PropTypes.string,
+      location: PropTypes.string,
+      description: PropTypes.string
+    })
+  }),
+  classes: PropTypes.object
 };
 
 export default withStyles(styles)(VenueCard);

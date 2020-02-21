@@ -4,7 +4,7 @@ const styles = () => {
       maxWidth: "100%",
       margin: "0 auto",
       display: "flex",
-      justifyContent: "flex-start"
+      justifyContent: "space-between"
     },
     card: {
       padding: 0

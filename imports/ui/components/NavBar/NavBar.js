@@ -7,12 +7,22 @@ import {
   Toolbar,
   Button,
   MenuItem,
-  Menu
+  Menu,
+  Typography,
+  Drawer,
+  List,
+  ListItem,
+  Divider
 } from "@material-ui/core";
 import ListItemText from "@material-ui/core/ListItemText";
 import { withTracker } from "meteor/react-meteor-data";
 import PowerSettingsNewIcon from "@material-ui/icons/PowerSettingsNew";
 import PersonOutlineTwoToneIcon from "@material-ui/icons/PersonOutlineTwoTone";
+import ExploreTwoToneIcon from "@material-ui/icons/ExploreTwoTone";
+import EventAvailableTwoToneIcon from "@material-ui/icons/EventAvailableTwoTone";
+import GroupTwoToneIcon from "@material-ui/icons/GroupTwoTone";
+import HomeTwoToneIcon from "@material-ui/icons/HomeTwoTone";
+import AssignmentIndTwoToneIcon from "@material-ui/icons/AssignmentIndTwoTone";
 
 const StyledMenu = withStyles({
   paper: {
@@ -54,6 +64,54 @@ const NavBar = ({ classes }) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  const [state, setState] = React.useState({
+    top: false,
+    left: false,
+    bottom: false,
+    right: false
+  });
+
+  const toggleDrawer = (side, open) => event => {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+
+    setState({ ...state, [side]: open });
+  };
+  const fullList = side => (
+    <div
+      className={classes.fullList}
+      role="presentation"
+      onClick={toggleDrawer(side, false)}
+      onKeyDown={toggleDrawer(side, false)}
+    >
+      <NavLink to="/event" className={classes.link}>
+        <StyledMenuItem className={classes.linkcontainer}>
+          <EventAvailableTwoToneIcon className={classes.linkbtn} />
+          <Typography className={classes.linklabel}>EVENTS</Typography>
+        </StyledMenuItem>
+      </NavLink>
+      <Divider />
+
+      <NavLink to="/artist" className={classes.link}>
+        <StyledMenuItem className={classes.linkcontainer}>
+          <GroupTwoToneIcon className={classes.linkbtn} />
+          <Typography className={classes.linklabel}>ARTISTS</Typography>
+        </StyledMenuItem>
+      </NavLink>
+      <Divider />
+
+      <NavLink to="/venue" className={classes.link}>
+        <StyledMenuItem className={classes.linkcontainer}>
+          <HomeTwoToneIcon className={classes.linkbtn} />
+          <Typography className={classes.linklabel}>VENUES</Typography>
+        </StyledMenuItem>
+      </NavLink>
+    </div>
+  );
   return (
     <nav className={classes.root}>
       <AppBar className={classes.appbar} position="static">
@@ -63,65 +121,77 @@ const NavBar = ({ classes }) => {
             activeClassName="selected"
             className={classes.link}
           >
-            <img
-              src={"/images/logo/Final/full-logo.png"}
-              height="75px"
-              width="px"
-              alt="logo"
-            />
+            <div className={classes.logo}>
+              <img
+                src={"/images/logo/Final/full-logo.png"}
+                height="75px"
+                alt="logo"
+              />
+            </div>
+            <div className={classes.logomobile}>
+              <img
+                src={"/images/logo/Final/logo.png"}
+                height="60px"
+                alt="logo"
+              />
+            </div>
           </NavLink>
-          <Button
-            aria-controls="customized-menu"
-            aria-haspopup="true"
-            variant="contained"
-            color="primary"
-            onClick={handleClick}
-            className={classes.explorebtn}
-          >
-            EXPLORE
-          </Button>
+
           <StyledMenu
             id="customized-menu"
             anchorEl={anchorEl}
             keepMounted
             open={Boolean(anchorEl)}
             onClose={handleClose}
-          >
-            <NavLink to="/event" className={classes.link}>
-              <StyledMenuItem>
-                <ListItemText primary="EVENT" />
-              </StyledMenuItem>
-            </NavLink>
-
-            <NavLink to="/artist" className={classes.link}>
-              <StyledMenuItem>
-                <ListItemText primary="ARTIST" />
-              </StyledMenuItem>
-            </NavLink>
-
-            <NavLink to="/venue" className={classes.link}>
-              <StyledMenuItem>
-                <ListItemText primary="VENUE" />
-              </StyledMenuItem>
-            </NavLink>
-          </StyledMenu>
+          ></StyledMenu>
           <div className={classes.navlinks}>
+            <div>
+              <Button
+                onClick={toggleDrawer("top", true)}
+                className={classes.btncontainer}
+              >
+                <div>
+                  <ExploreTwoToneIcon className={classes.discoverbtn} />
+                  <Typography className={classes.discoverlabel}>
+                    DISCOVER
+                  </Typography>
+                </div>
+              </Button>
+              <Drawer
+                anchor="top"
+                open={state.top}
+                // onMouseLeave={toggleDrawer("top", false)}
+                onClose={toggleDrawer("top", false)}
+              >
+                {fullList("top")}
+              </Drawer>
+            </div>
             <NavLink
-              to={`profile/${Meteor.userId()}`}
+              to={`/profile/${Meteor.userId()}`}
               activeClassName="selected"
               className={classes.link}
             >
-              <PersonOutlineTwoToneIcon className={classes.accountbtn} />
+              <Button className={classes.btncontainer}>
+                <div>
+                  <PersonOutlineTwoToneIcon className={classes.profilebtn} />
+                  <Typography className={classes.profilelabel}>
+                    PROFILE
+                  </Typography>
+                </div>
+              </Button>
             </NavLink>
 
-            <button
+            <Button
+              className={classes.btncontainer}
               onClick={() => {
                 Meteor.logout();
               }}
-              className={classes.logout}
             >
-              <PowerSettingsNewIcon className={classes.logoutbtn} />
-            </button>
+              <div>
+                <PowerSettingsNewIcon className={classes.logoutbtn} />
+                <Typography className={classes.logoutlabel}>LOGOUT</Typography>
+              </div>
+            </Button>
           </div>
         </Toolbar>
       </AppBar>

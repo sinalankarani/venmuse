@@ -2,14 +2,14 @@ export default validate = (values, toggle) => {
   const errors = {};
   if (!toggle) {
     if (!values.email) {
-      errors.email = 'Required';
+      errors.email = "Required*";
     }
   }
   if (!values.username) {
-    errors.username = 'Required';
+    errors.username = "Required*";
   }
   if (!values.password) {
-    errors.password = 'Required';
+    errors.password = "Required*";
   }
 
   return errors;

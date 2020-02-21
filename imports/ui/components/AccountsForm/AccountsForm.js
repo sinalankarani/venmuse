@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import { Accounts } from "meteor/accounts-base";
-import { Meteor } from "meteor/meteor";
-import { Form, Field } from "react-final-form";
-import { withRouter } from "react-router-dom";
+import React, { Component } from 'react';
+import { Accounts } from 'meteor/accounts-base';
+import { Meteor } from 'meteor/meteor';
+import { Form, Field } from 'react-final-form';
+import { withRouter } from 'react-router-dom';
 import {
   Button,
   Box,
@@ -13,11 +13,12 @@ import {
   TextField,
   Typography,
   withStyles
-} from "@material-ui/core/";
-import styles from "./styles";
-import validate from "./helpers";
-import StoreIcon from "@material-ui/icons/Store";
-import MusicNoteIcon from "@material-ui/icons/MusicNote";
+} from '@material-ui/core/';
+import styles from './styles';
+import validate from './helpers';
+import StoreIcon from '@material-ui/icons/Store';
+import MusicNoteIcon from '@material-ui/icons/MusicNote';
+import PropTypes from 'prop-types';
 
 class AccountsForm extends Component {
   constructor(props) {
@@ -37,7 +38,7 @@ class AccountsForm extends Component {
         email,
         password,
         profile: {
-          userType: this.state.userTypeToggle ? "venue" : "artist"
+          userType: this.state.userTypeToggle ? 'venue' : 'artist'
         }
       },
       error => {
@@ -83,9 +84,23 @@ class AccountsForm extends Component {
                   <>
                     <FormControlLabel
                       label={
-                        this.state.userTypeToggle === true ? "VENUE" : "ARTIST"
+                        this.state.userTypeToggle === true ? (
+                          <Typography className={classes.togglelabel}>
+                            VENUE
+                          </Typography>
+                        ) : (
+                          <Typography className={classes.togglelabel}>
+                            ARTIST
+                          </Typography>
+                        )
                       }
-                      control={<Switch onChange={this.changeUserType} />}
+                      control={
+                        <Switch
+                          color="primary"
+                          className={classes.toggleswitch}
+                          onChange={this.changeUserType}
+                        />
+                      }
                       labelPlacement="top"
                     />
                     <Field
@@ -96,7 +111,6 @@ class AccountsForm extends Component {
                             name="email"
                             type="text"
                             placeholder="WHAT'S YOUR EMAIL?"
-                            label="EMAIL"
                             {...input}
                           />
                           {meta.error && meta.touched && (
@@ -108,18 +122,17 @@ class AccountsForm extends Component {
                   </>
                 ) : (
                   <Typography variant="h4" className={classes.title}>
-                    Sign in{" "}
+                    Sign in{' '}
                   </Typography>
                 )}
                 <Field
                   name="username"
                   render={({ input, meta }) => (
-                    <>
+                    <div className={classes.inputContainer}>
                       <TextField
                         name="username"
                         type="text"
-                        label="USERNAME"
-                        placeholder="WHAT'S YOUR USERNAME"
+                        placeholder="WHAT'S YOUR USERNAME?"
                         {...input}
                       />
                       {meta.error && meta.touched && (
@@ -130,24 +143,23 @@ class AccountsForm extends Component {
                           {meta.error}
                         </span>
                       )}
-                    </>
+                    </div>
                   )}
                 />
                 <Field
                   name="password"
                   render={({ input, meta }) => (
-                    <>
+                    <div className={classes.inputContainer}>
                       <TextField
                         name="password"
                         type="password"
-                        label="PASSWORD"
-                        placeholder="WHAT'S YOUR PASSWORD"
+                        placeholder="WHAT'S YOUR PASSWORD?"
                         {...input}
                       />
                       {meta.error && meta.touched && (
                         <span className={classes.error}>{meta.error}</span>
                       )}
-                    </>
+                    </div>
                   )}
                 />
               </Box>
@@ -158,13 +170,15 @@ class AccountsForm extends Component {
                   variant="contained"
                   size="large"
                   color="primary"
+                  disableRipple={true}
                   disabled={pristine}
-                  className={classes.button}
+                  className={classes.submitbutton}
                 >
-                  {this.state.formToggle ? "Enter" : "Create Account"}
+                  {this.state.formToggle ? 'Enter' : 'Create Account'}
                 </Button>
                 <Button
                   className={classes.button}
+                  disableRipple={true}
                   type="button"
                   onClick={() =>
                     this.setState({
@@ -174,8 +188,8 @@ class AccountsForm extends Component {
                   }
                 >
                   {this.state.formToggle
-                    ? "New to VenMuse? Register"
-                    : "Sign in"}
+                    ? 'New to VenMuse? Register'
+                    : 'Sign in'}
                 </Button>
               </Box>
             </form>
@@ -185,5 +199,11 @@ class AccountsForm extends Component {
     );
   }
 }
+
+AccountsForm.propTypes = {
+  username: PropTypes.string,
+  password: PropTypes.string,
+  email: PropTypes.string
+};
 
 export default withStyles(styles)(withRouter(AccountsForm));
