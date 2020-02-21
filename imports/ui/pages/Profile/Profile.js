@@ -179,28 +179,28 @@ const Profile = ({ user, users, userId, event, myEvents, eventId, classes }) => 
         <Box className={classes.social}>
           <Typography variant="h5">Connect with {user.profile.title} on Social Media</Typography>
           <Box className={classes.socialLinks}>
-            <Link
+            <a
               className={classes.link}
-              to={user && user.profile && user.profile.social && user.profile.social.facebook}
+              href={user && user.profile && user.profile.social && user.profile.social.facebook}
               target="_blank"
             >
               <FacebookIcon className={classes.icon} /> Facebook
-            </Link>
-            <Link
+            </a>
+            <a
               className={classes.link}
-              to={user && user.profile && user.profile.social && user.profile.social.instagram}
+              href={user && user.profile && user.profile.social && user.profile.social.instagram}
               target="_blank"
             >
               <InstagramIcon className={classes.icon} /> Instagram
-            </Link>
-            <Link
+            </a>
+            <a
               className={classes.link}
-              to={user.profile.social.twitter}
+              href={user.profile.social.twitter}
               onClick={preventDefault}
               target="_blank"
             >
               <TwitterIcon className={classes.icon} /> Twitter
-            </Link>
+            </a>
           </Box>
         </Box>
       ) : null}
