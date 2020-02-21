@@ -63,18 +63,22 @@ const Profile = ({ user, users, userId, event, myEvents, eventId, classes }) => 
   return user && user.profile ? (
     <Grid className={classes.profileContainer}>
       <Notification />
-      <img src={user && user.profile.profileImage} className={classes.banner} />
+      <img
+        src={(user && user.profile.profileImage) || "http://place-puppy.com/200x200"}
+        className={classes.banner}
+      />
       <Card className={classes.card}>
         <Box className={classes.idContainer}>
           <Box className={classes.userContainer}>
             {user ? <Gravatar className={classes.gravatar} email={user.emails[0].address} /> : null}
             <Box className={classes.titleLocation}>
-              <Typography variant="h4"> {user.profile.title}</Typography>
+              <Typography variant="h4"> {user.profile.title || "[Title Placeholder]"}</Typography>
               <Typography variant="subtitle1" color="primary">
-                {user && user.profile && user.profile.location}
+                {(user && user.profile && user.profile.location) || "[Location Placeholder]"}
               </Typography>
-              <Typography variant="body1">
-                {user && user.profile && user.profile.description}
+              <Typography variant="body1" className={classes.description}>
+                {(user && user.profile && user.profile.description) ||
+                  "[Description Placeholder: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras id aliquet urna. Donec iaculis eu nunc a tempor. In quis feugiat diam, nec auctor mauris. In convallis purus ligula, at ultricies metus aliquet et. Cras libero leo, sollicitudin nec lacus eu, egestas convallis massa. Suspendisse commodo sodales ante lacinia pretium. Phasellus sem nulla, imperdiet nec aliquet non, viverra a dolor. Cras et ipsum felis. In imperdiet diam eget malesuada euismod. Etiam bibendum et felis a scelerisque. Sed posuere tellus ac rutrum fermentum. Duis nisl velit, laoreet scelerisque pretium at, mollis et ante. Nam id mattis dui. Praesent fermentum elementum luctus. Donec facilisis iaculis sodales. Duis consequat vulputate varius]"}
               </Typography>
             </Box>
           </Box>
