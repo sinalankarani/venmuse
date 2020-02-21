@@ -27,12 +27,15 @@ const styles = theme => ({
     width: "100%",
     textAlign: "center",
     opacity: "100%",
-    top: "19vh",
+    top: "14rem",
     letterSpacing: "1rem",
     [theme.breakpoints.down("xs")]: {
-      fontSize: "4rem",
-      transform: "translateY(-3rem)"
+      fontSize: "4rem"
     }
+  },
+  contentcontainer: {
+    margin: "0 3rem",
+    padding: 0
   }
 });
 
