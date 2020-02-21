@@ -1,8 +1,13 @@
 const styles = theme => {
   return {
     card: {
-      position: "relative",
-      height: 350
+      height: 350,
+      border: theme.palette.secondary.main + " 3px solid",
+      borderRadius: "0px"
+    },
+    date: {
+      fontFamily: theme.fonts.secondary.main,
+      textTransform: "uppercase"
     },
     image: {
       width: "100%",
@@ -37,12 +42,8 @@ const styles = theme => {
       color: "white",
       fontWeight: "bold"
     },
-    date: {
-      fontFamily: theme.fonts.secondary.main,
-      textTransform: "uppercase"
-    },
     lineup: {
-      backgroundColor: "rgba(255, 150, 51, 0.85)",
+      backgroundColor: "rgba(255, 150, 51, 0.75)",
       color: theme.palette.primary.background,
       fontWeight: "bold",
       border: "2px solid #fff",
@@ -50,7 +51,10 @@ const styles = theme => {
       top: "15%",
       left: "50%",
       transform: "translate(-50%)",
-      padding: "10px"
+      padding: "10px",
+      fontFamily: theme.fonts.secondary.main,
+      textTransform: "uppercase",
+      fontSize: "1.3rem"
     }
   };
 };

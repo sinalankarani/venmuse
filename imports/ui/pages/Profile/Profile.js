@@ -85,15 +85,24 @@ const Profile = ({ user, userId, event, myEvents, appliedEvents, classes }) => {
               />
             ) : null}
             <Box className={classes.titleLocation}>
-              <Typography variant="h4">
+              <Typography className={classes.titleLabel} variant="h4">
                 {" "}
                 {user.profile.title || "[Title Placeholder]"}
               </Typography>
-              <Typography variant="subtitle1" color="primary">
+              <Typography className={classes.userType}>
+                usertype <span className={classes.divider}>|</span>{" "}
+                {user?.profile?.userType}
+              </Typography>
+
+              <Typography variant="subtitle1" color="secondary">
                 {(user && user.profile && user.profile.location) ||
                   "[Location Placeholder]"}
               </Typography>
-              <Typography variant="body1" className={classes.description}>
+              <Typography
+                variant="body1"
+                color="secondary"
+                className={classes.description}
+              >
                 {(user && user.profile && user.profile.description) ||
                   "[Description Placeholder: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras id aliquet urna. Donec iaculis eu nunc a tempor. In quis feugiat diam, nec auctor mauris. In convallis purus ligula, at ultricies metus aliquet et. Cras libero leo, sollicitudin nec lacus eu, egestas convallis massa. Suspendisse commodo sodales ante lacinia pretium. Phasellus sem nulla, imperdiet nec aliquet non, viverra a dolor. Cras et ipsum felis. In imperdiet diam eget malesuada euismod. Etiam bibendum et felis a scelerisque. Sed posuere tellus ac rutrum fermentum. Duis nisl velit, laoreet scelerisque pretium at, mollis et ante. Nam id mattis dui. Praesent fermentum elementum luctus. Donec facilisis iaculis sodales. Duis consequat vulputate varius]"}
               </Typography>

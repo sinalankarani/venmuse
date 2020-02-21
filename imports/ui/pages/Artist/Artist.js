@@ -1,7 +1,7 @@
-import React from 'react';
-import ArtistContainer from '../../containers/ArtistContainer';
-import { withStyles, Typography, Container } from '@material-ui/core';
-import styles from './styles';
+import React from "react";
+import ArtistContainer from "../../containers/ArtistContainer";
+import { withStyles, Typography, Container } from "@material-ui/core";
+import styles from "./styles";
 
 const Artist = ({ classes }) => {
   return (
@@ -10,7 +10,9 @@ const Artist = ({ classes }) => {
         <Typography className={classes.bannertext}>ARTISTS</Typography>
         <img className={classes.bannerimage} src="/images/artist.jpg" />
       </Container>
-      <ArtistContainer />
+      <div className={classes.contentcontainer}>
+        <ArtistContainer />
+      </div>
     </div>
   );
 };
