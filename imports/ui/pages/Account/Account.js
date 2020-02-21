@@ -70,9 +70,9 @@ class Account extends React.Component {
             {/* DESCRIPTION */}
             <Field name="description" render={({ input }) => <TextField {...input} />} />
             {/* SOCIAL MEDIA */}
-            <Field name="facebook" render={({ input }) => <TextField {...input} />} />
-            <Field name="instagram" render={({ input }) => <TextField {...input} />} />
-            <Field name="twitter" render={({ input }) => <TextField {...input} />} />
+            <Field name="facebook" render={({ input }) => <TextField type="url" {...input} />} />
+            <Field name="instagram" render={({ input }) => <TextField type="url" {...input} />} />
+            <Field name="twitter" render={({ input }) => <TextField type="url" {...input} />} />
             <Button type="submit">Save</Button>
           </form>
         )}
