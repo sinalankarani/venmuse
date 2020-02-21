@@ -68,6 +68,9 @@ const styles = createStyles(theme => ({
   },
   icon: {
     transform: "translateY(7px)"
+  },
+  description: {
+    maxWidth: "800px"
   }
 }));
 
