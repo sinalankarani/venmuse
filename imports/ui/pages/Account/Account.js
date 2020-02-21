@@ -60,9 +60,8 @@ class Account extends React.Component {
             </Typography>
             <Field
               name="title"
-              placeholder="please enter name"
               render={({ input }) => (
-                <TextField className={classes.formfield} {...input} />
+                <TextField placeholder="Please enter name" {...input} />
               )}
             />
 

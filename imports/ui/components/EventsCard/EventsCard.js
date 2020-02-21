@@ -24,17 +24,26 @@ const EventsCard = ({ classes, event }) => {
           <CardContent className={classes.content}>
             <CardMedia className={classes.media}>
               <img
-                src={event.imageurl ? event.imageurl : "https://placekitten.com/640/360"}
+                src={
+                  event.imageurl
+                    ? event.imageurl
+                    : "https://placekitten.com/640/360"
+                }
                 className={classes.image}
               />
             </CardMedia>
             <div className={classes.eventDetails}>
-              {event.owner === Meteor.userId() && event?.artistApplied?.length ? (
+              {event.owner === Meteor.userId() &&
+              event?.artistApplied?.length ? (
                 <div className={classes.notifyCounter}>
                   <p className={classes.counter}>{counter}</p>
                 </div>
               ) : null}
-              <Typography variant="body1" color="primary" className={classes.date}>
+              <Typography
+                variant="body1"
+                color="primary"
+                className={classes.date}
+              >
                 {event.date}
               </Typography>
               <Typography variant="h6">{event.title}</Typography>

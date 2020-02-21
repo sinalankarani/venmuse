@@ -43,7 +43,7 @@ const styles = theme => {
       fontWeight: "bold"
     },
     lineup: {
-      backgroundColor: "rgba(255, 150, 51, 0.85)",
+      backgroundColor: "rgba(255, 150, 51, 0.75)",
       color: theme.palette.primary.background,
       fontWeight: "bold",
       border: "2px solid #fff",
@@ -51,7 +51,10 @@ const styles = theme => {
       top: "15%",
       left: "50%",
       transform: "translate(-50%)",
-      padding: "10px"
+      padding: "10px",
+      fontFamily: theme.fonts.secondary.main,
+      textTransform: "uppercase",
+      fontSize: "1.3rem"
     }
   };
 };

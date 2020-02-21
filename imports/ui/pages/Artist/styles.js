@@ -32,6 +32,10 @@ const styles = theme => ({
     [theme.breakpoints.down("xs")]: {
       fontSize: "4rem"
     }
+  },
+  contentcontainer: {
+    margin: "0 3rem",
+    padding: 0
   }
 });
 
