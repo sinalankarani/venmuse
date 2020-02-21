@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import SubmitEvent from "../../components/SubmitEvent";
 import { withTracker } from "meteor/react-meteor-data";
 import { Events } from "../../../api";
@@ -21,21 +21,12 @@ import { Meteor } from "meteor/meteor";
 import Gravatar from "react-gravatar";
 import Account from "../Account";
 import Loader from "../../components/Loader";
-import { Link } from "react-router-dom";
 import EventsCard from "../../components/EventsCard";
 import ArtistCard from "../../components/ArtistCard";
 
 import Notification from "../../components/Notification/Notification";
 
-const Profile = ({
-  user,
-  users,
-  userId,
-  event,
-  myEvents,
-  eventId,
-  classes
-}) => {
+const Profile = ({ user, userId, event, myEvents, appliedEvents, classes }) => {
   const [openAccount, setOpenAccount] = React.useState(false);
   const [openEvent, setOpenEvent] = React.useState(false);
 
@@ -49,9 +40,6 @@ const Profile = ({
   const handleClose = () => {
     setOpenAccount(false);
     setOpenEvent(false);
-  };
-  const preventDefault = event => {
-    event.preventDefault();
   };
 
   const applyEvent = () => {
@@ -262,6 +250,19 @@ const Profile = ({
           </Grid>
         ))}
       </Grid>
+      <Grid container spacing={2} className={classes.eventContainer}>
+        {appliedEvents?.map(event => (
+          <Fragment key={event._id}>
+            {event?.artistApplied?.map(artistId =>
+              artistId == userId ? (
+                <Grid item key={event._id} xs={12} sm={6} md={4} lg={3}>
+                  <EventsCard event={event} />
+                </Grid>
+              ) : null
+            )}
+          </Fragment>
+        ))}
+      </Grid>
     </Grid>
   ) : event ? (
     <Grid className={classes.profileContainer}>
@@ -295,35 +296,26 @@ const Profile = ({
         ) : null}
       </Card>
       {event.owner === userId
-        ? (console.log(event.artistApplied),
-          event.artistApplied.map(
-            appliedArtist => (
-              console.log(appliedArtist),
-              console.log(Meteor.users.find({ _id: appliedArtist }).fetch()),
-              (
-                <div key={appliedArtist}>
-                  <ArtistCard
-                    artist={
-                      Meteor.users.find({ _id: appliedArtist }).fetch()[0]
-                    }
-                  />
-                  <Button
-                    onClick={() => {
-                      approveArtist(appliedArtist);
-                    }}
-                  >
-                    Accept Application
-                  </Button>
-                  <Button
-                    onClick={() => {
-                      removeArtist(appliedArtist);
-                    }}
-                  >
-                    Reject
-                  </Button>
-                </div>
-              )
-            )
+        ? event.artistApplied.map(appliedArtist => (
+            <div key={appliedArtist}>
+              <ArtistCard
+                artist={Meteor.users.find({ _id: appliedArtist }).fetch()[0]}
+              />
+              <Button
+                onClick={() => {
+                  approveArtist(appliedArtist);
+                }}
+              >
+                Accept Application
+              </Button>
+              <Button
+                onClick={() => {
+                  removeArtist(appliedArtist);
+                }}
+              >
+                Reject
+              </Button>
+            </div>
           ))
         : null}
     </Grid>
@@ -337,6 +329,7 @@ export default withTracker(({ userId, eventId }) => {
   Meteor.subscribe("users");
 
   return {
+    appliedEvents: Events.find({}).fetch(),
     myEvents: Events.find({ owner: userId }).fetch(),
     event: Events.find({ _id: eventId }).fetch()[0],
     users: Meteor.users.find().fetch(),
