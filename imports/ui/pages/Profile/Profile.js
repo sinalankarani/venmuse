@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import SubmitEvent from '../../components/SubmitEvent';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Events } from '../../../api';
@@ -21,13 +21,20 @@ import { Meteor } from 'meteor/meteor';
 import Gravatar from 'react-gravatar';
 import Account from '../Account';
 import Loader from '../../components/Loader';
-import { Link } from 'react-router-dom';
 import EventsCard from '../../components/EventsCard';
 import ArtistCard from '../../components/ArtistCard';
 
 import Notification from '../../components/Notification/Notification';
 
-const Profile = ({ user, currentUser, userId, event, myEvents, classes }) => {
+const Profile = ({
+  currentUser,
+  user,
+  userId,
+  event,
+  myEvents,
+  appliedEvents,
+  classes
+}) => {
   const [openAccount, setOpenAccount] = React.useState(false);
   const [openEvent, setOpenEvent] = React.useState(false);
 
@@ -86,15 +93,24 @@ const Profile = ({ user, currentUser, userId, event, myEvents, classes }) => {
               />
             ) : null}
             <Box className={classes.titleLocation}>
-              <Typography variant="h4">
+              <Typography className={classes.titleLabel} variant="h4">
                 {' '}
                 {user.profile.title || '[Title Placeholder]'}
               </Typography>
-              <Typography variant="subtitle1" color="primary">
+              <Typography className={classes.userType}>
+                usertype <span className={classes.divider}>|</span>{' '}
+                {user?.profile?.userType}
+              </Typography>
+
+              <Typography variant="subtitle1" color="secondary">
                 {(user && user.profile && user.profile.location) ||
                   '[Location Placeholder]'}
               </Typography>
-              <Typography variant="body1" className={classes.description}>
+              <Typography
+                variant="body1"
+                color="secondary"
+                className={classes.description}
+              >
                 {(user && user.profile && user.profile.description) ||
                   '[Description Placeholder: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras id aliquet urna. Donec iaculis eu nunc a tempor. In quis feugiat diam, nec auctor mauris. In convallis purus ligula, at ultricies metus aliquet et. Cras libero leo, sollicitudin nec lacus eu, egestas convallis massa. Suspendisse commodo sodales ante lacinia pretium. Phasellus sem nulla, imperdiet nec aliquet non, viverra a dolor. Cras et ipsum felis. In imperdiet diam eget malesuada euismod. Etiam bibendum et felis a scelerisque. Sed posuere tellus ac rutrum fermentum. Duis nisl velit, laoreet scelerisque pretium at, mollis et ante. Nam id mattis dui. Praesent fermentum elementum luctus. Donec facilisis iaculis sodales. Duis consequat vulputate varius]'}
               </Typography>
@@ -199,50 +215,60 @@ const Profile = ({ user, currentUser, userId, event, myEvents, classes }) => {
           </Box>
         </Box>
       </Card>
-      {user?.profile?.social
-        ? (console.log(user.profile.social),
-          (
-            <Box className={classes.social}>
-              <Typography variant="h5">
-                Connect with {user.profile.title} on Social Media
-              </Typography>
-              <Box className={classes.socialLinks}>
-                {user?.profile?.social?.facebook && (
-                  <a
-                    className={classes.link}
-                    href={user?.profile?.social?.facebook}
-                    target="_blank"
-                  >
-                    <FacebookIcon className={classes.icon} /> Facebook
-                  </a>
-                )}
-                {user?.profile?.social?.instagram && (
-                  <a
-                    className={classes.link}
-                    href={user?.profile?.social?.instagram}
-                    target="_blank"
-                  >
-                    <InstagramIcon className={classes.icon} /> Instagram
-                  </a>
-                )}
-                {user?.profile?.social?.twitter && (
-                  <a
-                    className={classes.link}
-                    href={user?.profile?.social?.twitter}
-                    target="_blank"
-                  >
-                    <TwitterIcon className={classes.icon} /> Twitter
-                  </a>
-                )}
-              </Box>
-            </Box>
-          ))
-        : null}
+      {user?.profile?.social ? (
+        <Box className={classes.social}>
+          <Typography variant="h5">
+            Connect with {user.profile.title} on Social Media
+          </Typography>
+          <Box className={classes.socialLinks}>
+            {user?.profile?.social?.facebook && (
+              <a
+                className={classes.link}
+                href={user?.profile?.social?.facebook}
+                target="_blank"
+              >
+                <FacebookIcon className={classes.icon} /> Facebook
+              </a>
+            )}
+            {user?.profile?.social?.instagram && (
+              <a
+                className={classes.link}
+                href={user?.profile?.social?.instagram}
+                target="_blank"
+              >
+                <InstagramIcon className={classes.icon} /> Instagram
+              </a>
+            )}
+            {user?.profile?.social?.twitter && (
+              <a
+                className={classes.link}
+                href={user?.profile?.social?.twitter}
+                target="_blank"
+              >
+                <TwitterIcon className={classes.icon} /> Twitter
+              </a>
+            )}
+          </Box>
+        </Box>
+      ) : null}
       <Grid container spacing={2} className={classes.eventContainer}>
         {myEvents.map(event => (
           <Grid item key={event._id} xs={12} sm={6} md={4} lg={3}>
             <EventsCard event={event} />
           </Grid>
+        ))}
+      </Grid>
+      <Grid container spacing={2} className={classes.eventContainer}>
+        {appliedEvents?.map(event => (
+          <Fragment key={event._id}>
+            {event?.artistApplied?.map(artistId =>
+              artistId == userId ? (
+                <Grid item key={event._id} xs={12} sm={6} md={4} lg={3}>
+                  <EventsCard event={event} />
+                </Grid>
+              ) : null
+            )}
+          </Fragment>
         ))}
       </Grid>
     </Grid>
@@ -324,6 +350,7 @@ export default withTracker(({ userId, eventId }) => {
   Meteor.subscribe('users');
 
   return {
+    appliedEvents: Events.find({}).fetch(),
     myEvents: Events.find({ owner: userId }).fetch(),
     event: Events.find({ _id: eventId }).fetch()[0],
     users: Meteor.users.find().fetch(),

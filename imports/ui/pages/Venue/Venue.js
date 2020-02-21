@@ -9,8 +9,10 @@ const Venue = ({ classes }) => {
       <Container className={classes.banner}>
         <Typography className={classes.bannertext}>VENUES</Typography>
         <img className={classes.bannerimage} src="/images/venue.jpg" />
-      </Container>{" "}
-      <VenueContainer />
+      </Container>
+      <div className={classes.contentcontainer}>
+        <VenueContainer />
+      </div>
     </div>
   );
 };
