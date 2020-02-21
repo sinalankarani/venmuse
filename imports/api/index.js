@@ -3,14 +3,46 @@ import { Meteor } from 'meteor/meteor';
 export const Events = new Mongo.Collection('events');
 
 if (Meteor.isServer) {
-  Meteor.publish('events', function eventsPublication() {
-    return Events.find();
-  });
+  Meteor.publish(
+    'events',
+    (eventsPublication = () => {
+      return Events.find(
+        {},
+        {
+          fields: {
+            _id: 1,
+            artistApplied: 1,
+            create: 1,
+            date: 1,
+            description: 1,
+            filled: 1,
+            imageurl: 1,
+            lineup: 1,
+            location: 1,
+            tags: 1,
+            title: 1
+          }
+        }
+      );
+    })
+  );
 
   //////////////////KIERAN WILL REMOVE LATER - NOONE ELSE!
-  Meteor.publish('users', function usersPublication() {
-    return Meteor.users.find();
-  });
+  Meteor.publish(
+    'users',
+    (usersPublication = () => {
+      return Meteor.users.find(
+        {},
+        {
+          fields: {
+            _id: 1,
+            profile: 1,
+            username: 1
+          }
+        }
+      );
+    })
+  );
 }
 
 Meteor.methods({
