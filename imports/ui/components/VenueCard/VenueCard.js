@@ -16,7 +16,7 @@ const VenueCard = ({ classes, venue }) => {
   return (
     venue &&
     venue.profile.userType === "venue" && (
-      <CardActionArea className={classes.card}>
+      <CardActionArea>
         <Card className={classes.card}>
           <Link
             className={classes.link}

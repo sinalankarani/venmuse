@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Card,
   CardContent,
@@ -7,42 +7,49 @@ import {
   CardActionArea,
   withStyles,
   Box
-} from "@material-ui/core";
-import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
-import styles from "./styles";
+} from '@material-ui/core';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import styles from './styles';
 
 const EventsCard = ({ classes, event }) => {
   let counter = event?.artistApplied?.length;
-
   return (
-    <CardActionArea className={classes.card}>
+    <CardActionArea>
       <Card className={classes.card}>
         <Link
           className={classes.link}
-          to={event && event._id ? `/profile/${event && event._id}` : ""}
+          to={event && event._id ? `/profile/${event && event._id}` : ''}
         >
           <CardContent className={classes.content}>
             <CardMedia className={classes.media}>
               <img
-                src={event.imageurl ? event.imageurl : "https://placekitten.com/640/360"}
+                src={
+                  event.imageurl
+                    ? event.imageurl
+                    : 'https://placekitten.com/640/360'
+                }
                 className={classes.image}
               />
             </CardMedia>
             <div className={classes.eventDetails}>
-              {event.owner === Meteor.userId() && event?.artistApplied?.length ? (
+              {event.owner === Meteor.userId() &&
+              event?.artistApplied?.length ? (
                 <div className={classes.notifyCounter}>
                   <p className={classes.counter}>{counter}</p>
                 </div>
               ) : null}
-              <Typography variant="body1" color="primary" className={classes.date}>
+              <Typography
+                variant="body1"
+                color="primary"
+                className={classes.date}
+              >
                 {event.date}
               </Typography>
               <Typography variant="h6">{event.title}</Typography>
               <Typography color="primary" variant="body2">
                 {event.location}
               </Typography>
-              {console.log(event)}
               <Typography variant="body1">
                 {event.lineup.length ? (
                   `Line Up: ${event.lineup}`
