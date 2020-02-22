@@ -10,11 +10,8 @@ import {
   Menu,
   Typography,
   Drawer,
-  List,
-  ListItem,
   Divider
 } from "@material-ui/core";
-import ListItemText from "@material-ui/core/ListItemText";
 import { withTracker } from "meteor/react-meteor-data";
 import PowerSettingsNewIcon from "@material-ui/icons/PowerSettingsNew";
 import PersonOutlineTwoToneIcon from "@material-ui/icons/PersonOutlineTwoTone";
@@ -22,7 +19,6 @@ import ExploreTwoToneIcon from "@material-ui/icons/ExploreTwoTone";
 import EventAvailableTwoToneIcon from "@material-ui/icons/EventAvailableTwoTone";
 import GroupTwoToneIcon from "@material-ui/icons/GroupTwoTone";
 import HomeTwoToneIcon from "@material-ui/icons/HomeTwoTone";
-import AssignmentIndTwoToneIcon from "@material-ui/icons/AssignmentIndTwoTone";
 
 const StyledMenu = withStyles({
   paper: {
@@ -56,10 +52,6 @@ const StyledMenuItem = withStyles(theme => ({
 }))(MenuItem);
 const NavBar = ({ classes }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
-
-  const handleClick = event => {
-    setAnchorEl(event.currentTarget);
-  };
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -160,7 +152,6 @@ const NavBar = ({ classes }) => {
               <Drawer
                 anchor="top"
                 open={state.top}
-                // onMouseLeave={toggleDrawer("top", false)}
                 onClose={toggleDrawer("top", false)}
               >
                 {fullList("top")}

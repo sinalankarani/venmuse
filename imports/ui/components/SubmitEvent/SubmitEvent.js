@@ -80,7 +80,7 @@ class SubmitEvent extends React.Component {
           onSubmit={this.onSubmit}
           validate={validate}
           initialValues={{ tags: [] }}
-          render={({ handleSubmit, form, pristine }) => {
+          render={({ handleSubmit }) => {
             return (
               <form onSubmit={handleSubmit} className={classes.form}>
                 {/* EVENT TITLE */}
