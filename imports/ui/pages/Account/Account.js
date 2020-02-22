@@ -7,7 +7,7 @@ import styles from './styles';
 
 class Account extends React.Component {
   render() {
-    const { classes } = this.props;
+    const { classes, handleClose } = this.props;
     return (
       <Form
         initialValues={{
@@ -41,6 +41,7 @@ class Account extends React.Component {
               alert(err.reason);
             }
           });
+          handleClose();
         }}
         render={({ handleSubmit }) => (
           <form className={classes.formcontainer} onSubmit={handleSubmit}>
