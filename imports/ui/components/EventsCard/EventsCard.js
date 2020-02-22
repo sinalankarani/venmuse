@@ -23,14 +23,7 @@ const EventsCard = ({ classes, event }) => {
         >
           <CardContent className={classes.content}>
             <CardMedia className={classes.media}>
-              <img
-                src={
-                  event.imageurl
-                    ? event.imageurl
-                    : 'https://placekitten.com/640/360'
-                }
-                className={classes.image}
-              />
+              <img src={event?.imageurl} className={classes.image} />
             </CardMedia>
             <div className={classes.eventDetails}>
               {event.owner === Meteor.userId() &&

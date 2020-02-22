@@ -76,13 +76,7 @@ const Profile = ({
   return user?.profile ? (
     <Grid className={classes.profileContainer}>
       <Notification />
-      <img
-        src={
-          (user && user.profile.profileImage) ||
-          'http://place-puppy.com/200x200'
-        }
-        className={classes.banner}
-      />
+      <img src={user?.profile?.profileImage} className={classes.banner} />
       <Card className={classes.card}>
         <Box className={classes.idContainer}>
           <Box className={classes.userContainer}>
@@ -143,7 +137,7 @@ const Profile = ({
                 >
                   <Fade in={openAccount}>
                     <div className={classes.paper}>
-                      <Account />
+                      <Account handleClose={handleClose} />
                     </div>
                   </Fade>
                 </Modal>
