@@ -38,7 +38,10 @@ class AccountsForm extends Component {
         email,
         password,
         profile: {
-          userType: this.state.userTypeToggle ? 'venue' : 'artist'
+          userType: this.state.userTypeToggle ? 'venue' : 'artist',
+          profileImage: this.state.userTypeToggle
+            ? 'https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80'
+            : 'https://images.unsplash.com/photo-1499364615650-ec38552f4f34?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60'
         }
       },
       error => {

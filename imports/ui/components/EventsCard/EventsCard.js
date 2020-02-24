@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import {
   Card,
   CardContent,
@@ -11,12 +11,12 @@ import {
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import styles from "./styles";
+import { Meteor } from "meteor/meteor";
 
 const EventsCard = ({ classes, event }) => {
   let counter = event?.artistApplied?.length;
-
   return (
-    <CardActionArea className={classes.card}>
+    <CardActionArea>
       <Card className={classes.card}>
         <Link
           className={classes.link}
@@ -24,33 +24,40 @@ const EventsCard = ({ classes, event }) => {
         >
           <CardContent className={classes.content}>
             <CardMedia className={classes.media}>
-              <img
-                src={event.imageurl ? event.imageurl : "https://placekitten.com/640/360"}
-                className={classes.image}
-              />
+              <img src={event?.imageurl} className={classes.image} />
+
             </CardMedia>
             <div className={classes.eventDetails}>
-              {event.owner === Meteor.userId() && event?.artistApplied?.length ? (
+              {event.owner === Meteor.userId() &&
+              event?.artistApplied?.length ? (
                 <div className={classes.notifyCounter}>
                   <p className={classes.counter}>{counter}</p>
                 </div>
               ) : null}
-              <Typography variant="body1" color="primary" className={classes.date}>
+              <Typography
+                variant="body1"
+                color="primary"
+                className={classes.date}
+              >
                 {event.date}
               </Typography>
               <Typography variant="h6">{event.title}</Typography>
               <Typography color="primary" variant="body2">
                 {event.location}
               </Typography>
-              {console.log(event)}
               <Typography variant="body1">
-                {event.lineup.length ? (
-                  `Line Up: ${event.lineup}`
-                ) : (
-                  <Box component="span" className={classes.lineup}>
-                    Seeking Artists
-                  </Box>
-                )}
+                <Fragment>
+                  {event.lineup.length ? (
+                    `Line Up: ${Meteor.users
+                      .find({ _id: event.lineup[0] })
+                      .fetch()
+                      .map(artist => artist.profile.title)}`
+                  ) : (
+                    <Box component="span" className={classes.lineup}>
+                      Seeking Artists
+                    </Box>
+                  )}
+                </Fragment>
               </Typography>
             </div>
           </CardContent>

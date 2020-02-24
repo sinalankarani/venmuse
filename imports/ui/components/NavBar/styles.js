@@ -3,7 +3,7 @@ const styles = theme => {
     appbar: {
       backgroundColor: "white",
       boxShadow: "none",
-      borderBottom: theme.palette.secondary.main + " 2px solid",
+      borderBottom: theme.palette.secondary.main + " 3px solid",
       position: "fixed",
       width: "100%",
       top: 0,
