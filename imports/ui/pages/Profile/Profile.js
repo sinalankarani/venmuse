@@ -23,7 +23,6 @@ import Account from "../Account";
 import Loader from "../../components/Loader";
 import EventsCard from "../../components/EventsCard";
 import ArtistCard from "../../components/ArtistCard";
-
 import Notification from "../../components/Notification/Notification";
 
 const Profile = ({
