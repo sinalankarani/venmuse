@@ -352,6 +352,7 @@ const Profile = ({
                 artist={Meteor.users.find({ _id: appliedArtist }).fetch()[0]}
               />
               <Button
+                className={classes.button}
                 onClick={() => {
                   approveArtist(appliedArtist);
                 }}
@@ -359,6 +360,7 @@ const Profile = ({
                 Accept
               </Button>
               <Button
+                className={classes.button}
                 onClick={() => {
                   removeArtist(appliedArtist);
                 }}

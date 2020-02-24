@@ -23,7 +23,9 @@ const styles = theme => {
     },
     location: {
       fontWeight: "bold",
-      textTransform: "uppercase"
+      textTransform: "uppercase",
+      color: theme.palette.primary.main,
+      fontSize: "0.9rem"
     },
     image: {
       width: "100%",
