@@ -14,13 +14,12 @@ import LocationOnIcon from '@material-ui/icons/LocationOn';
 
 const VenueCard = ({ classes, venue }) => {
   return (
-    venue &&
-    venue.profile.userType === 'venue' && (
+    venue?.profile.userType === 'venue' && (
       <CardActionArea>
         <Card className={classes.card}>
           <Link
             className={classes.link}
-            to={venue && venue._id ? `/profile/${venue && venue._id}` : ''}
+            to={venue?._id ? `/profile/${venue?._id}` : ''}
           >
             <CardContent className={classes.content}>
               <CardMedia className={classes.media}>
