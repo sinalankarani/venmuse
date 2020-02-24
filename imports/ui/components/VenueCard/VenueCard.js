@@ -25,14 +25,19 @@ const VenueCard = ({ classes, venue }) => {
             <CardContent className={classes.content}>
               <CardMedia className={classes.media}>
                 <img
-                  src={venue.profile.profileImage || "https://www.fillmurray.com/640/360"}
+                  src={
+                    venue.profile.profileImage ||
+                    "https://www.fillmurray.com/640/360"
+                  }
                   className={classes.image}
                 />
               </CardMedia>
               <div className={classes.venueDetails}>
-                <Typography variant="h6">{venue.profile.title || "[Venue Title]"}</Typography>
-                <Typography color="primary">
-                  <LocationOnIcon />
+                <Typography className={classes.title} variant="h6">
+                  {venue.profile.title || "[Venue Title]"}
+                </Typography>
+                <Typography className={classes.location} color="primary">
+                  <LocationOnIcon className={classes.icon} />
                   {venue.profile.location || "[Venue Location]"}
                 </Typography>
                 <Typography variant="body2" color="secondary">
