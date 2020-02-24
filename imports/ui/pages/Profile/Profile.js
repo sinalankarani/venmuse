@@ -1,9 +1,9 @@
-import React, { Fragment } from 'react';
-import SubmitEvent from '../../components/SubmitEvent';
-import { withTracker } from 'meteor/react-meteor-data';
-import { Events } from '../../../api';
-import styles from './styles';
-import { withStyles } from '@material-ui/core';
+import React, { Fragment } from "react";
+import SubmitEvent from "../../components/SubmitEvent";
+import { withTracker } from "meteor/react-meteor-data";
+import { Events } from "../../../api";
+import styles from "./styles";
+import { withStyles } from "@material-ui/core";
 import {
   Card,
   Grid,
@@ -13,18 +13,18 @@ import {
   Button,
   Typography,
   Box
-} from '@material-ui/core';
-import FacebookIcon from '@material-ui/icons/Facebook';
-import InstagramIcon from '@material-ui/icons/Instagram';
-import TwitterIcon from '@material-ui/icons/Twitter';
-import { Meteor } from 'meteor/meteor';
-import Gravatar from 'react-gravatar';
-import Account from '../Account';
-import Loader from '../../components/Loader';
-import EventsCard from '../../components/EventsCard';
-import ArtistCard from '../../components/ArtistCard';
+} from "@material-ui/core";
+import FacebookIcon from "@material-ui/icons/Facebook";
+import InstagramIcon from "@material-ui/icons/Instagram";
+import TwitterIcon from "@material-ui/icons/Twitter";
+import { Meteor } from "meteor/meteor";
+import Gravatar from "react-gravatar";
+import Account from "../Account";
+import Loader from "../../components/Loader";
+import EventsCard from "../../components/EventsCard";
+import ArtistCard from "../../components/ArtistCard";
 
-import Notification from '../../components/Notification/Notification';
+import Notification from "../../components/Notification/Notification";
 
 const Profile = ({
   currentUser,
@@ -51,14 +51,14 @@ const Profile = ({
   };
 
   const applyEvent = () => {
-    Meteor.call('events.applyToEvent', event, (err, res) => {
+    Meteor.call("events.applyToEvent", event, (err, res) => {
       if (err) {
         alert(err.reason);
       }
     });
   };
   const approveArtist = artistApplied => {
-    Meteor.call('events.approveArtist', event, artistApplied, (err, res) => {
+    Meteor.call("events.approveArtist", event, artistApplied, (err, res) => {
       if (err) {
         alert(err.reason);
       }
@@ -66,11 +66,16 @@ const Profile = ({
   };
 
   const removeArtist = artistApplied => {
-    Meteor.call('events.removeArtist', event, artistApplied, (err, res) => {
+    Meteor.call("events.removeArtist", event, artistApplied, (err, res) => {
       if (err) {
         alert(err.reason);
       }
     });
+  };
+  console.log(appliedEvents);
+
+  const filterAppliedEvents = () => {
+    return appliedEvents.filter(event => event.artistApplied?.includes(userId));
   };
 
   return user?.profile ? (
@@ -79,7 +84,7 @@ const Profile = ({
       <img
         src={
           (user && user.profile.profileImage) ||
-          'http://place-puppy.com/200x200'
+          "http://place-puppy.com/200x200"
         }
         className={classes.banner}
       />
@@ -94,17 +99,17 @@ const Profile = ({
             ) : null}
             <Box className={classes.titleLocation}>
               <Typography className={classes.titleLabel} variant="h4">
-                {' '}
-                {user.profile.title || '[Title Placeholder]'}
+                {" "}
+                {user.profile.title || "[Title Placeholder]"}
               </Typography>
               <Typography className={classes.userType}>
-                usertype <span className={classes.divider}>|</span>{' '}
+                usertype <span className={classes.divider}>|</span>{" "}
                 {user?.profile?.userType}
               </Typography>
 
               <Typography variant="subtitle1" color="secondary">
                 {(user && user.profile && user.profile.location) ||
-                  '[Location Placeholder]'}
+                  "[Location Placeholder]"}
               </Typography>
               <Typography
                 variant="body1"
@@ -112,7 +117,7 @@ const Profile = ({
                 className={classes.description}
               >
                 {(user && user.profile && user.profile.description) ||
-                  '[Description Placeholder: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras id aliquet urna. Donec iaculis eu nunc a tempor. In quis feugiat diam, nec auctor mauris. In convallis purus ligula, at ultricies metus aliquet et. Cras libero leo, sollicitudin nec lacus eu, egestas convallis massa. Suspendisse commodo sodales ante lacinia pretium. Phasellus sem nulla, imperdiet nec aliquet non, viverra a dolor. Cras et ipsum felis. In imperdiet diam eget malesuada euismod. Etiam bibendum et felis a scelerisque. Sed posuere tellus ac rutrum fermentum. Duis nisl velit, laoreet scelerisque pretium at, mollis et ante. Nam id mattis dui. Praesent fermentum elementum luctus. Donec facilisis iaculis sodales. Duis consequat vulputate varius]'}
+                  "[Description Placeholder: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras id aliquet urna. Donec iaculis eu nunc a tempor. In quis feugiat diam, nec auctor mauris. In convallis purus ligula, at ultricies metus aliquet et. Cras libero leo, sollicitudin nec lacus eu, egestas convallis massa. Suspendisse commodo sodales ante lacinia pretium. Phasellus sem nulla, imperdiet nec aliquet non, viverra a dolor. Cras et ipsum felis. In imperdiet diam eget malesuada euismod. Etiam bibendum et felis a scelerisque. Sed posuere tellus ac rutrum fermentum. Duis nisl velit, laoreet scelerisque pretium at, mollis et ante. Nam id mattis dui. Praesent fermentum elementum luctus. Donec facilisis iaculis sodales. Duis consequat vulputate varius]"}
               </Typography>
             </Box>
           </Box>
@@ -127,7 +132,7 @@ const Profile = ({
                   color="primary"
                   onClick={handleOpenAccount}
                 >
-                  Update Profile{' '}
+                  Update Profile{" "}
                 </Button>
                 <Modal
                   aria-labelledby="transition-modal-title"
@@ -158,9 +163,9 @@ const Profile = ({
                   color="primary"
                   onClick={handleOpenAccount}
                 >
-                  {user.profile.userType === 'artist'
-                    ? 'Message Artist'
-                    : 'Message Venue'}
+                  {user.profile.userType === "artist"
+                    ? "Message Artist"
+                    : "Message Venue"}
                 </Button>
                 <Modal
                   aria-labelledby="transition-modal-title"
@@ -180,7 +185,7 @@ const Profile = ({
                 </Modal>
               </div>
             )}
-            {user.profile.userType === 'venue' && user._id === userId ? (
+            {user.profile.userType === "venue" && user._id === userId ? (
               <div>
                 <Button
                   className={classes.button}
@@ -251,7 +256,7 @@ const Profile = ({
           </Box>
         </Box>
       ) : null}
-      {myEvents.length ? (
+      {myEvents.length && user.profile.userType === "venue" ? (
         <div className={classes.myEventsContainer}>
           <Typography className={classes.myEventsTitle}>My Events</Typography>
           <Grid container spacing={2} className={classes.eventContainer}>
@@ -263,19 +268,23 @@ const Profile = ({
           </Grid>
         </div>
       ) : null}
-      <Grid container spacing={2} className={classes.eventContainer}>
-        {appliedEvents?.map(event => (
-          <Fragment key={event._id}>
-            {event?.artistApplied?.map(artistId =>
-              artistId == userId ? (
-                <Grid item key={event._id} xs={12} sm={6} md={4} lg={3}>
-                  <EventsCard event={event} />
-                </Grid>
-              ) : null
-            )}
-          </Fragment>
-        ))}
-      </Grid>
+      {appliedEvents.length && user.profile.userType === "artist" ? (
+        <div className={classes.myEventsContainer}>
+          {filterAppliedEvents().length > 0 && (
+            <Typography className={classes.myEventsTitle}>
+              My Applied Events
+            </Typography>
+          )}
+          {console.log(filterAppliedEvents())}
+          <Grid container spacing={2} className={classes.eventContainer}>
+            {filterAppliedEvents().map(event => (
+              <Grid item key={event._id} xs={12} sm={6} md={4} lg={3}>
+                <EventsCard event={event} />
+              </Grid>
+            ))}
+          </Grid>
+        </div>
+      ) : null}
     </Grid>
   ) : event ? (
     <Grid className={classes.profileContainer}>
@@ -289,7 +298,7 @@ const Profile = ({
           <Typography variant="subtitle1">{event.date}</Typography>
           <Typography variant="body1">{event.description}</Typography>
         </Box>
-        {event.owner !== userId && currentUser.profile.userType === 'artist' ? (
+        {event.owner !== userId && currentUser.profile.userType === "artist" ? (
           !event.filled ? (
             event?.artistApplied?.includes(userId) ? (
               <Button
@@ -351,8 +360,8 @@ const Profile = ({
 };
 
 export default withTracker(({ userId, eventId }) => {
-  Meteor.subscribe('events');
-  Meteor.subscribe('users');
+  Meteor.subscribe("events");
+  Meteor.subscribe("users");
 
   return {
     appliedEvents: Events.find({}).fetch(),
