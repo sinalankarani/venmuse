@@ -25,7 +25,6 @@ const EventsCard = ({ classes, event }) => {
           <CardContent className={classes.content}>
             <CardMedia className={classes.media}>
               <img src={event?.imageurl} className={classes.image} />
-
             </CardMedia>
             <div className={classes.eventDetails}>
               {event.owner === Meteor.userId() &&
@@ -46,15 +45,6 @@ const EventsCard = ({ classes, event }) => {
                 {event.location}
               </Typography>
               <Typography variant="body1">
-<<<<<<< HEAD
-                {event.lineup.length ? (
-                  `Line Up: ${event.lineup.join(", ")}`
-                ) : (
-                  <Box component="span" className={classes.lineup}>
-                    Seeking Artists
-                  </Box>
-                )}
-=======
                 <Fragment>
                   {event.lineup.length ? (
                     `Line Up: ${Meteor.users
@@ -67,7 +57,6 @@ const EventsCard = ({ classes, event }) => {
                     </Box>
                   )}
                 </Fragment>
->>>>>>> master
               </Typography>
             </div>
           </CardContent>

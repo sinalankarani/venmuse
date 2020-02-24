@@ -1,9 +1,10 @@
 const styles = theme => {
   return {
     footerContainer: {
-      marginTop: "50px",
+      marginTop: "100px",
       height: 300,
-      backgroundColor: theme.palette.secondary.main,
+      backgroundColor: theme.palette.primary.navicon,
+      //   borderTop: theme.palette.prim.main + " 4px solid",
       display: "flex",
       justifyContent: "space-around",
       [theme.breakpoints.down("xs")]: {
