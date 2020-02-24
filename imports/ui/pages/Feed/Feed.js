@@ -4,6 +4,7 @@ import ArtistContainer from "../../containers/ArtistContainer";
 import VenueContainer from "../../containers/VenueContainer";
 import { withStyles, Container, Typography } from "@material-ui/core";
 import styles from "./styles";
+import Footer from "../../components/Footer";
 
 const Feed = ({ classes }) => {
   return (
@@ -22,6 +23,7 @@ const Feed = ({ classes }) => {
         <Typography className={classes.title}>HOTTEST VENUES</Typography>
         <VenueContainer />
       </div>
+      <Footer />
     </div>
   );
 };
