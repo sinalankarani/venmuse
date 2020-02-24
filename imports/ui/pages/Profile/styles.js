@@ -36,7 +36,8 @@ const styles = createStyles(theme => ({
     display: "flex"
   },
   profileContainer: {
-    margin: "80px 0"
+    margin: "80px 0",
+    marginBottom: 50
   },
   social: {
     margin: " 80px 20px"
@@ -58,7 +59,8 @@ const styles = createStyles(theme => ({
   eventCard: {
     padding: "20px 50px",
     display: "flex",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
+    marginBottom: 25
   },
   myEventsContainer: {
     margin: "0 3rem"
@@ -112,6 +114,9 @@ const styles = createStyles(theme => ({
   },
   divider: {
     fontSize: "3rem"
+  },
+  description: {
+    marginBottom: 50
   }
 }));
 

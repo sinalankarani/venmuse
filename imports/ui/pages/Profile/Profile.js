@@ -310,7 +310,9 @@ const Profile = ({
             {event.location}
           </Typography>
           <Typography variant="subtitle1">{event.date}</Typography>
-          <Typography variant="body1">{event.description}</Typography>
+          <Typography className={classes.description} variant="body1">
+            {event.description}
+          </Typography>
         </Box>
         {event.owner !== userId && currentUser.profile.userType === "artist" ? (
           !event.filled ? (

@@ -57,12 +57,13 @@ const styles = theme => {
       alignSelf: "flex-end",
       border: theme.palette.secondary.main + " 2px solid",
       fontFamily: theme.fonts.primary.main,
-      boxShadow: "1px 1px 2px",
+      boxShadow: "1px 1px 1px",
       opacity: 0.9
     },
     counter: {
       color: "white",
-      fontWeight: "bold"
+      fontWeight: "bold",
+      fontSize: "1rem"
     },
     lineup: {
       backgroundColor: "rgba(255, 150, 51, 0.75)",
