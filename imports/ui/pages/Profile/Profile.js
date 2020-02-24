@@ -4,7 +4,16 @@ import { withTracker } from "meteor/react-meteor-data";
 import { Events } from "../../../api";
 import styles from "./styles";
 import { withStyles } from "@material-ui/core";
-import { Card, Grid, Modal, Backdrop, Fade, Button, Typography, Box } from "@material-ui/core";
+import {
+  Card,
+  Grid,
+  Modal,
+  Backdrop,
+  Fade,
+  Button,
+  Typography,
+  Box
+} from "@material-ui/core";
 import FacebookIcon from "@material-ui/icons/Facebook";
 import InstagramIcon from "@material-ui/icons/Instagram";
 import TwitterIcon from "@material-ui/icons/Twitter";
@@ -17,7 +26,15 @@ import ArtistCard from "../../components/ArtistCard";
 
 import Notification from "../../components/Notification/Notification";
 
-const Profile = ({ currentUser, user, userId, event, myEvents, appliedEvents, classes }) => {
+const Profile = ({
+  currentUser,
+  user,
+  userId,
+  event,
+  myEvents,
+  appliedEvents,
+  classes
+}) => {
   const [openAccount, setOpenAccount] = React.useState(false);
   const [openEvent, setOpenEvent] = React.useState(false);
 
@@ -64,20 +81,31 @@ const Profile = ({ currentUser, user, userId, event, myEvents, appliedEvents, cl
       <Card className={classes.card}>
         <Box className={classes.idContainer}>
           <Box className={classes.userContainer}>
-            {user ? <Gravatar className={classes.gravatar} email={user.emails[0].address} /> : null}
+            {user ? (
+              <Gravatar
+                className={classes.gravatar}
+                email={user.emails[0].address}
+              />
+            ) : null}
             <Box className={classes.titleLocation}>
               <Typography className={classes.titleLabel} variant="h4">
                 {" "}
                 {user.profile.title || "[Title Placeholder]"}
               </Typography>
               <Typography className={classes.userType}>
-                usertype <span className={classes.divider}>|</span> {user?.profile?.userType}
+                usertype <span className={classes.divider}>|</span>{" "}
+                {user?.profile?.userType}
               </Typography>
 
               <Typography variant="subtitle1" color="secondary">
-                {(user && user.profile && user.profile.location) || "[Location Placeholder]"}
+                {(user && user.profile && user.profile.location) ||
+                  "[Location Placeholder]"}
               </Typography>
-              <Typography variant="body1" color="secondary" className={classes.description}>
+              <Typography
+                variant="body1"
+                color="secondary"
+                className={classes.description}
+              >
                 {(user && user.profile && user.profile.description) ||
                   "[Description Placeholder: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras id aliquet urna. Donec iaculis eu nunc a tempor. In quis feugiat diam, nec auctor mauris. In convallis purus ligula, at ultricies metus aliquet et. Cras libero leo, sollicitudin nec lacus eu, egestas convallis massa. Suspendisse commodo sodales ante lacinia pretium. Phasellus sem nulla, imperdiet nec aliquet non, viverra a dolor. Cras et ipsum felis. In imperdiet diam eget malesuada euismod. Etiam bibendum et felis a scelerisque. Sed posuere tellus ac rutrum fermentum. Duis nisl velit, laoreet scelerisque pretium at, mollis et ante. Nam id mattis dui. Praesent fermentum elementum luctus. Donec facilisis iaculis sodales. Duis consequat vulputate varius]"}
               </Typography>
@@ -125,7 +153,9 @@ const Profile = ({ currentUser, user, userId, event, myEvents, appliedEvents, cl
                   color="primary"
                   onClick={handleOpenAccount}
                 >
-                  {user.profile.userType === "artist" ? "Message Artist" : "Message Venue"}
+                  {user.profile.userType === "artist"
+                    ? "Message Artist"
+                    : "Message Venue"}
                 </Button>
                 <Modal
                   aria-labelledby="transition-modal-title"
@@ -181,20 +211,34 @@ const Profile = ({ currentUser, user, userId, event, myEvents, appliedEvents, cl
         </Box>
         {user?.profile?.social ? (
           <Box className={classes.social}>
-            <Typography variant="h5">Connect with {user.profile.title} on Social Media</Typography>
+            <Typography variant="h5">
+              Connect with {user.profile.title} on Social Media
+            </Typography>
             <Box className={classes.socialLinks}>
               {user?.profile?.social?.facebook && (
-                <a className={classes.link} href={user?.profile?.social?.facebook} target="_blank">
+                <a
+                  className={classes.link}
+                  href={user?.profile?.social?.facebook}
+                  target="_blank"
+                >
                   <FacebookIcon className={classes.icon} /> Facebook
                 </a>
               )}
               {user?.profile?.social?.instagram && (
-                <a className={classes.link} href={user?.profile?.social?.instagram} target="_blank">
+                <a
+                  className={classes.link}
+                  href={user?.profile?.social?.instagram}
+                  target="_blank"
+                >
                   <InstagramIcon className={classes.icon} /> Instagram
                 </a>
               )}
               {user?.profile?.social?.twitter && (
-                <a className={classes.link} href={user?.profile?.social?.twitter} target="_blank">
+                <a
+                  className={classes.link}
+                  href={user?.profile?.social?.twitter}
+                  target="_blank"
+                >
                   <TwitterIcon className={classes.icon} /> Twitter
                 </a>
               )}
@@ -202,26 +246,30 @@ const Profile = ({ currentUser, user, userId, event, myEvents, appliedEvents, cl
           </Box>
         ) : null}
       </Card>
-      <Grid container spacing={2} className={classes.eventContainer}>
-        {myEvents.map(event => (
-          <Grid item key={event._id} xs={12} sm={6} md={4} lg={3}>
-            <EventsCard event={event} />
-          </Grid>
-        ))}
-      </Grid>
-      <Grid container spacing={2} className={classes.eventContainer}>
-        {appliedEvents?.map(event => (
-          <Fragment key={event._id}>
-            {event?.artistApplied?.map(artistId =>
-              artistId == userId ? (
-                <Grid item key={event._id} xs={12} sm={6} md={4} lg={3}>
-                  <EventsCard event={event} />
-                </Grid>
-              ) : null
-            )}
-          </Fragment>
-        ))}
-      </Grid>
+      {user._id === userId ? (
+        <Grid container spacing={2} className={classes.eventContainer}>
+          {myEvents.map(event => (
+            <Grid item key={event._id} xs={12} sm={6} md={4} lg={3}>
+              <EventsCard event={event} />
+            </Grid>
+          ))}
+        </Grid>
+      ) : null}
+      {user._id === userId ? (
+        <Grid container spacing={2} className={classes.eventContainer}>
+          {appliedEvents?.map(event => (
+            <Fragment key={event._id}>
+              {event?.artistApplied?.map(artistId =>
+                artistId == userId ? (
+                  <Grid item key={event._id} xs={12} sm={6} md={4} lg={3}>
+                    <EventsCard event={event} />
+                  </Grid>
+                ) : null
+              )}
+            </Fragment>
+          ))}
+        </Grid>
+      ) : null}
     </Grid>
   ) : event ? (
     <Grid className={classes.profileContainer}>
@@ -270,7 +318,9 @@ const Profile = ({ currentUser, user, userId, event, myEvents, appliedEvents, cl
       {event.owner === userId
         ? event.artistApplied.map(appliedArtist => (
             <div key={appliedArtist}>
-              <ArtistCard artist={Meteor.users.find({ _id: appliedArtist }).fetch()[0]} />
+              <ArtistCard
+                artist={Meteor.users.find({ _id: appliedArtist }).fetch()[0]}
+              />
               <Button
                 onClick={() => {
                   approveArtist(appliedArtist);
