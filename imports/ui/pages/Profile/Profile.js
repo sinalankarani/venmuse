@@ -73,6 +73,11 @@ const Profile = ({
       }
     });
   };
+  console.log(appliedEvents);
+
+  const filterAppliedEvents = () => {
+    return appliedEvents.filter(event => event.artistApplied?.includes(userId));
+  };
 
   return user?.profile ? (
     <Grid className={classes.profileContainer}>
@@ -212,73 +217,72 @@ const Profile = ({
             ) : null}
           </Box>
         </Box>
-        {/* User Social Media Links */}
-        {user?.profile?.social ? (
-          <Box className={classes.social}>
-            <Typography variant="h5">
-              Connect with {user.profile.title} on Social Media
-            </Typography>
-            {/* FACEBOOK */}
-            <Box className={classes.socialLinks}>
-              {user?.profile?.social?.facebook && (
-                <a
-                  className={classes.link}
-                  href={user?.profile?.social?.facebook}
-                  target="_blank"
-                >
-                  <FacebookIcon className={classes.icon} /> Facebook
-                </a>
-              )}
-              {/* INSTAGRAM */}
-              {user?.profile?.social?.instagram && (
-                <a
-                  className={classes.link}
-                  href={user?.profile?.social?.instagram}
-                  target="_blank"
-                >
-                  <InstagramIcon className={classes.icon} /> Instagram
-                </a>
-              )}
-              {/* TWITTER */}
-              {user?.profile?.social?.twitter && (
-                <a
-                  className={classes.link}
-                  href={user?.profile?.social?.twitter}
-                  target="_blank"
-                >
-                  <TwitterIcon className={classes.icon} /> Twitter
-                </a>
-              )}
-            </Box>
-          </Box>
-        ) : null}
       </Card>
-      {/* Events created by Venue */}
-      {user._id === userId ? (
-        <Grid container spacing={2} className={classes.eventContainer}>
-          {myEvents.map(event => (
-            <Grid item key={event._id} xs={12} sm={6} md={4} lg={3}>
-              <EventsCard event={event} />
-            </Grid>
-          ))}
-        </Grid>
+      {user?.profile?.social ? (
+        <Box className={classes.social}>
+          <Typography variant="h5">
+            Connect with {user.profile.title} on Social Media
+          </Typography>
+          <Box className={classes.socialLinks}>
+            {user?.profile?.social?.facebook && (
+              <a
+                className={classes.link}
+                href={user?.profile?.social?.facebook}
+                target="_blank"
+              >
+                <FacebookIcon className={classes.icon} /> Facebook
+              </a>
+            )}
+            {user?.profile?.social?.instagram && (
+              <a
+                className={classes.link}
+                href={user?.profile?.social?.instagram}
+                target="_blank"
+              >
+                <InstagramIcon className={classes.icon} /> Instagram
+              </a>
+            )}
+            {user?.profile?.social?.twitter && (
+              <a
+                className={classes.link}
+                href={user?.profile?.social?.twitter}
+                target="_blank"
+              >
+                <TwitterIcon className={classes.icon} /> Twitter
+              </a>
+            )}
+          </Box>
+        </Box>
       ) : null}
-      {/* Applied Events for Artists */}
-      {user._id === userId ? (
-        <Grid container spacing={2} className={classes.eventContainer}>
-          {appliedEvents?.map(event => (
-            <Fragment key={event._id}>
-              {event?.artistApplied?.map(artistId =>
-                artistId == userId ? (
-                  <Grid item key={event._id} xs={12} sm={6} md={4} lg={3}>
-                    <EventsCard event={event} />
-                  </Grid>
-                ) : null
-              )}
-            </Fragment>
-          ))}
-        </Grid>
-      ) : null}{" "}
+      {myEvents.length && user.profile.userType === "venue" ? (
+        <div className={classes.myEventsContainer}>
+          <Typography className={classes.myEventsTitle}>My Events</Typography>
+          <Grid container spacing={2} className={classes.eventContainer}>
+            {myEvents.map(event => (
+              <Grid item key={event._id} xs={12} sm={6} md={4} lg={3}>
+                <EventsCard event={event} />
+              </Grid>
+            ))}
+          </Grid>
+        </div>
+      ) : null}
+      {appliedEvents.length && user.profile.userType === "artist" ? (
+        <div className={classes.myEventsContainer}>
+          {filterAppliedEvents().length > 0 && (
+            <Typography className={classes.myEventsTitle}>
+              My Applied Events
+            </Typography>
+          )}
+          {console.log(filterAppliedEvents())}
+          <Grid container spacing={2} className={classes.eventContainer}>
+            {filterAppliedEvents().map(event => (
+              <Grid item key={event._id} xs={12} sm={6} md={4} lg={3}>
+                <EventsCard event={event} />
+              </Grid>
+            ))}
+          </Grid>
+        </div>
+      ) : null}
       {/* Events the Artist is performing at */}
       {user._id === userId ? (
         <Grid container spacing={2} className={classes.eventContainer}>

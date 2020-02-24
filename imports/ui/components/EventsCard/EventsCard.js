@@ -40,9 +40,8 @@ const EventsCard = ({ classes, event }) => {
               >
                 {event.date}
               </Typography>
-              <Typography variant="h6">{event.title}</Typography>
-              <Typography color="primary" variant="body2">
-                {event.location}
+              <Typography className={classes.title} variant="h6">
+                {event.title}
               </Typography>
               <Typography variant="body1">
                 <Fragment>
@@ -56,6 +55,15 @@ const EventsCard = ({ classes, event }) => {
                   )}
                 </Fragment>
               </Typography>
+              {event.lineup.length ? (
+                <Typography className={classes.lineuplist} variant="body1">
+                  Line Up: {event.lineup.join(", ")}
+                </Typography>
+              ) : (
+                <Box component="span" className={classes.lineup}>
+                  Seeking Artists
+                </Box>
+              )}
             </div>
           </CardContent>
         </Link>
