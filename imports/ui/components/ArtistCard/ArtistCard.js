@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Card,
   CardContent,
@@ -6,21 +6,21 @@ import {
   Typography,
   CardActionArea,
   withStyles
-} from '@material-ui/core';
-import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import styles from './styles';
-import LocationOnIcon from '@material-ui/icons/LocationOn';
+} from "@material-ui/core";
+import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+import styles from "./styles";
+import LocationOnIcon from "@material-ui/icons/LocationOn";
 
 const ArtistCard = ({ classes, artist }) => {
   return (
     artist &&
-    artist.profile.userType === 'artist' && (
+    artist.profile.userType === "artist" && (
       <CardActionArea>
         <Card className={classes.card}>
           <Link
             className={classes.link}
-            to={artist && artist._id ? `/profile/${artist && artist._id}` : ''}
+            to={artist && artist._id ? `/profile/${artist && artist._id}` : ""}
           >
             <CardContent className={classes.content}>
               <CardMedia className={classes.media}>
@@ -33,15 +33,23 @@ const ArtistCard = ({ classes, artist }) => {
                 />
               </CardMedia>
               <div className={classes.eventDetails}>
-                <Typography variant="h6">
-                  {artist.profile.title || '[Artist Name Placeholder]'}
+                <Typography className={classes.title} variant="h6">
+                  {artist.profile.title || "[Artist Name Placeholder]"}
                 </Typography>
-                <Typography variant="body2" color="primary">
-                  <LocationOnIcon />
-                  {artist.profile.location || '[Location Placeholder]'}
+                <Typography
+                  className={classes.location}
+                  variant="body2"
+                  color="primary"
+                >
+                  <LocationOnIcon className={classes.icon} />
+                  {artist.profile.location || "[Location Placeholder]"}
                 </Typography>
-                <Typography variant="body2" color="secondary">
-                  {artist.profile.description || '[Description Placeholder]'}
+                <Typography
+                  className={classes.description}
+                  variant="body2"
+                  color="secondary"
+                >
+                  {artist.profile.description || "[Description Placeholder]"}
                 </Typography>
               </div>
             </CardContent>
