@@ -80,6 +80,7 @@ const Profile = ({
   return user?.profile ? (
     <Grid className={classes.profileContainer}>
       <Notification />
+<<<<<<< HEAD
       <img
         src={
           (user && user.profile.profileImage) ||
@@ -87,6 +88,10 @@ const Profile = ({
         }
         className={classes.banner}
       />
+=======
+      <img src={user?.profile?.profileImage} className={classes.banner} />
+
+>>>>>>> master
       <Card className={classes.card}>
         <Box className={classes.idContainer}>
           <Box className={classes.userContainer}>
@@ -147,7 +152,7 @@ const Profile = ({
                 >
                   <Fade in={openAccount}>
                     <div className={classes.paper}>
-                      <Account />
+                      <Account handleClose={handleClose} />
                     </div>
                   </Fade>
                 </Modal>
@@ -218,6 +223,7 @@ const Profile = ({
             ) : null}
           </Box>
         </Box>
+<<<<<<< HEAD
       </Card>
       {user?.profile?.social ? (
         <Box className={classes.social}>
@@ -283,6 +289,68 @@ const Profile = ({
             ))}
           </Grid>
         </div>
+=======
+        {user?.profile?.social ? (
+          <Box className={classes.social}>
+            <Typography variant="h5">
+              Connect with {user.profile.title} on Social Media
+            </Typography>
+            <Box className={classes.socialLinks}>
+              {user?.profile?.social?.facebook && (
+                <a
+                  className={classes.link}
+                  href={user?.profile?.social?.facebook}
+                  target="_blank"
+                >
+                  <FacebookIcon className={classes.icon} /> Facebook
+                </a>
+              )}
+              {user?.profile?.social?.instagram && (
+                <a
+                  className={classes.link}
+                  href={user?.profile?.social?.instagram}
+                  target="_blank"
+                >
+                  <InstagramIcon className={classes.icon} /> Instagram
+                </a>
+              )}
+              {user?.profile?.social?.twitter && (
+                <a
+                  className={classes.link}
+                  href={user?.profile?.social?.twitter}
+                  target="_blank"
+                >
+                  <TwitterIcon className={classes.icon} /> Twitter
+                </a>
+              )}
+            </Box>
+          </Box>
+        ) : null}
+      </Card>
+      {user._id === userId ? (
+        <Grid container spacing={2} className={classes.eventContainer}>
+          {myEvents.map(event => (
+            <Grid item key={event._id} xs={12} sm={6} md={4} lg={3}>
+              <EventsCard event={event} />
+            </Grid>
+          ))}
+        </Grid>
+      ) : null}
+      {user._id === userId ? (
+        <Grid container spacing={2} className={classes.eventContainer}>
+          {appliedEvents?.map(event => (
+            <Fragment key={event._id}>
+              {event?.artistApplied?.map(artistId =>
+                artistId == userId ? (
+                  <Grid item key={event._id} xs={12} sm={6} md={4} lg={3}>
+                    <EventsCard event={event} />
+                  </Grid>
+                ) : null
+              )}
+            </Fragment>
+          ))}
+        </Grid>
+>>>>>>> master
       ) : null}
     </Grid>
   ) : event ? (

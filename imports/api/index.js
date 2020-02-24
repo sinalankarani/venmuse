@@ -1,10 +1,10 @@
-import { Mongo } from 'meteor/mongo';
-import { Meteor } from 'meteor/meteor';
-export const Events = new Mongo.Collection('events');
+import { Mongo } from "meteor/mongo";
+import { Meteor } from "meteor/meteor";
+export const Events = new Mongo.Collection("events");
 
 if (Meteor.isServer) {
   Meteor.publish(
-    'events',
+    "events",
     (eventsPublication = () => {
       return Events.find(
         {},
@@ -29,7 +29,7 @@ if (Meteor.isServer) {
   );
 
   Meteor.publish(
-    'users',
+    "users",
     (usersPublication = () => {
       return Meteor.users.find(
         {},
@@ -46,11 +46,11 @@ if (Meteor.isServer) {
 }
 
 Meteor.methods({
-  'events.addNewEvent'(event) {
-    if (Meteor.user().profile.userType !== 'venue') {
+  "events.addNewEvent"(event) {
+    if (Meteor.user().profile.userType !== "venue") {
       throw new Meteor.Error(
-        'events.addNewEvent.not-authorized',
-        'You are unauthorized to add new events.'
+        "events.addNewEvent.not-authorized",
+        "You are unauthorized to add new events."
       );
     }
     Events.insert({
@@ -61,33 +61,33 @@ Meteor.methods({
       lineup: []
     });
   },
-  'events.removeEvent'(event) {
+  "events.removeEvent"(event) {
     if (this.userId !== event.owner) {
       throw new Meteor.Error(
-        'events.removeEvent.not-authorized',
-        'You are unauthorized to remove events.'
+        "events.removeEvent.not-authorized",
+        "You are unauthorized to remove events."
       );
     }
     Events.remove(event._id);
   },
 
-  'events.applyToEvent'(event) {
-    if (Meteor.user().profile.userType !== 'artist') {
+  "events.applyToEvent"(event) {
+    if (Meteor.user().profile.userType !== "artist") {
       throw new Meteor.Error(
-        'events.applyToEvent not authorized',
-        'You cannot apply to this event because you are signed in as a venue'
+        "events.applyToEvent not authorized",
+        "You cannot apply to this event because you are signed in as a venue"
       );
     }
     if (event.filled) {
       throw new Meteor.Error(
-        'events.applyToEvent not authorized',
-        'This event lineup has been filled'
+        "events.applyToEvent not authorized",
+        "This event lineup has been filled"
       );
     }
     if (event.artistApplied.includes(this.userId)) {
       throw new Meteor.Error(
-        'events.applyToEvent not authorized',
-        'You have already applied to this event.'
+        "events.applyToEvent not authorized",
+        "You have already applied to this event."
       );
     }
     Events.update(event._id, {
@@ -95,17 +95,17 @@ Meteor.methods({
     });
   },
 
-  'events.approveArtist'(event, artistId) {
+  "events.approveArtist"(event, artistId) {
     if (event.filled) {
       throw new Meteor.Error(
-        'events.approveArtist not authorized',
-        'Event lineup has already been filled'
+        "events.approveArtist not authorized",
+        "Event lineup has already been filled"
       );
     }
     if (event.owner !== this.userId) {
       throw new Meteor.Error(
-        'events.approveArtist not authorized',
-        'You do not own this event'
+        "events.approveArtist not authorized",
+        "You do not own this event"
       );
     }
     Events.update(event._id, {
@@ -113,17 +113,17 @@ Meteor.methods({
     });
   },
 
-  'events.removeArtist'(event, artistId) {
+  "events.removeArtist"(event, artistId) {
     if (event.owner !== this.userId) {
       throw new Meteor.Error(
-        'events.removeArtist not authorized',
-        'You do not own this event'
+        "events.removeArtist not authorized",
+        "You do not own this event"
       );
     }
     if (!event.artistApplied) {
       throw new Meteor.Error(
-        'events.removeArtist no authorized',
-        'No artists have applied to your event. Womp womp.'
+        "events.removeArtist no authorized",
+        "No artists have applied to your event. Womp womp."
       );
     }
 
@@ -135,11 +135,11 @@ Meteor.methods({
     });
   },
 
-  'users.updateProfile'({ profile }) {
+  "users.updateProfile"({ profile }) {
     if (!this.userId) {
       throw new Meteor.Error(
-        'profile.updateProfile.not-authorized',
-        'You are not allowed to update profile for other users'
+        "profile.updateProfile.not-authorized",
+        "You are not allowed to update profile for other users"
       );
     }
 
