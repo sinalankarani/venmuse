@@ -40,14 +40,17 @@ const EventsCard = ({ classes, event }) => {
               >
                 {event.date}
               </Typography>
-              <Typography className={classes.title} variant="h6">
-                {event.title}
+              <Typography variant="h6">{event.title}</Typography>
+              <Typography color="primary" variant="body2">
+                {event.location}
               </Typography>
               <Typography variant="body1">
                 <Fragment>
-                  {/* {console.log(event.lineup)} */}
                   {event.lineup.length ? (
-                    `Line Up: ${lineup.map(artist => artist.profile.title)}`
+                    `Line Up: ${Meteor.users
+                      .find({ _id: event.lineup[0] })
+                      .fetch()
+                      .map(artist => artist.profile.title)}`
                   ) : (
                     <Box component="span" className={classes.lineup}>
                       Seeking Artists
@@ -55,15 +58,6 @@ const EventsCard = ({ classes, event }) => {
                   )}
                 </Fragment>
               </Typography>
-              {event.lineup.length ? (
-                <Typography className={classes.lineuplist} variant="body1">
-                  Line Up: {event.lineup.join(", ")}
-                </Typography>
-              ) : (
-                <Box component="span" className={classes.lineup}>
-                  Seeking Artists
-                </Box>
-              )}
             </div>
           </CardContent>
         </Link>
