@@ -23,10 +23,7 @@ class App extends React.Component {
 
 export default withTracker(() => {
   Meteor.subscribe('events');
-  Meteor.subscribe('users');
   return {
-    events: Events.find({}).fetch(),
-    userId: Meteor.userId(),
-    user: Meteor.user()
+    events: Events.find({}).fetch()
   };
 })(App);

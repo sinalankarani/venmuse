@@ -13,13 +13,16 @@ const styles = createStyles(theme => ({
     padding: theme.spacing(2, 4, 3)
   },
   gravatar: {
-    borderRadius: "30px",
-    marginRight: "20px"
+    borderRadius: "50px",
+    marginRight: "20px",
+    width: "5rem",
+    height: "5rem"
   },
   banner: {
     width: "100%",
     maxHeight: "400px",
-    objectFit: "cover"
+    objectFit: "cover",
+    opacity: 0.7
   },
   titleLocation: {
     display: "flex",
@@ -63,8 +66,44 @@ const styles = createStyles(theme => ({
     width: "220px",
     margin: "10px"
   },
+  border: {
+    border: "2px solid red"
+  },
   icon: {
     transform: "translateY(7px)"
+  },
+  description: {
+    maxWidth: "800px"
+  },
+  button: {
+    width: 250,
+    fontFamily: theme.fonts.secondary.main,
+    fontSize: "1.2rem",
+    backgroundColor: "transparent",
+    color: theme.palette.secondary.main,
+    border: theme.palette.secondary.main + " 3px solid",
+    transition: "100ms",
+    marginTop: "1.5rem",
+    "&:hover": {
+      backgroundColor: theme.palette.primary.main,
+      color: theme.palette.primary.background,
+      border: theme.palette.primary.main + " 3px solid",
+      letterSpacing: "3px"
+    }
+  },
+  titleLabel: {
+    fontFamily: theme.fonts.secondary.main,
+    textTransform: "uppercase",
+    fontSize: "4rem"
+  },
+  userType: {
+    fontFamily: theme.fonts.secondary.main,
+    textTransform: "uppercase",
+    fontSize: "2rem",
+    transform: "translateY(-20px)"
+  },
+  divider: {
+    fontSize: "3rem"
   }
 }));
 

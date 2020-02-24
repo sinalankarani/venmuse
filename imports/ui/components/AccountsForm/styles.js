@@ -7,27 +7,38 @@ const styles = theme => ({
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    border: theme.palette.primary.main + " 5px solid"
   },
   form: {
     height: "100%",
     display: "flex",
     flexDirection: "column",
-    justifyContent: "space-between"
+    justifyContent: "flex-start"
   },
   title: {
     textTransform: "uppercase",
     textAlign: "center",
-    fontWeight: "bold"
+    fontFamily: theme.fonts.secondary.main,
+    fontSize: "3rem",
+    lineHeight: "1.25"
   },
   fields: {
     height: "65%",
     display: "flex",
     flexDirection: "column",
-    justifyContent: "space-evenly"
+    justifyContent: "center"
   },
   button: {
-    width: "250px"
+    width: "250px",
+    fontFamily: theme.fonts.secondary.main,
+    fontSize: "1.5rem",
+    padding: "0.5rem",
+    lineHeight: "1",
+    "&:hover": {
+      background: "none",
+      color: theme.palette.primary.main
+    }
   },
   icon: {
     position: "absolute",
@@ -48,12 +59,40 @@ const styles = theme => ({
     width: "100%",
     display: "flex",
     flexDirection: "column",
-    justifyContent: "space-between",
-    alignItems: "space-between"
+    justifyContent: "space-around",
+    alignItems: "space-between",
+    marginTop: "2rem"
   },
-  // inputContainer: {
-  //   height: "50px"
-  // }
+  inputContainer: {
+    display: "flex",
+    flexDirection: "column",
+    height: "75px",
+    transform: "translateY(25px)",
+    justifyContent: "center"
+  },
+  togglelabel: {
+    fontFamily: theme.fonts.secondary.main,
+    fontSize: "3rem",
+    lineHeight: "1.25"
+  },
+  toggleswitch: {
+    position: "absolute",
+    transform: "translateY(2rem)"
+  },
+  submitbutton: {
+    width: "250px",
+    fontFamily: theme.fonts.secondary.main,
+    fontSize: "1.5rem",
+    padding: "0.5rem",
+    lineHeight: "1",
+    color: theme.palette.primary.background,
+    backgroundColor: theme.palette.primary.main,
+    transition: "100ms",
+    "&:hover": {
+      backgroundColor: theme.palette.primary.main,
+      letterSpacing: "3px"
+    }
+  }
 });
 
 export default styles;

@@ -5,6 +5,8 @@ import { withTracker } from 'meteor/react-meteor-data';
 import { withRouter } from 'react-router-dom';
 import validate from './helpers/';
 import { Meteor } from 'meteor/meteor';
+
+import PropTypes from 'prop-types';
 import styles from './styles';
 import {
   Button,
@@ -33,6 +35,9 @@ class SubmitEvent extends React.Component {
       created: moment()
         .startOf()
         .fromNow(),
+      imageurl: values?.image?.length
+        ? values.image
+        : 'https://images.unsplash.com/photo-1501386761578-eac5c94b800a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
       title: values.title,
       location: this.props.user?.profile?.location
         ? this.props.user.profile.location
@@ -40,8 +45,12 @@ class SubmitEvent extends React.Component {
       description: values.description,
       tags: values.tags
     };
-    Meteor.call('events.addNewEvent', newEvent);
-    this.props.history.push('/feed');
+    Meteor.call('events.addNewEvent', newEvent, (err, res) => {
+      if (err) {
+        alert(err.reason);
+      }
+    });
+    this.props.handleClose();
   };
 
   render() {
@@ -74,7 +83,7 @@ class SubmitEvent extends React.Component {
           onSubmit={this.onSubmit}
           validate={validate}
           initialValues={{ tags: [] }}
-          render={({ handleSubmit, form, pristine }) => {
+          render={({ handleSubmit }) => {
             return (
               <form onSubmit={handleSubmit} className={classes.form}>
                 {/* EVENT TITLE */}
@@ -123,6 +132,23 @@ class SubmitEvent extends React.Component {
                     <>
                       <TextField
                         label="Description"
+                        className={classes.fields}
+                        {...input}
+                      />
+                      {meta.error && meta.touched && (
+                        <span className={classes.error}>{meta.error}</span>
+                      )}
+                    </>
+                  )}
+                />
+                {/* EVENT IMAGE */}
+                <Field
+                  name="image"
+                  type="url"
+                  render={({ input, meta }) => (
+                    <>
+                      <TextField
+                        label="Image"
                         className={classes.fields}
                         {...input}
                       />
@@ -202,6 +228,14 @@ class SubmitEvent extends React.Component {
     );
   }
 }
+
+SubmitEvent.propTypes = {
+  user: PropTypes.shape({
+    location: PropTypes.string
+  }),
+  classes: PropTypes.object
+};
+
 export default withTracker(() => {
   Meteor.subscribe('events');
   Meteor.subscribe('users');
