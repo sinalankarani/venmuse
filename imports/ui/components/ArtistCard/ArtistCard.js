@@ -25,11 +25,7 @@ const ArtistCard = ({ classes, artist }) => {
             <CardContent className={classes.content}>
               <CardMedia className={classes.media}>
                 <img
-                  src={
-                    artist.profile.profileImage
-                      ? artist.profile.profileImage
-                      : "https://baconmockup.com/640/360"
-                  }
+                  src={artist?.profile?.profileImage}
                   alt="profile-image"
                   height="300px"
                   width="600px"

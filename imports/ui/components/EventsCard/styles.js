@@ -42,6 +42,7 @@ const styles = theme => {
       color: theme.fonts.primary.color
     },
     notifyCounter: {
+      position: "absolute",
       height: 30,
       width: 30,
       display: "flex",
