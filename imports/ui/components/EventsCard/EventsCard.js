@@ -25,7 +25,6 @@ const EventsCard = ({ classes, event }) => {
           <CardContent className={classes.content}>
             <CardMedia className={classes.media}>
               <img src={event?.imageurl} className={classes.image} />
-
             </CardMedia>
             <div className={classes.eventDetails}>
               {event.owner === Meteor.userId() &&
@@ -47,11 +46,9 @@ const EventsCard = ({ classes, event }) => {
               </Typography>
               <Typography variant="body1">
                 <Fragment>
+                  {/* {console.log(event.lineup)} */}
                   {event.lineup.length ? (
-                    `Line Up: ${Meteor.users
-                      .find({ _id: event.lineup[0] })
-                      .fetch()
-                      .map(artist => artist.profile.title)}`
+                    `Line Up: ${lineup.map(artist => artist.profile.title)}`
                   ) : (
                     <Box component="span" className={classes.lineup}>
                       Seeking Artists

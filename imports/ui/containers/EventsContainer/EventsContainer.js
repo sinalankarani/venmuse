@@ -19,7 +19,10 @@ const EventsContainer = ({ classes, events }) => {
 
 export default withTracker(() => {
   Meteor.subscribe("events");
+  Meteor.subscribe("users");
+
   return {
+    user: Meteor.users.find({ _id: event.lineup }).fetch(),
     events: Events.find({}).fetch()
   };
 })(withStyles(styles)(EventsContainer));
