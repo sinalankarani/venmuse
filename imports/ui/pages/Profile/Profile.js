@@ -1,29 +1,21 @@
-import React, { Fragment } from 'react';
-import SubmitEvent from '../../components/SubmitEvent';
-import { withTracker } from 'meteor/react-meteor-data';
-import { Events } from '../../../api';
-import styles from './styles';
-import { withStyles } from '@material-ui/core';
-import {
-  Card,
-  Grid,
-  Modal,
-  Backdrop,
-  Fade,
-  Button,
-  Typography,
-  Box
-} from '@material-ui/core';
-import FacebookIcon from '@material-ui/icons/Facebook';
-import InstagramIcon from '@material-ui/icons/Instagram';
-import TwitterIcon from '@material-ui/icons/Twitter';
-import { Meteor } from 'meteor/meteor';
-import Gravatar from 'react-gravatar';
-import Account from '../Account';
-import Loader from '../../components/Loader';
-import EventsCard from '../../components/EventsCard';
-import ArtistCard from '../../components/ArtistCard';
-import Notification from '../../components/Notification/Notification';
+import React, { Fragment } from "react";
+import SubmitEvent from "../../components/SubmitEvent";
+import { withTracker } from "meteor/react-meteor-data";
+import { Events } from "../../../api";
+import styles from "./styles";
+import { withStyles } from "@material-ui/core";
+import { Card, Grid, Modal, Backdrop, Fade, Button, Typography, Box } from "@material-ui/core";
+import FacebookIcon from "@material-ui/icons/Facebook";
+import InstagramIcon from "@material-ui/icons/Instagram";
+import TwitterIcon from "@material-ui/icons/Twitter";
+import { Meteor } from "meteor/meteor";
+import Gravatar from "react-gravatar";
+import Account from "../Account";
+import Loader from "../../components/Loader";
+import EventsCard from "../../components/EventsCard";
+import ArtistCard from "../../components/ArtistCard";
+import Notification from "../../components/Notification/Notification";
+import Follow from "../../components/Follow";
 
 const Profile = ({
   currentUser,
@@ -37,6 +29,7 @@ const Profile = ({
 }) => {
   const [openAccount, setOpenAccount] = React.useState(false);
   const [openEvent, setOpenEvent] = React.useState(false);
+  const [openFollow, setOpenFollow] = React.useState(false);
 
   const handleOpenAccount = () => {
     setOpenAccount(true);
@@ -44,14 +37,18 @@ const Profile = ({
   const handleOpenEvent = () => {
     setOpenEvent(true);
   };
+  const handleOpenFollow = () => {
+    setOpenFollow(true);
+  };
 
   const handleClose = () => {
     setOpenAccount(false);
     setOpenEvent(false);
+    setOpenFollow(false);
   };
 
   const applyEvent = () => {
-    Meteor.call('events.applyToEvent', event, (err, res) => {
+    Meteor.call("events.applyToEvent", event, (err, res) => {
       if (err) {
         alert(err.reason);
       }
@@ -59,7 +56,7 @@ const Profile = ({
   };
 
   const approveArtist = artistApplied => {
-    Meteor.call('events.approveArtist', event, artistApplied, (err, res) => {
+    Meteor.call("events.approveArtist", event, artistApplied, (err, res) => {
       if (err) {
         alert(err.reason);
       }
@@ -67,14 +64,14 @@ const Profile = ({
   };
 
   const removeArtist = artistApplied => {
-    Meteor.call('events.removeArtist', event, artistApplied, (err, res) => {
+    Meteor.call("events.removeArtist", event, artistApplied, (err, res) => {
       if (err) {
         alert(err.reason);
       }
     });
   };
   const cancelApplication = () => {
-    Meteor.call('events.cancelApplication', event, (err, res) => {
+    Meteor.call("events.cancelApplication", event, (err, res) => {
       if (err) {
         alert(err.reason);
       }
@@ -82,7 +79,7 @@ const Profile = ({
   };
 
   const removeEvent = event => {
-    Meteor.call('events.removeEvent', event, (err, res) => {
+    Meteor.call("events.removeEvent", event, (err, res) => {
       if (err) {
         alert(err.reason);
       }
@@ -93,7 +90,7 @@ const Profile = ({
     return appliedEvents.filter(event => event.artistApplied?.includes(userId));
   };
 
-  const apiKey = 'get your own key';
+  const apiKey = "get your own key";
 
   return user?.profile ? (
     <Grid className={classes.profileContainer}>
@@ -102,34 +99,24 @@ const Profile = ({
       <Card className={classes.card}>
         <Box className={classes.idContainer}>
           <Box className={classes.userContainer}>
-            {user ? (
-              <Gravatar
-                className={classes.gravatar}
-                email={user.emails[0].address}
-              />
-            ) : null}
+            {user ? <Gravatar className={classes.gravatar} email={user.emails[0].address} /> : null}
             <Box className={classes.titleLocation}>
               <Typography className={classes.titleLabel} variant="h4">
-                {' '}
-                {user.profile.title || '[Title Placeholder]'}
+                {" "}
+                {user.profile.title || "[Title Placeholder]"}
               </Typography>
               <Typography className={classes.userType}>
-                usertype <span className={classes.divider}>|</span>{' '}
-                {user?.profile?.userType}
+                usertype <span className={classes.divider}>|</span> {user?.profile?.userType}
               </Typography>
 
               <Typography variant="subtitle1" color="secondary">
-                {user?.profile?.location || '[Location Placeholder]'}
+                {user?.profile?.location || "[Location Placeholder]"}
               </Typography>
-              <Typography
-                variant="body1"
-                color="secondary"
-                className={classes.description}
-              >
+              <Typography variant="body1" color="secondary" className={classes.description}>
                 {user?.profile?.description ||
-                  '[Description Placeholder: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras id aliquet urna. Donec iaculis eu nunc a tempor. In quis feugiat diam, nec auctor mauris. In convallis purus ligula, at ultricies metus aliquet et. Cras libero leo, sollicitudin nec lacus eu, egestas convallis massa. Suspendisse commodo sodales ante lacinia pretium. Phasellus sem nulla, imperdiet nec aliquet non, viverra a dolor. Cras et ipsum felis. In imperdiet diam eget malesuada euismod. Etiam bibendum et felis a scelerisque. Sed posuere tellus ac rutrum fermentum. Duis nisl velit, laoreet scelerisque pretium at, mollis et ante. Nam id mattis dui. Praesent fermentum elementum luctus. Donec facilisis iaculis sodales. Duis consequat vulputate varius]'}
+                  "[Description Placeholder: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras id aliquet urna. Donec iaculis eu nunc a tempor. In quis feugiat diam, nec auctor mauris. In convallis purus ligula, at ultricies metus aliquet et. Cras libero leo, sollicitudin nec lacus eu, egestas convallis massa. Suspendisse commodo sodales ante lacinia pretium. Phasellus sem nulla, imperdiet nec aliquet non, viverra a dolor. Cras et ipsum felis. In imperdiet diam eget malesuada euismod. Etiam bibendum et felis a scelerisque. Sed posuere tellus ac rutrum fermentum. Duis nisl velit, laoreet scelerisque pretium at, mollis et ante. Nam id mattis dui. Praesent fermentum elementum luctus. Donec facilisis iaculis sodales. Duis consequat vulputate varius]"}
               </Typography>
-              {user?.profile?.location && user.profile.userType === 'venue' && (
+              {user?.profile?.location && user.profile.userType === "venue" && (
                 <Box className={classes.googleMap}>
                   <img
                     src={`https://maps.googleapis.com/maps/api/staticmap?&markers=${user.profile.location}&size=400x300&zoom=15&&key=${apiKey}`}
@@ -180,17 +167,15 @@ const Profile = ({
                   variant="contained"
                   size="large"
                   color="primary"
-                  onClick={handleOpenAccount}
+                  onClick={handleOpenFollow}
                 >
-                  {user.profile.userType === 'artist'
-                    ? 'Message Artist'
-                    : 'Message Venue'}
+                  {user.profile.userType === "artist" ? "Follow Artist" : "Follow Venue"}
                 </Button>
                 <Modal
                   aria-labelledby="transition-modal-title"
                   aria-describedby="transition-modal-description"
                   className={classes.modal}
-                  open={openAccount}
+                  open={openFollow}
                   onClose={handleClose}
                   closeAfterTransition
                   BackdropComponent={Backdrop}
@@ -198,14 +183,16 @@ const Profile = ({
                     timeout: 500
                   }}
                 >
-                  <Fade in={openAccount}>
-                    <div className={classes.paper}></div>
+                  <Fade in={openFollow}>
+                    <div className={classes.paper}>
+                      <Follow handleClose={handleClose} />
+                    </div>
                   </Fade>
                 </Modal>
               </div>
             )}
             {/* CREATE NEW EVENT AS A VENUE */}
-            {user.profile.userType === 'venue' && user._id === userId ? (
+            {user.profile.userType === "venue" && user._id === userId ? (
               <div>
                 <Button
                   className={classes.button}
@@ -242,41 +229,27 @@ const Profile = ({
       </Card>
       {user?.profile?.social ? (
         <Box className={classes.social}>
-          <Typography variant="h5">
-            Connect with {user.profile.title} on Social Media
-          </Typography>
+          <Typography variant="h5">Connect with {user.profile.title} on Social Media</Typography>
           <Box className={classes.socialLinks}>
             {user?.profile?.social?.facebook && (
-              <a
-                className={classes.link}
-                href={user?.profile?.social?.facebook}
-                target="_blank"
-              >
+              <a className={classes.link} href={user?.profile?.social?.facebook} target="_blank">
                 <FacebookIcon className={classes.icon} /> Facebook
               </a>
             )}
             {user?.profile?.social?.instagram && (
-              <a
-                className={classes.link}
-                href={user?.profile?.social?.instagram}
-                target="_blank"
-              >
+              <a className={classes.link} href={user?.profile?.social?.instagram} target="_blank">
                 <InstagramIcon className={classes.icon} /> Instagram
               </a>
             )}
             {user?.profile?.social?.twitter && (
-              <a
-                className={classes.link}
-                href={user?.profile?.social?.twitter}
-                target="_blank"
-              >
+              <a className={classes.link} href={user?.profile?.social?.twitter} target="_blank">
                 <TwitterIcon className={classes.icon} /> Twitter
               </a>
             )}
           </Box>
         </Box>
       ) : null}
-      {myEvents.length && user.profile.userType === 'venue' ? (
+      {myEvents.length && user.profile.userType === "venue" ? (
         <div className={classes.myEventsContainer}>
           <Typography className={classes.myEventsTitle}>My Events</Typography>
           <Grid container spacing={2} className={classes.eventContainer}>
@@ -288,12 +261,10 @@ const Profile = ({
           </Grid>
         </div>
       ) : null}
-      {appliedEvents.length && user.profile.userType === 'artist' ? (
+      {appliedEvents.length && user.profile.userType === "artist" ? (
         <div className={classes.myEventsContainer}>
           {filterAppliedEvents().length > 0 && (
-            <Typography className={classes.myEventsTitle}>
-              My Applied Events
-            </Typography>
+            <Typography className={classes.myEventsTitle}>My Applied Events</Typography>
           )}
           {console.log(filterAppliedEvents())}
           <Grid container spacing={2} className={classes.eventContainer}>
@@ -344,7 +315,7 @@ const Profile = ({
             </Box>
           )}
         </Box>
-        {event.owner !== userId && currentUser.profile.userType === 'artist' ? (
+        {event.owner !== userId && currentUser.profile.userType === "artist" ? (
           !event.filled ? (
             event?.artistApplied?.includes(userId) ? (
               <Button
@@ -400,9 +371,7 @@ const Profile = ({
               <Typography variant="h5" color="secondary">
                 Artist Applications:
               </Typography>
-              <ArtistCard
-                artist={Meteor.users.find({ _id: appliedArtist }).fetch()[0]}
-              />
+              <ArtistCard artist={Meteor.users.find({ _id: appliedArtist }).fetch()[0]} />
 
               <Button
                 className={classes.button}
@@ -440,8 +409,8 @@ const Profile = ({
 };
 
 export default withTracker(({ userId, eventId }) => {
-  Meteor.subscribe('events');
-  Meteor.subscribe('users');
+  Meteor.subscribe("events");
+  Meteor.subscribe("users");
 
   return {
     appliedEvents: Events.find({}).fetch(),
