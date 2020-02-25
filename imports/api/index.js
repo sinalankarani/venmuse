@@ -103,10 +103,7 @@ Meteor.methods({
       );
     }
     if (event.owner !== this.userId) {
-      throw new Meteor.Error(
-        "events.approveArtist not authorized",
-        "You do not own this event"
-      );
+      throw new Meteor.Error("events.approveArtist not authorized", "You do not own this event");
     }
     Events.update(event._id, {
       $set: { filled: true, lineup: [artistId], artistApplied: [] }
@@ -115,10 +112,7 @@ Meteor.methods({
 
   "events.removeArtist"(event, artistId) {
     if (event.owner !== this.userId) {
-      throw new Meteor.Error(
-        "events.removeArtist not authorized",
-        "You do not own this event"
-      );
+      throw new Meteor.Error("events.removeArtist not authorized", "You do not own this event");
     }
     if (!event.artistApplied) {
       throw new Meteor.Error(
@@ -127,9 +121,7 @@ Meteor.methods({
       );
     }
 
-    let newArtistApplied = event.artistApplied.filter(
-      artist => artist !== artistId
-    );
+    let newArtistApplied = event.artistApplied.filter(artist => artist !== artistId);
     Events.update(event._id, {
       $set: { artistApplied: newArtistApplied }
     });
@@ -145,6 +137,19 @@ Meteor.methods({
 
     Meteor.users.update(Meteor.userId(), {
       $set: { profile: { ...Meteor.user().profile, ...profile } }
+    });
+  },
+
+  "users.updateFollowers"(_id) {
+    let userId = Meteor.userId();
+    Meteor.users.update(_id, {
+      $push: { "profile.followers": userId }
+    });
+
+    Meteor.users.update(Meteor.userId(), {
+      $push: {
+        "profile.following": _id
+      }
     });
   }
 });
