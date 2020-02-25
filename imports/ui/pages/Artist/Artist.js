@@ -2,6 +2,7 @@ import React from "react";
 import ArtistContainer from "../../containers/ArtistContainer";
 import { withStyles, Typography, Container } from "@material-ui/core";
 import styles from "./styles";
+import Footer from "../../components/Footer";
 
 const Artist = ({ classes }) => {
   return (
@@ -13,6 +14,7 @@ const Artist = ({ classes }) => {
       <div className={classes.contentcontainer}>
         <ArtistContainer />
       </div>
+      <Footer />
     </div>
   );
 };

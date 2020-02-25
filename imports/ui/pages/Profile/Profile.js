@@ -23,7 +23,6 @@ import Account from '../Account';
 import Loader from '../../components/Loader';
 import EventsCard from '../../components/EventsCard';
 import ArtistCard from '../../components/ArtistCard';
-
 import Notification from '../../components/Notification/Notification';
 
 const Profile = ({
@@ -33,6 +32,7 @@ const Profile = ({
   event,
   myEvents,
   appliedEvents,
+  upcomingEvents,
   classes
 }) => {
   const [openAccount, setOpenAccount] = React.useState(false);
@@ -73,11 +73,16 @@ const Profile = ({
     });
   };
 
+  const filterAppliedEvents = () => {
+    return appliedEvents.filter(event => event.artistApplied?.includes(userId));
+  };
+
+  const apiKey = 'get your own key';
+
   return user?.profile ? (
     <Grid className={classes.profileContainer}>
       <Notification />
       <img src={user?.profile?.profileImage} className={classes.banner} />
-
       <Card className={classes.card}>
         <Box className={classes.idContainer}>
           <Box className={classes.userContainer}>
@@ -111,12 +116,13 @@ const Profile = ({
               {user?.profile?.location && user.profile.userType === 'venue' && (
                 <Box className={classes.googleMap}>
                   <img
-                    src={`https://maps.googleapis.com/maps/api/staticmap?&markers=${user.profile.location}&size=400x300&zoom=15&&key=AIzaSyCmSLst-WtvEnvOEDHWvcOvsl0Z27D_u0I`}
+                    src={`https://maps.googleapis.com/maps/api/staticmap?&markers=${user.profile.location}&size=400x300&zoom=15&&key=${apiKey}`}
                   />
                 </Box>
               )}
             </Box>
           </Box>
+          {/* UPDATE PROFILE AS USER */}
           <Box className={classes.buttonsContainer}>
             {user._id === userId ? (
               <div>
@@ -128,7 +134,7 @@ const Profile = ({
                   color="primary"
                   onClick={handleOpenAccount}
                 >
-                  Update Profile{' '}
+                  Update Profile
                 </Button>
                 <Modal
                   aria-labelledby="transition-modal-title"
@@ -150,6 +156,7 @@ const Profile = ({
                 </Modal>
               </div>
             ) : (
+              // MESSAGE USER
               <div>
                 <Button
                   className={classes.button}
@@ -181,6 +188,7 @@ const Profile = ({
                 </Modal>
               </div>
             )}
+            {/* CREATE NEW EVENT AS A VENUE */}
             {user.profile.userType === 'venue' && user._id === userId ? (
               <div>
                 <Button
@@ -215,57 +223,78 @@ const Profile = ({
             ) : null}
           </Box>
         </Box>
-        {user?.profile?.social ? (
-          <Box className={classes.social}>
-            <Typography variant="h5">
-              Connect with {user.profile.title} on Social Media
-            </Typography>
-            <Box className={classes.socialLinks}>
-              {user?.profile?.social?.facebook && (
-                <a
-                  className={classes.link}
-                  href={user?.profile?.social?.facebook}
-                  target="_blank"
-                >
-                  <FacebookIcon className={classes.icon} /> Facebook
-                </a>
-              )}
-              {user?.profile?.social?.instagram && (
-                <a
-                  className={classes.link}
-                  href={user?.profile?.social?.instagram}
-                  target="_blank"
-                >
-                  <InstagramIcon className={classes.icon} /> Instagram
-                </a>
-              )}
-              {user?.profile?.social?.twitter && (
-                <a
-                  className={classes.link}
-                  href={user?.profile?.social?.twitter}
-                  target="_blank"
-                >
-                  <TwitterIcon className={classes.icon} /> Twitter
-                </a>
-              )}
-            </Box>
-          </Box>
-        ) : null}
       </Card>
-      {user._id === userId ? (
-        <Grid container spacing={2} className={classes.eventContainer}>
-          {myEvents.map(event => (
-            <Grid item key={event._id} xs={12} sm={6} md={4} lg={3}>
-              <EventsCard event={event} />
-            </Grid>
-          ))}
-        </Grid>
+      {user?.profile?.social ? (
+        <Box className={classes.social}>
+          <Typography variant="h5">
+            Connect with {user.profile.title} on Social Media
+          </Typography>
+          <Box className={classes.socialLinks}>
+            {user?.profile?.social?.facebook && (
+              <a
+                className={classes.link}
+                href={user?.profile?.social?.facebook}
+                target="_blank"
+              >
+                <FacebookIcon className={classes.icon} /> Facebook
+              </a>
+            )}
+            {user?.profile?.social?.instagram && (
+              <a
+                className={classes.link}
+                href={user?.profile?.social?.instagram}
+                target="_blank"
+              >
+                <InstagramIcon className={classes.icon} /> Instagram
+              </a>
+            )}
+            {user?.profile?.social?.twitter && (
+              <a
+                className={classes.link}
+                href={user?.profile?.social?.twitter}
+                target="_blank"
+              >
+                <TwitterIcon className={classes.icon} /> Twitter
+              </a>
+            )}
+          </Box>
+        </Box>
       ) : null}
+      {myEvents.length && user.profile.userType === 'venue' ? (
+        <div className={classes.myEventsContainer}>
+          <Typography className={classes.myEventsTitle}>My Events</Typography>
+          <Grid container spacing={2} className={classes.eventContainer}>
+            {myEvents.map(event => (
+              <Grid item key={event._id} xs={12} sm={6} md={4} lg={3}>
+                <EventsCard event={event} />
+              </Grid>
+            ))}
+          </Grid>
+        </div>
+      ) : null}
+      {appliedEvents.length && user.profile.userType === 'artist' ? (
+        <div className={classes.myEventsContainer}>
+          {filterAppliedEvents().length > 0 && (
+            <Typography className={classes.myEventsTitle}>
+              My Applied Events
+            </Typography>
+          )}
+          {console.log(filterAppliedEvents())}
+          <Grid container spacing={2} className={classes.eventContainer}>
+            {filterAppliedEvents().map(event => (
+              <Grid item key={event._id} xs={12} sm={6} md={4} lg={3}>
+                <EventsCard event={event} />
+              </Grid>
+            ))}
+          </Grid>
+        </div>
+      ) : null}
+      {/* Events the Artist is performing at */}
       {user._id === userId ? (
         <Grid container spacing={2} className={classes.eventContainer}>
-          {appliedEvents?.map(event => (
+          {upcomingEvents?.map(event => (
             <Fragment key={event._id}>
-              {event?.artistApplied?.map(artistId =>
+              {event?.lineup?.map(artistId =>
                 artistId == userId ? (
                   <Grid item key={event._id} xs={12} sm={6} md={4} lg={3}>
                     <EventsCard event={event} />
@@ -278,6 +307,7 @@ const Profile = ({
       ) : null}
     </Grid>
   ) : event ? (
+    // APPLY TO EVENTS
     <Grid className={classes.profileContainer}>
       <img src={event?.imageurl} className={classes.banner} />
       <Card className={classes.eventCard}>
@@ -291,7 +321,7 @@ const Profile = ({
           {event?.location && (
             <Box className={classes.googleMap}>
               <img
-                src={`https://maps.googleapis.com/maps/api/staticmap?&markers=${event?.location}&size=400x300&zoom=15&&key=AIzaSyCmSLst-WtvEnvOEDHWvcOvsl0Z27D_u0I`}
+                src={`https://maps.googleapis.com/maps/api/staticmap?&markers=${event?.location}&size=400x300&zoom=15&&key=${apiKey}`}
               />
             </Box>
           )}
@@ -328,6 +358,7 @@ const Profile = ({
           )
         ) : null}
       </Card>
+      {/* ACCEPT OR REJECT APPLICATION TO YOUR EVENT */}
       {event.owner === userId
         ? event.artistApplied.map(appliedArtist => (
             <div key={appliedArtist}>
@@ -339,7 +370,7 @@ const Profile = ({
                   approveArtist(appliedArtist);
                 }}
               >
-                Accept Application
+                Accept
               </Button>
               <Button
                 onClick={() => {
@@ -363,6 +394,7 @@ export default withTracker(({ userId, eventId }) => {
 
   return {
     appliedEvents: Events.find({}).fetch(),
+    upcomingEvents: Events.find({}).fetch(),
     myEvents: Events.find({ owner: userId }).fetch(),
     event: Events.find({ _id: eventId }).fetch()[0],
     users: Meteor.users.find().fetch(),

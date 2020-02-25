@@ -63,6 +63,14 @@ const styles = createStyles(theme => ({
     display: 'flex',
     justifyContent: 'space-between'
   },
+  myEventsContainer: {
+    margin: '0 3rem'
+  },
+  myEventsTitle: {
+    fontFamily: theme.fonts.secondary.main,
+    fontSize: '3rem',
+    textTransform: 'uppercase'
+  },
   buttonsContainer: { display: 'flex', flexDirection: 'column' },
   button: {
     maxHeight: '50px',
@@ -79,6 +87,7 @@ const styles = createStyles(theme => ({
     maxWidth: '800px'
   },
   button: {
+    maxHeight: 60,
     width: 250,
     fontFamily: theme.fonts.secondary.main,
     fontSize: '1.2rem',
