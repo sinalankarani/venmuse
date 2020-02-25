@@ -94,3 +94,46 @@ export default const MyItem = () => {
   </div>
 }
 ```
+
+## Screenshots
+
+### Login
+
+<img src="/public/images/screenshot/Login.png">
+
+### Artist/Venue Signup
+
+<img src="/public/images/screenshot/Artist-Signup.png">
+<img src="/public/images/screenshot/Venue-Signup.png">
+
+### Home/Feed
+
+<img src="/public/images/screenshot/Home-Feed.png">
+
+### NavBar State
+
+<img src="/public/images/screenshot/NavBar-State.png">
+
+### Events/Artists/Venues
+
+<img src="/public/images/screenshot/Event-Page.png">
+<img src="/public/images/screenshot/Artist-Page.png">
+<img src="/public/images/screenshot/Venue-Page.png">
+
+### Artist/Venue Profile
+
+<img src="/public/images/screenshot/Artist-Profile.png">
+<img src="/public/images/screenshot/Venue-Profile.png">
+
+### Forms
+
+<img src="/public/images/screenshot/Edit-Profile-Form.png">
+<img src="/public/images/screenshot/Submit-Event.png">
+
+### Accept/Reject
+
+<img src="/public/images/screenshot/Accept-Reject.png">
+
+### Notification
+
+<img src="/public/images/screenshot/Notification.png">
