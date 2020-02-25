@@ -22,7 +22,7 @@ export default withTracker(() => {
   Meteor.subscribe("users");
 
   return {
-    user: Meteor.users.find({ _id: event.lineup }).fetch(),
+    // users: Meteor.users.find({ _id: event.lineup }).fetch(),
     events: Events.find({}).fetch()
   };
 })(withStyles(styles)(EventsContainer));
