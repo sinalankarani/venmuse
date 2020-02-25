@@ -1,9 +1,9 @@
-import React, { Fragment } from "react";
-import SubmitEvent from "../../components/SubmitEvent";
-import { withTracker } from "meteor/react-meteor-data";
-import { Events } from "../../../api";
-import styles from "./styles";
-import { withStyles } from "@material-ui/core";
+import React, { Fragment } from 'react';
+import SubmitEvent from '../../components/SubmitEvent';
+import { withTracker } from 'meteor/react-meteor-data';
+import { Events } from '../../../api';
+import styles from './styles';
+import { withStyles } from '@material-ui/core';
 import {
   Card,
   Grid,
@@ -13,17 +13,17 @@ import {
   Button,
   Typography,
   Box
-} from "@material-ui/core";
-import FacebookIcon from "@material-ui/icons/Facebook";
-import InstagramIcon from "@material-ui/icons/Instagram";
-import TwitterIcon from "@material-ui/icons/Twitter";
-import { Meteor } from "meteor/meteor";
-import Gravatar from "react-gravatar";
-import Account from "../Account";
-import Loader from "../../components/Loader";
-import EventsCard from "../../components/EventsCard";
-import ArtistCard from "../../components/ArtistCard";
-import Notification from "../../components/Notification/Notification";
+} from '@material-ui/core';
+import FacebookIcon from '@material-ui/icons/Facebook';
+import InstagramIcon from '@material-ui/icons/Instagram';
+import TwitterIcon from '@material-ui/icons/Twitter';
+import { Meteor } from 'meteor/meteor';
+import Gravatar from 'react-gravatar';
+import Account from '../Account';
+import Loader from '../../components/Loader';
+import EventsCard from '../../components/EventsCard';
+import ArtistCard from '../../components/ArtistCard';
+import Notification from '../../components/Notification/Notification';
 
 const Profile = ({
   currentUser,
@@ -51,7 +51,7 @@ const Profile = ({
   };
 
   const applyEvent = () => {
-    Meteor.call("events.applyToEvent", event, (err, res) => {
+    Meteor.call('events.applyToEvent', event, (err, res) => {
       if (err) {
         alert(err.reason);
       }
@@ -59,7 +59,7 @@ const Profile = ({
   };
 
   const approveArtist = artistApplied => {
-    Meteor.call("events.approveArtist", event, artistApplied, (err, res) => {
+    Meteor.call('events.approveArtist', event, artistApplied, (err, res) => {
       if (err) {
         alert(err.reason);
       }
@@ -67,14 +67,14 @@ const Profile = ({
   };
 
   const removeArtist = artistApplied => {
-    Meteor.call("events.removeArtist", event, artistApplied, (err, res) => {
+    Meteor.call('events.removeArtist', event, artistApplied, (err, res) => {
       if (err) {
         alert(err.reason);
       }
     });
   };
   const cancelApplication = () => {
-    Meteor.call("events.cancelApplication", event, (err, res) => {
+    Meteor.call('events.cancelApplication', event, (err, res) => {
       if (err) {
         alert(err.reason);
       }
@@ -82,7 +82,7 @@ const Profile = ({
   };
 
   const removeEvent = event => {
-    Meteor.call("events.removeEvent", event, (err, res) => {
+    Meteor.call('events.removeEvent', event, (err, res) => {
       if (err) {
         alert(err.reason);
       }
@@ -92,6 +92,8 @@ const Profile = ({
   const filterAppliedEvents = () => {
     return appliedEvents.filter(event => event.artistApplied?.includes(userId));
   };
+
+  const apiKey = 'get your own key';
 
   return user?.profile ? (
     <Grid className={classes.profileContainer}>
@@ -108,26 +110,32 @@ const Profile = ({
             ) : null}
             <Box className={classes.titleLocation}>
               <Typography className={classes.titleLabel} variant="h4">
-                {" "}
-                {user.profile.title || "[Title Placeholder]"}
+                {' '}
+                {user.profile.title || '[Title Placeholder]'}
               </Typography>
               <Typography className={classes.userType}>
-                usertype <span className={classes.divider}>|</span>{" "}
+                usertype <span className={classes.divider}>|</span>{' '}
                 {user?.profile?.userType}
               </Typography>
 
               <Typography variant="subtitle1" color="secondary">
-                {(user && user.profile && user.profile.location) ||
-                  "[Location Placeholder]"}
+                {user?.profile?.location || '[Location Placeholder]'}
               </Typography>
               <Typography
                 variant="body1"
                 color="secondary"
                 className={classes.description}
               >
-                {(user && user.profile && user.profile.description) ||
-                  "[Description Placeholder: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras id aliquet urna. Donec iaculis eu nunc a tempor. In quis feugiat diam, nec auctor mauris. In convallis purus ligula, at ultricies metus aliquet et. Cras libero leo, sollicitudin nec lacus eu, egestas convallis massa. Suspendisse commodo sodales ante lacinia pretium. Phasellus sem nulla, imperdiet nec aliquet non, viverra a dolor. Cras et ipsum felis. In imperdiet diam eget malesuada euismod. Etiam bibendum et felis a scelerisque. Sed posuere tellus ac rutrum fermentum. Duis nisl velit, laoreet scelerisque pretium at, mollis et ante. Nam id mattis dui. Praesent fermentum elementum luctus. Donec facilisis iaculis sodales. Duis consequat vulputate varius]"}
+                {user?.profile?.description ||
+                  '[Description Placeholder: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras id aliquet urna. Donec iaculis eu nunc a tempor. In quis feugiat diam, nec auctor mauris. In convallis purus ligula, at ultricies metus aliquet et. Cras libero leo, sollicitudin nec lacus eu, egestas convallis massa. Suspendisse commodo sodales ante lacinia pretium. Phasellus sem nulla, imperdiet nec aliquet non, viverra a dolor. Cras et ipsum felis. In imperdiet diam eget malesuada euismod. Etiam bibendum et felis a scelerisque. Sed posuere tellus ac rutrum fermentum. Duis nisl velit, laoreet scelerisque pretium at, mollis et ante. Nam id mattis dui. Praesent fermentum elementum luctus. Donec facilisis iaculis sodales. Duis consequat vulputate varius]'}
               </Typography>
+              {user?.profile?.location && user.profile.userType === 'venue' && (
+                <Box className={classes.googleMap}>
+                  <img
+                    src={`https://maps.googleapis.com/maps/api/staticmap?&markers=${user.profile.location}&size=400x300&zoom=15&&key=${apiKey}`}
+                  />
+                </Box>
+              )}
             </Box>
           </Box>
           {/* UPDATE PROFILE AS USER */}
@@ -174,9 +182,9 @@ const Profile = ({
                   color="primary"
                   onClick={handleOpenAccount}
                 >
-                  {user.profile.userType === "artist"
-                    ? "Message Artist"
-                    : "Message Venue"}
+                  {user.profile.userType === 'artist'
+                    ? 'Message Artist'
+                    : 'Message Venue'}
                 </Button>
                 <Modal
                   aria-labelledby="transition-modal-title"
@@ -197,7 +205,7 @@ const Profile = ({
               </div>
             )}
             {/* CREATE NEW EVENT AS A VENUE */}
-            {user.profile.userType === "venue" && user._id === userId ? (
+            {user.profile.userType === 'venue' && user._id === userId ? (
               <div>
                 <Button
                   className={classes.button}
@@ -268,7 +276,7 @@ const Profile = ({
           </Box>
         </Box>
       ) : null}
-      {myEvents.length && user.profile.userType === "venue" ? (
+      {myEvents.length && user.profile.userType === 'venue' ? (
         <div className={classes.myEventsContainer}>
           <Typography className={classes.myEventsTitle}>My Events</Typography>
           <Grid container spacing={2} className={classes.eventContainer}>
@@ -280,7 +288,7 @@ const Profile = ({
           </Grid>
         </div>
       ) : null}
-      {appliedEvents.length && user.profile.userType === "artist" ? (
+      {appliedEvents.length && user.profile.userType === 'artist' ? (
         <div className={classes.myEventsContainer}>
           {filterAppliedEvents().length > 0 && (
             <Typography className={classes.myEventsTitle}>
@@ -317,7 +325,7 @@ const Profile = ({
   ) : event ? (
     // APPLY TO EVENTS
     <Grid className={classes.profileContainer}>
-      <img src={event && event.imageurl} className={classes.banner} />
+      <img src={event?.imageurl} className={classes.banner} />
       <Card className={classes.eventCard}>
         <Box>
           <Typography variant="h4"> {event.title}</Typography>
@@ -328,8 +336,15 @@ const Profile = ({
           <Typography className={classes.description} variant="body1">
             {event.description}
           </Typography>
+          {event?.location && (
+            <Box className={classes.googleMap}>
+              <img
+                src={`https://maps.googleapis.com/maps/api/staticmap?&markers=${event?.location}&size=400x300&zoom=15&&key=${apiKey}`}
+              />
+            </Box>
+          )}
         </Box>
-        {event.owner !== userId && currentUser.profile.userType === "artist" ? (
+        {event.owner !== userId && currentUser.profile.userType === 'artist' ? (
           !event.filled ? (
             event?.artistApplied?.includes(userId) ? (
               <Button
@@ -425,8 +440,8 @@ const Profile = ({
 };
 
 export default withTracker(({ userId, eventId }) => {
-  Meteor.subscribe("events");
-  Meteor.subscribe("users");
+  Meteor.subscribe('events');
+  Meteor.subscribe('users');
 
   return {
     appliedEvents: Events.find({}).fetch(),
