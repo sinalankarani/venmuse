@@ -57,6 +57,7 @@ const Profile = ({
       }
     });
   };
+
   const approveArtist = artistApplied => {
     Meteor.call("events.approveArtist", event, artistApplied, (err, res) => {
       if (err) {
@@ -72,7 +73,21 @@ const Profile = ({
       }
     });
   };
-  console.log(appliedEvents);
+  const cancelApplication = () => {
+    Meteor.call("events.cancelApplication", event, (err, res) => {
+      if (err) {
+        alert(err.reason);
+      }
+    });
+  };
+
+  const removeEvent = event => {
+    Meteor.call("events.removeEvent", event, (err, res) => {
+      if (err) {
+        alert(err.reason);
+      }
+    });
+  };
 
   const filterAppliedEvents = () => {
     return appliedEvents.filter(event => event.artistApplied?.includes(userId));
@@ -322,10 +337,10 @@ const Profile = ({
                 type="button"
                 variant="contained"
                 size="large"
-                color="primary"
-                disabled
+                color="secondary"
+                onClick={cancelApplication}
               >
-                applied
+                Cancel Application
               </Button>
             ) : (
               <Button
@@ -346,28 +361,59 @@ const Profile = ({
           )
         ) : null}
       </Card>
+      {/* REMOVE EVENT AS VENUE */}
+      {event.owner === userId ? (
+        <Button
+          onClick={() => {
+            removeEvent(event);
+          }}
+          className={classes.button}
+          type="button"
+          variant="contained"
+          size="medium"
+          color="primary"
+        >
+          Cancel Event
+        </Button>
+      ) : null}
+      <br />
+      <br />
       {/* ACCEPT OR REJECT APPLICATION TO YOUR EVENT */}
       {event.owner === userId
         ? event.artistApplied.map(appliedArtist => (
             <div key={appliedArtist}>
+              <Typography variant="h5" color="secondary">
+                Artist Applications:
+              </Typography>
               <ArtistCard
                 artist={Meteor.users.find({ _id: appliedArtist }).fetch()[0]}
               />
+
               <Button
                 className={classes.button}
                 onClick={() => {
                   approveArtist(appliedArtist);
                 }}
+                className={classes.button}
+                type="button"
+                variant="contained"
+                size="medium"
+                color="primary"
               >
-                Accept
+                Accept Artist
               </Button>
               <Button
                 className={classes.button}
                 onClick={() => {
                   removeArtist(appliedArtist);
                 }}
+                className={classes.button}
+                type="button"
+                variant="contained"
+                size="medium"
+                color="primary"
               >
-                Reject
+                Reject Artist
               </Button>
             </div>
           ))
