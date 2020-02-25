@@ -42,9 +42,6 @@ const EventsCard = ({ classes, event }) => {
                 {eventDate}
               </Typography>
               <Typography variant="h6">{event.title}</Typography>
-              <Typography color="primary" variant="body2">
-                {event.location}
-              </Typography>
               <Typography className={classes.location} variant="h6">
                 {event.location}
               </Typography>
