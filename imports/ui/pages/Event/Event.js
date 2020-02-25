@@ -2,6 +2,7 @@ import React from "react";
 import EventsContainer from "../../containers/EventsContainer";
 import { withStyles, Typography, Container } from "@material-ui/core";
 import styles from "./styles";
+import Footer from "../../components/Footer";
 
 const Event = ({ classes }) => {
   return (
@@ -13,6 +14,7 @@ const Event = ({ classes }) => {
       <div className={classes.contentcontainer}>
         <EventsContainer />
       </div>
+      <Footer />
     </div>
   );
 };

@@ -95,6 +95,28 @@ Meteor.methods({
     });
   },
 
+  "events.cancelApplication"(event) {
+    // console.log(this.userId);
+    if (Meteor.user().profile.userType !== "artist") {
+      throw new Meteor.Error(
+        "events.cancelApplication not authorized",
+        "You are not authorized to apply or cancel application as a venue"
+      );
+    }
+    if (event.artistApplied.includes(!this.userId)) {
+      throw new Meteor.Error(
+        "You are not authorized to cancel this application"
+      );
+    }
+    let newArtistApplied = event.artistApplied.filter(
+      artist => artist !== this.userId
+    );
+
+    Events.update(event._id, {
+      $set: { artistApplied: newArtistApplied }
+    });
+  },
+
   "events.approveArtist"(event, artistId) {
     if (event.filled) {
       throw new Meteor.Error(
@@ -125,6 +147,16 @@ Meteor.methods({
     Events.update(event._id, {
       $set: { artistApplied: newArtistApplied }
     });
+  },
+
+  "events.remove"(event) {
+    if (event.owner !== this.userId) {
+      throw new Meteor.Error(
+        "events.remove not authorized",
+        "You do not own this event"
+      );
+    }
+    Events.remove(event._id);
   },
 
   "users.updateProfile"({ profile }) {

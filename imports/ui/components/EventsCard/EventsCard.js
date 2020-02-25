@@ -15,6 +15,7 @@ import { Meteor } from "meteor/meteor";
 
 const EventsCard = ({ classes, event }) => {
   let counter = event?.artistApplied?.length;
+  let eventDate = moment(event.date).format("LL");
   return (
     <CardActionArea>
       <Card className={classes.card}>
@@ -25,7 +26,6 @@ const EventsCard = ({ classes, event }) => {
           <CardContent className={classes.content}>
             <CardMedia className={classes.media}>
               <img src={event?.imageurl} className={classes.image} />
-
             </CardMedia>
             <div className={classes.eventDetails}>
               {event.owner === Meteor.userId() &&
@@ -39,10 +39,13 @@ const EventsCard = ({ classes, event }) => {
                 color="primary"
                 className={classes.date}
               >
-                {event.date}
+                {eventDate}
               </Typography>
               <Typography variant="h6">{event.title}</Typography>
               <Typography color="primary" variant="body2">
+                {event.location}
+              </Typography>
+              <Typography className={classes.location} variant="h6">
                 {event.location}
               </Typography>
               <Typography variant="body1">

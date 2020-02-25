@@ -14,27 +14,29 @@ import LocationOnIcon from '@material-ui/icons/LocationOn';
 
 const VenueCard = ({ classes, venue }) => {
   return (
-    venue &&
-    venue.profile.userType === 'venue' && (
+    venue?.profile.userType === 'venue' && (
       <CardActionArea>
         <Card className={classes.card}>
           <Link
             className={classes.link}
-            to={venue && venue._id ? `/profile/${venue && venue._id}` : ''}
+            to={venue?._id ? `/profile/${venue?._id}` : ''}
           >
             <CardContent className={classes.content}>
               <CardMedia className={classes.media}>
                 <img
-                  src={venue?.profile?.profileImage}
+                  src={
+                    venue.profile.profileImage ||
+                    'https://www.fillmurray.com/640/360'
+                  }
                   className={classes.image}
                 />
               </CardMedia>
               <div className={classes.venueDetails}>
-                <Typography variant="h6">
+                <Typography className={classes.title} variant="h6">
                   {venue.profile.title || '[Venue Title]'}
                 </Typography>
-                <Typography color="primary">
-                  <LocationOnIcon />
+                <Typography className={classes.location} color="primary">
+                  <LocationOnIcon className={classes.icon} />
                   {venue.profile.location || '[Venue Location]'}
                 </Typography>
                 <Typography variant="body2" color="secondary">
