@@ -15,6 +15,7 @@ import { Meteor } from "meteor/meteor";
 
 const EventsCard = ({ classes, event }) => {
   let counter = event?.artistApplied?.length;
+  let eventDate = moment(event.date).format("LL");
   return (
     <CardActionArea>
       <Card className={classes.card}>
@@ -38,10 +39,13 @@ const EventsCard = ({ classes, event }) => {
                 color="primary"
                 className={classes.date}
               >
-                {event.date}
+                {eventDate}
               </Typography>
               <Typography className={classes.title} variant="h6">
                 {event.title}
+              </Typography>
+              <Typography className={classes.location} variant="h6">
+                {event.location}
               </Typography>
               <Typography variant="body1">
                 <Fragment>
@@ -57,7 +61,7 @@ const EventsCard = ({ classes, event }) => {
                   )}
                 </Fragment>
               </Typography>
-              {event.lineup.length ? (
+              {/* {event.lineup.length ? (
                 <Typography className={classes.lineuplist} variant="body1">
                   Line Up: {event.lineup.join(", ")}
                 </Typography>
@@ -65,7 +69,7 @@ const EventsCard = ({ classes, event }) => {
                 <Box component="span" className={classes.lineup}>
                   Seeking Artists
                 </Box>
-              )}
+              )} */}
             </div>
           </CardContent>
         </Link>

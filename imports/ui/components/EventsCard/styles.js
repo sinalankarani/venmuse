@@ -23,7 +23,9 @@ const styles = theme => {
     },
     location: {
       fontWeight: "bold",
-      textTransform: "uppercase"
+      textTransform: "uppercase",
+      color: theme.palette.primary.main,
+      fontSize: "0.9rem"
     },
     image: {
       width: "100%",
@@ -53,11 +55,15 @@ const styles = theme => {
       zIndex: "1",
       fontSize: 25,
       alignSelf: "flex-end",
-      boxShadow: "2px 1px 6px "
+      border: theme.palette.secondary.main + " 2px solid",
+      fontFamily: theme.fonts.primary.main,
+      boxShadow: "1px 1px 1px",
+      opacity: 0.9
     },
     counter: {
       color: "white",
-      fontWeight: "bold"
+      fontWeight: "bold",
+      fontSize: "1rem"
     },
     lineup: {
       backgroundColor: "rgba(255, 150, 51, 0.75)",
